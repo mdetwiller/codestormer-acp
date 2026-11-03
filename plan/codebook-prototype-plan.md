@@ -318,16 +318,18 @@ interface ReconciledCodebook {
 ### Phase 1 — Interface prototype (current focus)
 - [x] Organize data: export transcripts from the snapshot, move the prep JSON under `data/source/`
 - [x] Transform `codebook-prep.json` into `top_down_codebook.json` shape (`scripts/build_top_down.py`)
-- [ ] Scaffold React app (Vite) in `app/`
-- [ ] Stub data: a placeholder `bottom_up_codebook.json` built from real turns in the 7 cited conversations (marked `placeholder: true`), replaced by a quick LLM pass once that paid run is approved
-- [ ] Build three-panel layout
-- [ ] Left panel: render bottom-up tree, click-to-highlight
-- [ ] Right panel: render top-down tree with RQ provenance badges (not tabs or filters), click-to-highlight
-- [ ] Center panel: drop zone, basic drag-and-drop from either side
-- [ ] Highlights panel: surfaces highlights for selected code
-- [ ] "Add example" flow: select highlight → pin to code in center
-- [ ] RAG search: stub (keyword filter for now, real embeddings later)
-- [ ] Export reconciled codebook as JSON
+- [x] Scaffold React app (Vite) in `app/` (dev server on port 5174, so it doesn't clash with Notes in the Margin on 5173)
+- [x] Stub data: a placeholder `bottom_up_codebook.json` hand-drafted from real participant turns in the 7 cited conversations (5 parents, 15 children, 47 highlights; marked `placeholder: true`). Replace with a quick LLM pass once that paid run is approved
+- [x] Build three-panel layout
+- [x] Left panel: render bottom-up tree, click-to-highlight
+- [x] Right panel: render top-down tree with RQ provenance badges (not tabs or filters), click-to-highlight; RQs with no families listed underneath
+- [x] Center panel: drop zone, drag-and-drop from either side; drop onto a parent to nest. Codes stay two levels deep: a parent dropped onto a parent comes in with its children lifted to siblings
+- [x] Center editing: rename (double-click), edit definition, reorder (↑ ↓), promote, demote (only codes without children), remove. Saved to browser storage
+- [x] Highlights panel: surfaces highlights for selected code, plus its child codes' highlights
+- [x] "Add example" flow: pick highlights from any code or from search results → pin to the code in the center
+- [x] RAG search: keyword stub over all 198 conversations (top 50, facilitator turns hidden by default)
+- [x] Export reconciled codebook as JSON, plus a Cortico flat `codes[]` export with `parent_id` (provenance kept under `x_codestormer`)
+- [ ] Drag search results into the highlights panel (pinning uses checkboxes for now)
 
 ### Phase 2 — Real pipelines
 - [ ] Full bottom-up pipeline: open coding → clustering on 50 conversations
