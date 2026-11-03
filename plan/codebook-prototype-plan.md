@@ -324,7 +324,7 @@ interface ReconciledCodebook {
 - [x] Left panel: render bottom-up tree, click-to-highlight
 - [x] Right panel: render top-down tree with RQ provenance badges (not tabs or filters), click-to-highlight; RQs with no families listed underneath
 - [x] Center panel: drop zone, drag-and-drop from either side; drop onto a parent to nest. Codes stay two levels deep: a parent dropped onto a parent comes in with its children lifted to siblings
-- [x] Center editing: rename (double-click), edit definition, reorder (↑ ↓), promote, demote (only codes without children), remove. Saved to browser storage
+- [x] Center editing: create new parent codes and child codes, rename (double-click), edit definition, reorder (↑ ↓), promote, demote (only codes without children), remove. Saved to browser storage
 - [x] Highlights panel: surfaces highlights for selected code, plus its child codes' highlights
 - [x] "Add example" flow: pick highlights from any code or from search results → pin to the code in the center
 - [x] RAG search: keyword stub over all 198 conversations (top 50, facilitator turns hidden by default)

@@ -2,6 +2,7 @@ import type { Code, Entry, ReconciledCodebook, SpeakerTurn } from './types'
 
 export type Action =
   | { type: 'add'; code: Code; parentId: string | null }
+  | { type: 'create'; name: string; definition: string; parentId: string | null }
   | { type: 'remove'; id: string }
   | { type: 'rename'; id: string; name: string }
   | { type: 'define'; id: string; definition: string }
@@ -91,6 +92,21 @@ export function reducer(codes: Code[], action: Action): Code[] {
         }))
       }
       return [...codes, clone]
+    }
+    case 'create': {
+      const code: Code = {
+        id: newId(),
+        name: action.name,
+        definition: action.definition,
+        source: 'reconciled',
+        highlights: [],
+        exemplars: [],
+        children: [],
+      }
+      if (action.parentId) {
+        return mapCode(codes, action.parentId, (p) => ({ ...p, children: [...(p.children ?? []), code] }))
+      }
+      return [...codes, code]
     }
     case 'remove': {
       const strip = (list: Code[]): Code[] =>

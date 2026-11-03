@@ -13,6 +13,51 @@ interface Props {
   onStartPin: (id: string) => void
 }
 
+function NewCodeForm({
+  placeholder,
+  onCreate,
+  onCancel,
+  autoFocus,
+}: {
+  placeholder: string
+  onCreate: (name: string) => void
+  onCancel?: () => void
+  autoFocus?: boolean
+}) {
+  const [name, setName] = useState('')
+  return (
+    <form
+      className="new-code"
+      onClick={(e) => e.stopPropagation()}
+      onSubmit={(e) => {
+        e.preventDefault()
+        const trimmed = name.trim()
+        if (!trimmed) return
+        onCreate(trimmed)
+        setName('')
+      }}
+    >
+      <input
+        value={name}
+        autoFocus={autoFocus}
+        placeholder={placeholder}
+        onChange={(e) => setName(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onCancel?.()
+        }}
+      />
+      <button type="submit" disabled={!name.trim()}>
+        Add
+      </button>
+      {onCancel && (
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      )}
+    </form>
+  )
+}
+
 function readPayload(e: DragEvent): DragPayload | null {
   const raw = e.dataTransfer.getData(DRAG_MIME)
   if (!raw) return null
@@ -46,6 +91,10 @@ export function ReconciledPanel(props: Props) {
         if (payload) onDropCode(payload, null)
       }}
     >
+      <NewCodeForm
+        placeholder="New parent code name"
+        onCreate={(name) => props.dispatch({ type: 'create', name, definition: '', parentId: null })}
+      />
       {codes.length === 0 ? (
         <p className="empty">
           Drag codes here from either side. Drop onto a parent code to add it as a child.
@@ -75,6 +124,7 @@ function RcCode({
 }: Props & { code: Code; isChild: boolean; first: boolean; last: boolean }) {
   const [editing, setEditing] = useState(false)
   const [overParent, setOverParent] = useState(false)
+  const [addingChild, setAddingChild] = useState(false)
   const kids = code.children ?? []
 
   const dropHandlers = isChild
@@ -173,6 +223,11 @@ function RcCode({
           <button disabled={last} onClick={() => dispatch({ type: 'move', id: code.id, dir: 1 })} title="Move down">
             ↓
           </button>
+          {!isChild && (
+            <button onClick={() => setAddingChild(true)} title="Create a new child code under this one">
+              + Child
+            </button>
+          )}
           {isChild ? (
             <button onClick={() => dispatch({ type: 'promote', id: code.id })} title="Make this a parent code">
               Promote
@@ -214,6 +269,19 @@ function RcCode({
             />
           ))}
         </ol>
+      )}
+      {addingChild && (
+        <div className="rc-children">
+          <NewCodeForm
+            autoFocus
+            placeholder={`New child of ${code.name}`}
+            onCreate={(name) => {
+              dispatch({ type: 'create', name, definition: '', parentId: code.id })
+              setAddingChild(false)
+            }}
+            onCancel={() => setAddingChild(false)}
+          />
+        </div>
       )}
     </li>
   )
