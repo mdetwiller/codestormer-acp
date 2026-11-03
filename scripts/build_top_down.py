@@ -25,18 +25,27 @@ def slug(text: str) -> str:
 
 
 def generated_code(child: dict, code_id: str, provenance: dict, cache: dict[int, dict[int, dict]], by_snippet: dict[int, int]) -> dict:
+    grounding = {g["snippet_id"]: g for g in child.get("example_grounding", [])}
+    picks = [(sid, "ai:model_example", grounding.get(sid)) for sid in child["example_snippet_ids"]]
+    picks += [(s["snippet_id"], "ai:similarity", s) for s in child.get("similar_turns", [])]
     highlights = []
-    for sid in child["example_snippet_ids"]:
+    for sid, source, score in picks:
         turn = load_turns(by_snippet[sid], cache)[sid]
         n = len(turn["text"].split())
+        if source == "ai:model_example":
+            note = "Example the model cited for this code"
+            if score:
+                note += f" (similarity {score['similarity']:.2f}, rank {score['rank_of_all_turns']:,} of all turns)"
+        else:
+            note = f"Found by similarity to the code's definition ({score['similarity']:.2f})"
         highlights.append(
             {
                 "connection_id": None,
                 "conversation_id": turn["conversation_id"],
-                "insight_text": "",
+                "insight_text": note,
                 "evidence": [
                     {**turn, "span": {"start_index": 0, "end_index": n}, "span_text": turn["text"],
-                     "evidence_source": "ai:top_down"}
+                     "evidence_source": source}
                 ],
             }
         )

@@ -6,7 +6,10 @@ Stages (run in order; each is resumable and skips work already saved):
             researcher's evidence, then ask the model for child codes with example turns.
             For RQs with no families, use the RQ text as the query and ask for families
             with children. Results go to data/derived/generated/top_down_children.json;
-            then run scripts/build_top_down.py to merge them into the top-down codebook.
+  expand    Evidence check: embed each generated child code's name and definition, attach
+            its closest participant turns as extra highlights, and record how the model's
+            own examples rank among all turns.
+Then run scripts/build_top_down.py to merge the results into the top-down codebook.
 
 Every stage takes --dry-run, which makes no API calls and needs no key: it prints call
 counts and token estimates and writes the prompts it would send to
@@ -17,6 +20,7 @@ Usage:
   .venv/bin/python scripts/top_down_children.py embed
   .venv/bin/python scripts/top_down_children.py generate --dry-run
   .venv/bin/python scripts/top_down_children.py generate [--only td-family-1] [--force]
+  .venv/bin/python scripts/top_down_children.py expand [--dry-run] [--force]
 """
 from __future__ import annotations
 
@@ -420,9 +424,68 @@ def stage_generate(cfg: dict[str, Any], dry_run: bool, only: str | None, force: 
     print(f"saved {RESULTS.relative_to(ROOT)}; now run scripts/build_top_down.py")
 
 
+def all_children(results: dict) -> list[dict]:
+    out = [c for fam in results["families"].values() for c in fam["children"]]
+    out += [c for rq in results["empty_rqs"].values() for fam in rq["families"] for c in fam["children"]]
+    return out
+
+
+def stage_expand(cfg: dict[str, Any], dry_run: bool, force: bool) -> None:
+    if not RESULTS.exists():
+        sys.exit("run the generate stage first")
+    results = json.loads(RESULTS.read_text())
+    children = [c for c in all_children(results) if force or "similar_turns" not in c]
+    texts = [f"{c['name']}: {c['definition']}" for c in children]
+    size = cfg["embedding_batch_size"]
+    print(f"children to expand: {len(children)}  embedding calls: {-(-len(texts) // size)}  "
+          f"approx tokens: {sum(approx_tokens(t) for t in texts):,}")
+    if dry_run or not children:
+        return
+
+    import numpy as np
+
+    turns = load_turns()
+    turns_by_id = {t["snippet_id"]: t for t in turns}
+    ids, matrix = load_embeddings(len(turns))
+    position = {sid: i for i, sid in enumerate(ids)}
+    client = get_client(cfg)
+    top_n = cfg["expand"]["top_n"]
+
+    for start in range(0, len(texts), size):
+        resp = client.embeddings.create(model=cfg["embedding_model"], input=texts[start : start + size])
+        for d in sorted(resp.data, key=lambda d: d.index):
+            child = children[start + d.index]
+            q = np.array(d.embedding, dtype=np.float32)
+            q /= np.linalg.norm(q)
+            scores = matrix @ q
+            order = np.argsort(-scores)
+            rank = np.empty_like(order)
+            rank[order] = np.arange(len(order))
+            child["example_grounding"] = [
+                {"snippet_id": sid, "similarity": round(float(scores[position[sid]]), 4),
+                 "rank_of_all_turns": int(rank[position[sid]]) + 1}
+                for sid in child["example_snippet_ids"]
+            ]
+            examples = set(child["example_snippet_ids"])
+            similar = [
+                t for t in retrieve(q, matrix, ids, turns_by_id, top_n + len(examples), cfg)
+                if t["snippet_id"] not in examples
+            ][:top_n]
+            child["similar_turns"] = [{"snippet_id": t["snippet_id"], "similarity": round(t["similarity"], 4)} for t in similar]
+    results["expand_metadata"] = {"embedding_model": cfg["embedding_model"], "top_n": top_n,
+                                  "query": "child name + ': ' + definition",
+                                  "expanded_at": datetime.now(timezone.utc).isoformat()}
+    RESULTS.write_text(json.dumps(results, ensure_ascii=False, indent=1))
+    ranks = [g["rank_of_all_turns"] for c in children for g in c["example_grounding"]]
+    ranks.sort()
+    print(f"expanded {len(children)} children; model examples' rank among {len(ids):,} turns: "
+          f"median {ranks[len(ranks) // 2]}, worst {ranks[-1]}")
+    print(f"saved {RESULTS.relative_to(ROOT)}; now run scripts/build_top_down.py")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("stage", choices=["embed", "generate"])
+    parser.add_argument("stage", choices=["embed", "generate", "expand"])
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--only", help="generate one job, e.g. td-family-1 or rq-9")
     parser.add_argument("--force", action="store_true", help="regenerate jobs that already have results")
@@ -430,8 +493,10 @@ def main() -> None:
     cfg = load_config()
     if args.stage == "embed":
         stage_embed(cfg, args.dry_run)
-    else:
+    elif args.stage == "generate":
         stage_generate(cfg, args.dry_run, args.only, args.force)
+    else:
+        stage_expand(cfg, args.dry_run, args.force)
 
 
 if __name__ == "__main__":

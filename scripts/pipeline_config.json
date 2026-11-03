@@ -10,10 +10,22 @@
     "exclude_facilitator": true,
     "max_words_per_turn_in_prompt": 150
   },
-  "families": { "max_children": 6, "min_examples": 2, "max_examples": 4 },
-  "empty_rqs": { "max_families": 3, "max_children_per_family": 4, "top_k": 80 },
+  "families": {
+    "max_children": 6,
+    "min_examples": 2,
+    "max_examples": 4
+  },
+  "empty_rqs": {
+    "max_families": 3,
+    "max_children_per_family": 4,
+    "top_k": 80
+  },
   "price_per_million_tokens_usd": {
     "_note": "Assumptions for the dry-run estimate only; check current OpenAI pricing.",
     "text-embedding-3-small": 0.02
+  },
+  "expand": {
+    "top_n": 15,
+    "_note": "Evidence check: extra highlights per child code, by similarity to its name and definition."
   }
 }
