@@ -64,7 +64,7 @@ The corpus is **198 conversations** (the snapshot has 201; three have no transcr
 
 **Pipeline steps:**
 
-1. **Embed** — Embed each code family definition + its existing evidence snippets as a composite query vector.
+1. **Embed** — Embed every speaker turn once (`text-embedding-3-small`); the query for each code family is the mean of its definition's and its existing evidence snippets' embeddings.
 2. **Retrieve** — For each code family, retrieve semantically similar speaker turns from the full 198-conversation corpus.
 3. **Generate child codes** — Prompt an LLM to cluster retrieved turns into child codes under each family. Same naming constraints as bottom-up (2–3 words, no conjunctions).
 4. **Handle empty research questions** — For RQs with no code families yet (currently RQ 9 on change/navigation and RQ 12 on technology), use the RQ description itself as the retrieval query, then generate both code families and their child codes in a single pass.
@@ -331,7 +331,7 @@ interface ReconciledCodebook {
 - [x] Export reconciled codebook as JSON, plus a Cortico flat `codes[]` export with `parent_id` (provenance kept under `x_codestormer`)
 - [ ] Drag search results into the highlights panel (pinning uses checkboxes for now)
 - [x] Replace the bottom-up placeholder with the sensemaking-codebook-prototype's final codebook (`scripts/import_legacy_bottom_up.py`): 10 parents and 75 children after dropping "Empathy for homeless hardship", "Low turnout repeated volunteers" and "takeaways". It covers conversations 1-50 only and was coded from Cortico AI-suggested highlights, mapped to speaker turns by word timings
-- [ ] Top-down child codes (`scripts/top_down_children.py`, OpenAI): embed all turns, retrieve the closest turns per family (definition plus the researcher's evidence as the query), one `gpt-5.5` call per family for child codes with example turns; RQ 9 and RQ 12 get families and children from the RQ text. Built and dry-run; the paid run is waiting for the researcher
+- [x] Top-down child codes (`scripts/top_down_children.py`, OpenAI, run 2026-11-03 with the Notes in the Margin key): embedded all 41,913 turns (`text-embedding-3-small`); retrieved the 60 closest participant turns per family (definition plus the researcher's evidence as the query); one `gpt-5.6-luna` call per family produced 48 child codes; RQ 9 and RQ 12 got 3 families each (21 children) from the RQ text. An evidence check (`expand`) attached the 15 most similar turns to each child, so each child has 17-19 highlights
 
 ### Phase 2 — Real pipelines
 - [ ] Full bottom-up pipeline: open coding → clustering on 50 conversations

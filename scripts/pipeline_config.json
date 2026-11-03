@@ -1,9 +1,9 @@
 {
-  "env_file": "../../acp-sensemaking-pipeline/backend/.env",
+  "env_file": "../backend/.env",
   "embedding_model": "text-embedding-3-small",
   "embedding_batch_size": 100,
   "embedding_max_chars": 8000,
-  "generation_model": "gpt-5.5",
+  "generation_model": "gpt-5.6-luna",
   "retrieval": {
     "top_k": 60,
     "min_words": 12,
