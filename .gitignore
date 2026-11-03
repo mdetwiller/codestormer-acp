@@ -1,0 +1,9 @@
+# Regenerate with scripts/export_transcripts.py (needs the snapshot one level up)
+data/transcripts/
+
+node_modules/
+dist/
+.venv/
+__pycache__/
+.DS_Store
+.env

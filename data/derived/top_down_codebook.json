@@ -1,0 +1,2300 @@
+{
+ "type": "top_down",
+ "generated_at": "2026-11-03T19:54:21.481352+00:00",
+ "source_prep_generated_at": "2026-11-03T17:16:24.808683+00:00",
+ "research_questions": [
+  {
+   "id": 1,
+   "name": "How do people describe trust in local institutions?",
+   "description": "Look for stories where trust is built or broken.",
+   "merged_from": [
+    11
+   ],
+   "family_ids": [
+    "td-family-1",
+    "td-family-9"
+   ]
+  },
+  {
+   "id": 3,
+   "name": "Where do people experience friction or disconnection?",
+   "description": "Stories of struggle, drifting apart, or unmet needs.",
+   "merged_from": [],
+   "family_ids": [
+    "td-family-2",
+    "td-family-3",
+    "td-family-7"
+   ]
+  },
+  {
+   "id": 4,
+   "name": "How have people seen disconnect repaired?",
+   "description": "",
+   "merged_from": [],
+   "family_ids": [
+    "td-family-4"
+   ]
+  },
+  {
+   "id": 5,
+   "name": "What are communities proud of?",
+   "description": "",
+   "merged_from": [],
+   "family_ids": [
+    "td-family-5",
+    "td-family-6"
+   ]
+  },
+  {
+   "id": 9,
+   "name": "What kinds of change have communities navigated together? When does it bring them together, drive them apart, break or build trust?",
+   "description": "",
+   "merged_from": [],
+   "family_ids": []
+  },
+  {
+   "id": 12,
+   "name": "How do people talk about technology? (AI, social media, data centers)",
+   "description": "",
+   "merged_from": [],
+   "family_ids": []
+  }
+ ],
+ "warnings": [
+  "\"What kinds of change have communities navigated together? When does it bring them together, drive them apart, break or build trust?\" has no starred code families.",
+  "\"How do people talk about technology? (AI, social media, data centers)\" has no starred code families."
+ ],
+ "codes": [
+  {
+   "id": "td-family-1",
+   "name": "Trust in Local Helpers",
+   "definition": "People place great trust in neighbors, friends, volunteers, and other known individuals who provide direct help. Rebuilding institutional trust is linked to more open, honest, and responsive communication with communities. Trust is sustained through local civic, service, and volunteer organizations that bring community members together to address shared needs, support one another, and develop local leadership. These organizations may be trusted more than distant or contested public institutions, particularly when public funding or institutional support is perceived as inadequate.",
+   "source": "top_down",
+   "rq_provenance": {
+    "id": 1,
+    "name": "How do people describe trust in local institutions?"
+   },
+   "highlights": [
+    {
+     "connection_id": 1,
+     "conversation_id": 10,
+     "insight_text": "People trust individuals they know—neighbors, friends, volunteers, and local helpers—more than government or other formal leadership. The reflection describes people as “very clearly disappointed in the federal response or even state level response,” while still trusting individual and volunteer action.",
+     "evidence": [
+      {
+       "snippet_id": 2780,
+       "snippet_cortico_id": 1108000083,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "Yes. Yeah, because I. I knew a guy that worked here at this fema, and he, you know, as soon as happened, he was gone. But I'm sure they've cut back on those people. Well, you don't hear about it. You don't find out about what's going on. He could be retired by now. But. But of course, they, you know, there's been proof that they cut back, like on the east coast, you know, they. They promised them money and then didn't.",
+       "index_in_conversation": 83,
+       "audio_start_offset": 1300.99,
+       "audio_end_offset": 1332.32,
+       "span": {
+        "start_index": 4,
+        "end_index": 83
+       },
+       "span_text": "I knew a guy that worked here at this fema, and he, you know, as soon as happened, he was gone. But I'm sure they've cut back on those people. Well, you don't hear about it. You don't find out about what's going on. He could be retired by now. But. But of course, they, you know, there's been proof that they cut back, like on the east coast, you know, they. They promised them money and then didn't.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2802,
+       "snippet_cortico_id": 1108000105,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "Because I have a whole all electric house. I was freezing. I had no place to go. Christy helped me for a while, but then she took the dogs to some place that still had electricity. And Sharon McLean helped me a little bit too, but that was it. Now, luckily, Christy brought me batteries because I had a radio tape player that had a radio. So we put batteries in so I could at least hear what the world was doing outside. But I was freezing at night and I have apnea and I couldn't sleep on my bed because I couldn't get them. You know, I had no electricity for the machine. So I'm trying to sit up in my chair and I've got, like, I've got. I finally pulled out my leggings. And of course I had, I don't know, two or three pairs of socks and. And sweaters. And I didn't wear a coat, but I had lots of sweater. Three. Three blankets over me, completely over me. And that's how I slept. Oh. And when I didn't have the electricity, I put my. My refrigerator stuff outside because it was cold and it would take care of it. But I suffered and I was so thankful I didn't die.",
+       "index_in_conversation": 105,
+       "audio_start_offset": 1690.69,
+       "audio_end_offset": 1777.69,
+       "span": {
+        "start_index": 0,
+        "end_index": 214
+       },
+       "span_text": "Because I have a whole all electric house. I was freezing. I had no place to go. Christy helped me for a while, but then she took the dogs to some place that still had electricity. And Sharon McLean helped me a little bit too, but that was it. Now, luckily, Christy brought me batteries because I had a radio tape player that had a radio. So we put batteries in so I could at least hear what the world was doing outside. But I was freezing at night and I have apnea and I couldn't sleep on my bed because I couldn't get them. You know, I had no electricity for the machine. So I'm trying to sit up in my chair and I've got, like, I've got. I finally pulled out my leggings. And of course I had, I don't know, two or three pairs of socks and. And sweaters. And I didn't wear a coat, but I had lots of sweater. Three. Three blankets over me, completely over me. And that's how I slept. Oh. And when I didn't have the electricity, I put my. My refrigerator stuff outside because it was cold and it would take care of it. But I suffered and I was so thankful I didn't die.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2886,
+       "snippet_cortico_id": 1108000189,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "I mean, and if they're, if they're eager to listen and then find some common ground to talk about. I mean, I, I just think more communications and being more open with people, maybe that would bring back more trust. It could, I mean, you know, be honest, open and just try to communicate.",
+       "index_in_conversation": 189,
+       "audio_start_offset": 2878.71,
+       "audio_end_offset": 2902.65,
+       "span": {
+        "start_index": 0,
+        "end_index": 54
+       },
+       "span_text": "I mean, and if they're, if they're eager to listen and then find some common ground to talk about. I mean, I, I just think more communications and being more open with people, maybe that would bring back more trust. It could, I mean, you know, be honest, open and just try to communicate.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 8,
+     "conversation_id": 44,
+     "insight_text": "Trust was described as residing strongly in community members and local collective action, while the reflection notes that distrust of local institutions was not mentioned: “the trust seemed really in the community and the community members, but there wasn't distrust mentioned of local institutions.”",
+     "evidence": [
+      {
+       "snippet_id": 9900,
+       "snippet_cortico_id": 1120900018,
+       "conversation_id": 44,
+       "speaker_id": 224,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "I've only lived in Oklahoma for 23 years. My husband was born here and I don't know that it's my pride to take in the state of Oklahoma. But I have lived in Illinois, Connecticut, Ohio, Texas, Arizona, California and I have not seen a state that so many people come together to try to address situations that make something happen in our state. It really is unparalleled and I think, I'm sure there are good things happening in Texas too. But I think it is unparalleled across the country how like minded individuals in our community come together and say we're going to do something about this. Whether it's juvenile justice, whether it's Palomar, whether it's Remerge, whatever organization that is within the community.",
+       "index_in_conversation": 18,
+       "audio_start_offset": 428.38,
+       "audio_end_offset": 473.23,
+       "span": {
+        "start_index": 0,
+        "end_index": 125
+       },
+       "span_text": "I've only lived in Oklahoma for 23 years. My husband was born here and I don't know that it's my pride to take in the state of Oklahoma. But I have lived in Illinois, Connecticut, Ohio, Texas, Arizona, California and I have not seen a state that so many people come together to try to address situations that make something happen in our state. It really is unparalleled and I think, I'm sure there are good things happening in Texas too. But I think it is unparalleled across the country how like minded individuals in our community come together and say we're going to do something about this. Whether it's juvenile justice, whether it's Palomar, whether it's Remerge, whatever organization that is within the community.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9948,
+       "snippet_cortico_id": 1120900066,
+       "conversation_id": 44,
+       "speaker_id": 228,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "I would love to see that. Well, I think Rotary how people can be together and interact with each other and support each other and then figure out ways to support their community and that can go down generations. I think how can we bring our children together to be with us and to talk about how we help others, how we support and have those kinds of conversations. I think we're doing a pretty good job on that. But I want to really expand that. Anybody that comes to this Rotary, for example, very good atmosphere, talk with each other always good speaking. How can we expand that concept more?",
+       "index_in_conversation": 66,
+       "audio_start_offset": 1265.93,
+       "audio_end_offset": 1312.84,
+       "span": {
+        "start_index": 6,
+        "end_index": 111
+       },
+       "span_text": "Well, I think Rotary how people can be together and interact with each other and support each other and then figure out ways to support their community and that can go down generations. I think how can we bring our children together to be with us and to talk about how we help others, how we support and have those kinds of conversations. I think we're doing a pretty good job on that. But I want to really expand that. Anybody that comes to this Rotary, for example, very good atmosphere, talk with each other always good speaking. How can we expand that concept more?",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 26,
+     "conversation_id": 140,
+     "insight_text": "Trust appears to be placed in local civic and service organizations such as Rotary, while trust in public institutions is more uncertain around schools and state support. The reflection says, “people have trust in like rotary and organizations like that,” but also describes concern that the state government does not see investing in public schools as worthwhile.",
+     "evidence": [
+      {
+       "snippet_id": 29547,
+       "snippet_cortico_id": 1126700091,
+       "conversation_id": 140,
+       "speaker_id": 721,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "But I think pulling our community together, when you are involved in things and voice your opinion, it's probably the best way to pull people together, you know, and many of us volunteer around the community. That really pulls people together, you know,",
+       "index_in_conversation": 91,
+       "audio_start_offset": 1189.96,
+       "audio_end_offset": 1211.25,
+       "span": {
+        "start_index": 0,
+        "end_index": 43
+       },
+       "span_text": "But I think pulling our community together, when you are involved in things and voice your opinion, it's probably the best way to pull people together, you know, and many of us volunteer around the community. That really pulls people together, you know,",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 29555,
+       "snippet_cortico_id": 1126700099,
+       "conversation_id": 140,
+       "speaker_id": 721,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "Some of the activities that I'm involved in, many. Well, young people, of course, I'm talking even to us in 40s and 50s are young people. Okay. I'm beginning to see them step forward. You know, if you look at who's on the chamber board now, if you look around at who's serving, like in Rotary, et cetera, there are some young people in this community stepping up. There's some new leadership that's coming forward, which pleases me no end. I'm really glad to see some of that. We really are developing some leaders",
+       "index_in_conversation": 99,
+       "audio_start_offset": 1282.33,
+       "audio_end_offset": 1328.47,
+       "span": {
+        "start_index": 55,
+        "end_index": 94
+       },
+       "span_text": "Rotary, et cetera, there are some young people in this community stepping up. There's some new leadership that's coming forward, which pleases me no end. I'm really glad to see some of that. We really are developing some leaders",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 29520,
+       "snippet_cortico_id": 1126700064,
+       "conversation_id": 140,
+       "speaker_id": 721,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "I do think the one thing that pulls this community apart right now is. Is our school system having the funding that it needs and that people are saying, you know, that we're including. We have a state legislature who thinks we don't do a very good job at our public schools. And I think that's a community thing that is an alarm for a lot of people. Going to parochial schools, losing our funding",
+       "index_in_conversation": 64,
+       "audio_start_offset": 894.85,
+       "audio_end_offset": 926.09,
+       "span": {
+        "start_index": 0,
+        "end_index": 75
+       },
+       "span_text": "I do think the one thing that pulls this community apart right now is. Is our school system having the funding that it needs and that people are saying, you know, that we're including. We have a state legislature who thinks we don't do a very good job at our public schools. And I think that's a community thing that is an alarm for a lot of people. Going to parochial schools, losing our funding",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 29525,
+       "snippet_cortico_id": 1126700069,
+       "conversation_id": 140,
+       "speaker_id": 720,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "That's not what I'm saying. So I really don't have any comparisons to, you know, to talk about. But I agree. I still think we need public education.",
+       "index_in_conversation": 69,
+       "audio_start_offset": 952.04,
+       "audio_end_offset": 968.61,
+       "span": {
+        "start_index": 0,
+        "end_index": 28
+       },
+       "span_text": "That's not what I'm saying. So I really don't have any comparisons to, you know, to talk about. But I agree. I still think we need public education.",
+       "evidence_source": "ai"
+      }
+     ]
+    },
+    {
+     "connection_id": 40,
+     "conversation_id": 120,
+     "insight_text": "The discussion favors grassroots and locally controlled investment over distant corporate or institutional promises. Participants imagine libraries, mixed-use spaces, local businesses, artist and maker spaces, and community gardens as better investments than a data center or chains; they also question whether residents have meaningful access to decision-making meetings.",
+     "evidence": [
+      {
+       "snippet_id": 24115,
+       "snippet_cortico_id": 1100600137,
+       "conversation_id": 120,
+       "speaker_id": 596,
+       "speaker_name": "D",
+       "is_facilitator": false,
+       "text": "I think so it affects the community. I mean, I didn't realize until the news talked about it that there was meetings for the community to be a part of. And I think I saw that they were during my work hours. So even if I wanted to go, I would have to request a day off. That's to go talk. I can. Let's talk about it. Let's talk about the data center, how we think it's going to affect our community.",
+       "index_in_conversation": 137,
+       "audio_start_offset": 1958.51,
+       "audio_end_offset": 1984.83,
+       "span": {
+        "start_index": 0,
+        "end_index": 82
+       },
+       "span_text": "I think so it affects the community. I mean, I didn't realize until the news talked about it that there was meetings for the community to be a part of. And I think I saw that they were during my work hours. So even if I wanted to go, I would have to request a day off. That's to go talk. I can. Let's talk about it. Let's talk about the data center, how we think it's going to affect our community.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 24167,
+       "snippet_cortico_id": 1100600189,
+       "conversation_id": 120,
+       "speaker_id": 596,
+       "speaker_name": "D",
+       "is_facilitator": false,
+       "text": "So I want to know, what do you guys think? Let's say I'm trying to form the question in my mind. Instead of the data center, what do you think the community needs besides that? What do you think would be a better investment? And actually who, who are the people who are making these decisions and making these community meetings where we can attend them because of work? And how is that bringing the community together? You know, I honestly think the funding would be better use at the library. Might as well just build a five story library.",
+       "index_in_conversation": 189,
+       "audio_start_offset": 2324.92,
+       "audio_end_offset": 2358.77,
+       "span": {
+        "start_index": 21,
+        "end_index": 100
+       },
+       "span_text": "Instead of the data center, what do you think the community needs besides that? What do you think would be a better investment? And actually who, who are the people who are making these decisions and making these community meetings where we can attend them because of work? And how is that bringing the community together? You know, I honestly think the funding would be better use at the library. Might as well just build a five story library.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 24229,
+       "snippet_cortico_id": 1100600251,
+       "conversation_id": 120,
+       "speaker_id": 594,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "I'm trying to approach that with an open mind because I've seen other communities who've taken mall space and turned it into multi. There was apartments and restaurants and shops. And if they can do create something like that. But if it's just another a bunch of chain restaurants and a Target, I'm not going.",
+       "index_in_conversation": 251,
+       "audio_start_offset": 2937.33,
+       "audio_end_offset": 2953.69,
+       "span": {
+        "start_index": 0,
+        "end_index": 55
+       },
+       "span_text": "I'm trying to approach that with an open mind because I've seen other communities who've taken mall space and turned it into multi. There was apartments and restaurants and shops. And if they can do create something like that. But if it's just another a bunch of chain restaurants and a Target, I'm not going.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 24251,
+       "snippet_cortico_id": 1100600273,
+       "conversation_id": 120,
+       "speaker_id": 594,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "locally owned business is much better because that money stays, you know. You know, just like when you support local farmers, that money helps local people. That helps the community. And then, you know, things. Like we did have this one place in Philly that was really cool. It was a. Was a wood shop and they held. You could go there and use their equipment, you could rent it and, you know, if you wanted to be a woodworker, learn, you know, skills, you use all that equipment there. And it was like a community event. They had different, like classes. But you could also go and say, oh, I want to work on. Because maybe you don't have the space in your own home for these tools and this equipment.",
+       "index_in_conversation": 273,
+       "audio_start_offset": 3061.58,
+       "audio_end_offset": 3105.74,
+       "span": {
+        "start_index": 4,
+        "end_index": 132
+       },
+       "span_text": "much better because that money stays, you know. You know, just like when you support local farmers, that money helps local people. That helps the community. And then, you know, things. Like we did have this one place in Philly that was really cool. It was a. Was a wood shop and they held. You could go there and use their equipment, you could rent it and, you know, if you wanted to be a woodworker, learn, you know, skills, you use all that equipment there. And it was like a community event. They had different, like classes. But you could also go and say, oh, I want to work on. Because maybe you don't have the space in your own home for these tools and this equipment.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 24254,
+       "snippet_cortico_id": 1100600276,
+       "conversation_id": 120,
+       "speaker_id": 594,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "And like some kind of community space where, you know, whether it's woodworking, whether it's art, whether it's whatever, you know, place. There was another place in Philly that I loved. It was an art studio, photography studio. And you could go and use their equipment, their printers and stuff like that to. And I also took a bunch of classes there. But like those community groups, I think really help build, you know, build the area. It's not just. It's. And it's hard because, you know, the town, you know, you want to bring in tax money, you know, so.",
+       "index_in_conversation": 276,
+       "audio_start_offset": 3108.62,
+       "audio_end_offset": 3145.56,
+       "span": {
+        "start_index": 0,
+        "end_index": 101
+       },
+       "span_text": "And like some kind of community space where, you know, whether it's woodworking, whether it's art, whether it's whatever, you know, place. There was another place in Philly that I loved. It was an art studio, photography studio. And you could go and use their equipment, their printers and stuff like that to. And I also took a bunch of classes there. But like those community groups, I think really help build, you know, build the area. It's not just. It's. And it's hard because, you know, the town, you know, you want to bring in tax money, you know, so.",
+       "evidence_source": "user"
+      }
+     ]
+    }
+   ],
+   "exemplars": [],
+   "children": []
+  },
+  {
+   "id": "td-family-9",
+   "name": "Trust Through Listening and Community Participation",
+   "definition": "Trust in local institutions and collective decisions is shaped by whether people can contribute to decisions, hear differing perspectives, and feel that their concerns are genuinely considered. Listening and ongoing opportunities for dialogue can build acceptance and prevent opposition from derailing change, even when decisions do not change.",
+   "source": "top_down",
+   "rq_provenance": {
+    "id": 1,
+    "name": "How do people describe trust in local institutions?"
+   },
+   "highlights": [
+    {
+     "connection_id": 17,
+     "conversation_id": 91,
+     "insight_text": "Trust in local institutions appears shaped by who makes the decision and whether community input matters. ",
+     "evidence": [
+      {
+       "snippet_id": 18683,
+       "snippet_cortico_id": 1094500143,
+       "conversation_id": 91,
+       "speaker_id": 458,
+       "speaker_name": "G",
+       "is_facilitator": false,
+       "text": "I think the difference, though, in your two scenarios is that that change come from the bottom up.",
+       "index_in_conversation": 143,
+       "audio_start_offset": 1184.53,
+       "audio_end_offset": 1190.49,
+       "span": {
+        "start_index": 0,
+        "end_index": 18
+       },
+       "span_text": "I think the difference, though, in your two scenarios is that that change come from the bottom up.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18685,
+       "snippet_cortico_id": 1094500145,
+       "conversation_id": 91,
+       "speaker_id": 458,
+       "speaker_name": "G",
+       "is_facilitator": false,
+       "text": "And our change, because I'm Catholic too, it's top down.",
+       "index_in_conversation": 145,
+       "audio_start_offset": 1196.13,
+       "audio_end_offset": 1200.65,
+       "span": {
+        "start_index": 0,
+        "end_index": 10
+       },
+       "span_text": "And our change, because I'm Catholic too, it's top down.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18688,
+       "snippet_cortico_id": 1094500148,
+       "conversation_id": 91,
+       "speaker_id": 458,
+       "speaker_name": "G",
+       "is_facilitator": false,
+       "text": "Instead of. They asked. But it definitely felt like it was this is happening.",
+       "index_in_conversation": 148,
+       "audio_start_offset": 1202.61,
+       "audio_end_offset": 1207.81,
+       "span": {
+        "start_index": 0,
+        "end_index": 14
+       },
+       "span_text": "Instead of. They asked. But it definitely felt like it was this is happening.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18689,
+       "snippet_cortico_id": 1094500149,
+       "conversation_id": 91,
+       "speaker_id": 452,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "Maybe didn't make much impact. Like we all said what we thought and they all nodded appreciatively but maybe didn't listen very well to. Or our. Our feedback didn't outweigh the others. The stuff on the other side, the financial problems or whatever, the lack of priests. I think Joe, you mentioned that. Right.",
+       "index_in_conversation": 149,
+       "audio_start_offset": 1207.81,
+       "audio_end_offset": 1225.09,
+       "span": {
+        "start_index": 0,
+        "end_index": 54
+       },
+       "span_text": "Maybe didn't make much impact. Like we all said what we thought and they all nodded appreciatively but maybe didn't listen very well to. Or our. Our feedback didn't outweigh the others. The stuff on the other side, the financial problems or whatever, the lack of priests. I think Joe, you mentioned that. Right.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18699,
+       "snippet_cortico_id": 1094500159,
+       "conversation_id": 91,
+       "speaker_id": 458,
+       "speaker_name": "G",
+       "is_facilitator": false,
+       "text": "And if you can remain civil and be willing to hear them rather than try and change their mind. It's pretty interesting too, hearing other people's thoughts on why they voted for who or what's going on currently. But that's always been impressive, is that we have this problem every four years of who's going to be our next leader and we sort it out by voting. And I will admit we don't always, in my opinion, come to the best conclusion about like the final outrunner or the final Runners, but it's. You don't get there without that process.",
+       "index_in_conversation": 159,
+       "audio_start_offset": 1259.27,
+       "audio_end_offset": 1291.98,
+       "span": {
+        "start_index": 0,
+        "end_index": 100
+       },
+       "span_text": "And if you can remain civil and be willing to hear them rather than try and change their mind. It's pretty interesting too, hearing other people's thoughts on why they voted for who or what's going on currently. But that's always been impressive, is that we have this problem every four years of who's going to be our next leader and we sort it out by voting. And I will admit we don't always, in my opinion, come to the best conclusion about like the final outrunner or the final Runners, but it's. You don't get there without that process.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 21,
+     "conversation_id": 92,
+     "insight_text": "high trust group has people invested in local institutions and have navigated change through listening. Trust appears connected to repeated opportunities for people to hear and be heard, even when decisions do not change.",
+     "evidence": [
+      {
+       "snippet_id": 18817,
+       "snippet_cortico_id": 1105700002,
+       "conversation_id": 92,
+       "speaker_id": 461,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "Mj. I can, I can go, I guess kind of look at this also from my position as a city council person, but. And we were talking about this last night after our meeting, how well our city government and how well our economic development organization in our Chamber of Commerce organization, how well all three of those entities work together. In many cities that doesn't happen where they're always opposing forces, but all of ours seem to work. I mean, obviously there's always going to be bumps in the road and various issues, but for the most part, over the last 20, 20 years, for sure, all of them have worked very well together to. I mean, you see Tyville and all the things that are going on. Obviously everybody has to be on the same page for all that to work. So I think that's one thing that we all are pretty happy about and proud of.",
+       "index_in_conversation": 2,
+       "audio_start_offset": 168.04,
+       "audio_end_offset": 230.89,
+       "span": {
+        "start_index": 6,
+        "end_index": 159
+       },
+       "span_text": "I guess kind of look at this also from my position as a city council person, but. And we were talking about this last night after our meeting, how well our city government and how well our economic development organization in our Chamber of Commerce organization, how well all three of those entities work together. In many cities that doesn't happen where they're always opposing forces, but all of ours seem to work. I mean, obviously there's always going to be bumps in the road and various issues, but for the most part, over the last 20, 20 years, for sure, all of them have worked very well together to. I mean, you see Tyville and all the things that are going on. Obviously everybody has to be on the same page for all that to work. So I think that's one thing that we all are pretty happy about and proud of.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18834,
+       "snippet_cortico_id": 1105700019,
+       "conversation_id": 92,
+       "speaker_id": 467,
+       "speaker_name": "I",
+       "is_facilitator": false,
+       "text": "Yes, just recently with the Small Town Dreams initiative and what Last Nation and Elwood have been doing has a really good example for other communities within Clinton County. And to see Calmness and Wheatland, they've done a good job of working together because they're so close in proximity and they share a school district. It's just really fun to see them step up and cooperate with each other and listen to each other of their wants and needs and hopes and dreams and looking towards the future on, you know, how maybe they can participate in small town dreams. And it's the same way for the Charlotte and Goose Bay towns that shared a school district as well. So that's been really fun to witness, to be part of.",
+       "index_in_conversation": 19,
+       "audio_start_offset": 521.48,
+       "audio_end_offset": 576.62,
+       "span": {
+        "start_index": 0,
+        "end_index": 130
+       },
+       "span_text": "Yes, just recently with the Small Town Dreams initiative and what Last Nation and Elwood have been doing has a really good example for other communities within Clinton County. And to see Calmness and Wheatland, they've done a good job of working together because they're so close in proximity and they share a school district. It's just really fun to see them step up and cooperate with each other and listen to each other of their wants and needs and hopes and dreams and looking towards the future on, you know, how maybe they can participate in small town dreams. And it's the same way for the Charlotte and Goose Bay towns that shared a school district as well. So that's been really fun to witness, to be part of.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18859,
+       "snippet_cortico_id": 1105700044,
+       "conversation_id": 92,
+       "speaker_id": 459,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "But so important that that somebody just said let's get everybody together and be heard. So what's common in all of these examples from Molly and Jackie and Amanda Willameck and you, Mark, is just the role that exchange or conversation plays in a community moving beyond a division. And that part of what our role is. And you all embody this, that you're good listeners, you're not afraid of hard questions. You, you face division or maybe conflicting views. Not necessarily afraid of, of that happening, but rather, you know, how can we validate everybody's voice? And when we come to a consensus or a solution, it's fair to say some people will remain disappointed. But we do still live in a democracy. And part of what this American Conversation Project validates is that through consensus building, just like the original framers, we do move beyond. It does fade. It's probably always remembered because we remember them still. But the last question that we touch on as part of this is what small steps do you see in yourself that you now have confidence to take when there is a division or a conflict? And I'll just use an example from my practice and my involvement as a citizen leader. We here in Guttenberg have a family resource center that serves probably two thirds of Clayton county and then some of Dubuque and Delaware County. And it's led by just some amazing servant leaders who sought to establish a one stop shop for people in need. So it's everything from job coaching to food relief to clothing to household supplies, to toys, to health information. This week there's going to be a dental clinic there. But as it sought to move to a brand new building, and it was about a four and a half million dollar project, there was certainly not, not a resounding majority, but a healthy minority that just disagreed with the whole concept of why, you know, why those without were going to get a new building. And so with. With listening, with direct meetings, with those that disagreed, we didn't change their mind, but we. They were listened to and their. Their thoughts were considered. They didn't end up being part of the donor base because we had to raise. And Molly was. Molly and Emily both were involved in. In the fundraising and the grant writing. They didn't participate in that. They didn't turn around and all of a sudden become a cheerleader for the vulnerable that are served. But they did kind of fade away and they didn't derail the project. But without a certain really courage to engage with somebody who's just flat out against something that you believe in with all your heart, we wouldn't have had the type of resolution that came about. So more than anything today, you know, what I leave you with, is that you represent the whole community in your job. You would never have taken this job if you didn't have a big heart for moving things forward and be injected today with a little boost of courage and a little boost of confidence that conflicts and division, small or large, will always be a part of the American experience and the American conversation they have for 250 years. But it's through our leadership, our caring, our respect, all of which you embody, that we do eventually leave those behind. So, you know, that's kind of the ending point that we have for this. I would just invite anybody who wants to comment maybe on a division or a conflict, maybe that you're in the middle of right now or a divisive issue that you're anticipating, because we could use the small time that we have left to kind of group problem solve or give you an extra boost of. Of courage.",
+       "index_in_conversation": 44,
+       "audio_start_offset": 1276.22,
+       "audio_end_offset": 1607.32,
+       "span": {
+        "start_index": 211,
+        "end_index": 474
+       },
+       "span_text": "We here in Guttenberg have a family resource center that serves probably two thirds of Clayton county and then some of Dubuque and Delaware County. And it's led by just some amazing servant leaders who sought to establish a one stop shop for people in need. So it's everything from job coaching to food relief to clothing to household supplies, to toys, to health information. This week there's going to be a dental clinic there. But as it sought to move to a brand new building, and it was about a four and a half million dollar project, there was certainly not, not a resounding majority, but a healthy minority that just disagreed with the whole concept of why, you know, why those without were going to get a new building. And so with. With listening, with direct meetings, with those that disagreed, we didn't change their mind, but we. They were listened to and their. Their thoughts were considered. They didn't end up being part of the donor base because we had to raise. And Molly was. Molly and Emily both were involved in. In the fundraising and the grant writing. They didn't participate in that. They didn't turn around and all of a sudden become a cheerleader for the vulnerable that are served. But they did kind of fade away and they didn't derail the project. But without a certain really courage to engage with somebody who's just flat out against something that you believe in with all your heart, we wouldn't have had the type of resolution that came about.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 32,
+     "conversation_id": 140,
+     "insight_text": "The reflection found limited direct discussion of grassroots involvement versus federal government support, but did identify a tension between public provision and private replacement: private donors or philanthropy were discussed as possible substitutes for cut community services, schools, and orchestral programming. The reflection also notes community volunteering and local organizations as forms of grassroots involvement.",
+     "evidence": [
+      {
+       "snippet_id": 29501,
+       "snippet_cortico_id": 1126700045,
+       "conversation_id": 140,
+       "speaker_id": 721,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "Well, they didn't have the money. And, you know, I still hope that maybe a private entity will decide to teach lessons and have a private orchestra instead. I think that would be wonderful because there are lots of those kids with violins and instruments that they would love to be using. Maybe we'll find someone rich to do that for us.",
+       "index_in_conversation": 45,
+       "audio_start_offset": 654.67,
+       "audio_end_offset": 686.72,
+       "span": {
+        "start_index": 0,
+        "end_index": 62
+       },
+       "span_text": "Well, they didn't have the money. And, you know, I still hope that maybe a private entity will decide to teach lessons and have a private orchestra instead. I think that would be wonderful because there are lots of those kids with violins and instruments that they would love to be using. Maybe we'll find someone rich to do that for us.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 29520,
+       "snippet_cortico_id": 1126700064,
+       "conversation_id": 140,
+       "speaker_id": 721,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "I do think the one thing that pulls this community apart right now is. Is our school system having the funding that it needs and that people are saying, you know, that we're including. We have a state legislature who thinks we don't do a very good job at our public schools. And I think that's a community thing that is an alarm for a lot of people. Going to parochial schools, losing our funding",
+       "index_in_conversation": 64,
+       "audio_start_offset": 894.85,
+       "audio_end_offset": 926.09,
+       "span": {
+        "start_index": 0,
+        "end_index": 75
+       },
+       "span_text": "I do think the one thing that pulls this community apart right now is. Is our school system having the funding that it needs and that people are saying, you know, that we're including. We have a state legislature who thinks we don't do a very good job at our public schools. And I think that's a community thing that is an alarm for a lot of people. Going to parochial schools, losing our funding",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 29547,
+       "snippet_cortico_id": 1126700091,
+       "conversation_id": 140,
+       "speaker_id": 721,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "But I think pulling our community together, when you are involved in things and voice your opinion, it's probably the best way to pull people together, you know, and many of us volunteer around the community. That really pulls people together, you know,",
+       "index_in_conversation": 91,
+       "audio_start_offset": 1189.96,
+       "audio_end_offset": 1211.25,
+       "span": {
+        "start_index": 0,
+        "end_index": 43
+       },
+       "span_text": "But I think pulling our community together, when you are involved in things and voice your opinion, it's probably the best way to pull people together, you know, and many of us volunteer around the community. That really pulls people together, you know,",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 29555,
+       "snippet_cortico_id": 1126700099,
+       "conversation_id": 140,
+       "speaker_id": 721,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "Some of the activities that I'm involved in, many. Well, young people, of course, I'm talking even to us in 40s and 50s are young people. Okay. I'm beginning to see them step forward. You know, if you look at who's on the chamber board now, if you look around at who's serving, like in Rotary, et cetera, there are some young people in this community stepping up. There's some new leadership that's coming forward, which pleases me no end. I'm really glad to see some of that. We really are developing some leaders",
+       "index_in_conversation": 99,
+       "audio_start_offset": 1282.33,
+       "audio_end_offset": 1328.47,
+       "span": {
+        "start_index": 0,
+        "end_index": 94
+       },
+       "span_text": "Some of the activities that I'm involved in, many. Well, young people, of course, I'm talking even to us in 40s and 50s are young people. Okay. I'm beginning to see them step forward. You know, if you look at who's on the chamber board now, if you look around at who's serving, like in Rotary, et cetera, there are some young people in this community stepping up. There's some new leadership that's coming forward, which pleases me no end. I'm really glad to see some of that. We really are developing some leaders",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 42,
+     "conversation_id": 95,
+     "insight_text": "The people who represent local institutions cite trust as tied to people being informed, honest, accessible, and willing to explain what they know. ",
+     "evidence": [
+      {
+       "snippet_id": 19123,
+       "snippet_cortico_id": 1138400029,
+       "conversation_id": 95,
+       "speaker_id": 480,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "Well, currently in. In DeWitt, we're working on. We have it set up for a vote for a. To redo the school. So it's, you know, I have been participating in the meetings, even going through the. The initial meetings of what the. What the buildings are currently, what the needs are and what the best options were and just being. Trying to be informed with that so that I can share what I know when people do have questions and to just try to be that open person and trusted person that people know. I'm gonna tell them what I really think and what I really feel in a nice way, but just so they know the facts. And I'm not trying to. I'm just trying to be a trusted person in the community.",
+       "index_in_conversation": 29,
+       "audio_start_offset": 1488.11,
+       "audio_end_offset": 1550.63,
+       "span": {
+        "start_index": 0,
+        "end_index": 135
+       },
+       "span_text": "Well, currently in. In DeWitt, we're working on. We have it set up for a vote for a. To redo the school. So it's, you know, I have been participating in the meetings, even going through the. The initial meetings of what the. What the buildings are currently, what the needs are and what the best options were and just being. Trying to be informed with that so that I can share what I know when people do have questions and to just try to be that open person and trusted person that people know. I'm gonna tell them what I really think and what I really feel in a nice way, but just so they know the facts. And I'm not trying to. I'm just trying to be a trusted person in the community.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 19117,
+       "snippet_cortico_id": 1138400023,
+       "conversation_id": 95,
+       "speaker_id": 480,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "I was going to use the data centers as that. That's a big division right now. A few years ago, the county supervisors revised their policies for wind turbines and there was a lot of opposition there. When they were going through that process, they actually kind of modeled that and did another policy guidelines on the data centers for the county. But then there's in Clinton, that's just the city of Clinton. They're looking at bringing one in and there's a lot of opposition. The director at their chamber, you know, part of his job is an economic development. Part of his job is to bring ideas to the community and to the city. And he's gotten a lot of backlash just because he brought like everybody thinks he's for it because he brought it is the idea. And I feel like that's very fair, unfair for him as an individual to be kind of put under the microscope or attacked that way because he's not for or against it. It's an opportunity that the community needs to explore and to decide. And I feel like a lot of the opposition and division is because of the, the, the lack of information that is known around the data center. So it's kind of a scary time for that.",
+       "index_in_conversation": 23,
+       "audio_start_offset": 975.71,
+       "audio_end_offset": 1072.35,
+       "span": {
+        "start_index": 150,
+        "end_index": 219
+       },
+       "span_text": "an individual to be kind of put under the microscope or attacked that way because he's not for or against it. It's an opportunity that the community needs to explore and to decide. And I feel like a lot of the opposition and division is because of the, the, the lack of information that is known around the data center. So it's kind of a scary time for that.",
+       "evidence_source": "user"
+      }
+     ]
+    }
+   ],
+   "exemplars": [],
+   "children": []
+  },
+  {
+   "id": "td-family-2",
+   "name": "Institutional and community disconnection during crises",
+   "definition": "Disconnection is experienced as political and social division, distrust of leaders and outsiders, and unmet community needs when infrastructure or disaster-response systems fail. The entries connect inadequate preparation, funding cuts, unreliable utilities, and decisions made without listening to residents with broader feelings of abandonment and division.",
+   "source": "top_down",
+   "rq_provenance": {
+    "id": 3,
+    "name": "Where do people experience friction or disconnection?"
+   },
+   "highlights": [
+    {
+     "connection_id": 2,
+     "conversation_id": 10,
+     "insight_text": "Disconnection appears both as political and social division and as unmet needs during infrastructure and disaster failures. The reflection emphasizes “division at the top,” cuts to funding, unreliable electricity and water, and people feeling skeptical of leaders and of people outside their trusted circles.",
+     "evidence": [
+      {
+       "snippet_id": 2741,
+       "snippet_cortico_id": 1108000044,
+       "conversation_id": 10,
+       "speaker_id": 44,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "I think that's true. I've been thinking about this a lot lately with the gas leaks, and I hear a lot of grumbling and complaining and finger Pointing. And a lot of it happens before we really know much of anything. It's like people were angry with the city before they knew that they should really be angry with the gas company. You know what I mean? It's. There's a bit of that and I am not saying there isn't blame to go around, but it would be better, I think in those moments to think about what can we do to make",
+       "index_in_conversation": 44,
+       "audio_start_offset": 719.17,
+       "audio_end_offset": 749.86,
+       "span": {
+        "start_index": 4,
+        "end_index": 103
+       },
+       "span_text": "I've been thinking about this a lot lately with the gas leaks, and I hear a lot of grumbling and complaining and finger Pointing. And a lot of it happens before we really know much of anything. It's like people were angry with the city before they knew that they should really be angry with the gas company. You know what I mean? It's. There's a bit of that and I am not saying there isn't blame to go around, but it would be better, I think in those moments to think about what can we do to make",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2762,
+       "snippet_cortico_id": 1108000065,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "Yeah, I, I think the thing that bothers me the most is usually when you have a, you know, there's some disasters that you probably could have prepared for and prevented, and we don't do that as a, as a whole. You know, we're quick to say, you know, oh, now we need help, but how are we going to fix the problem? You know, there's some things that, I mean that we have the capabilities of fixing. We used to. We just, I just don't see. We don't have it now. Since they've cut back on the weather service. I mean, there's, I mean, it's just now the test, you know, compared to 4th of July, July last year and now the. They did put in sirens, but. But they're still not finished because look how bad this one. So far, three people have died.",
+       "index_in_conversation": 65,
+       "audio_start_offset": 936.9,
+       "audio_end_offset": 990.45,
+       "span": {
+        "start_index": 0,
+        "end_index": 146
+       },
+       "span_text": "Yeah, I, I think the thing that bothers me the most is usually when you have a, you know, there's some disasters that you probably could have prepared for and prevented, and we don't do that as a, as a whole. You know, we're quick to say, you know, oh, now we need help, but how are we going to fix the problem? You know, there's some things that, I mean that we have the capabilities of fixing. We used to. We just, I just don't see. We don't have it now. Since they've cut back on the weather service. I mean, there's, I mean, it's just now the test, you know, compared to 4th of July, July last year and now the. They did put in sirens, but. But they're still not finished because look how bad this one. So far, three people have died.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2786,
+       "snippet_cortico_id": 1108000089,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "That's what I was saying. The people at the top are the, they've set the example. And the examples, the examples that the younger, you know, people underneath are learning are not the things that probably should happen to help. It's also following, trickling down to the local. Well, that's. It is, it's all on the low. I mean that. Well, it has to go to the local because when you start at the top, where else is it going to go? I'm talking about that, where they don't care about people. I kind of got that feeling when I watched the news about these data centers. You know, the townspeople said, we do not want one in our county. And, and the, the councils or whatever those people are, they ignore it and vote for it. So. But you're not listening to the people that you represent. But how did they get there? They were voted in by those people that they're not wanting it. But that was before we got the data. I know, but what, that's what I'm saying. People don't, I don't think they realize that just every little thing that they can do, they need to make sure that they understand what's really going on first. And then instead of pointing fingers, how do you fix these things? Look at, you know, look at ways to fix things instead of, you know, just quit doing it doesn't fix the problem, you just run away from it. Well, yeah, for certain things. But, but when you, when you as a, as a group, you know, go there and say, we don't want this, we have problems with it and you know, we voted you in. You're supposed to be listening and voting for us. Right? And they don't. Well, and see, in that case, to me, this, you know, they work for the city. There's, there's, you know, public servant or whatever, whatever it is, you know, they work for the citizens. They were put in there. They're supposed to be working for the citizens. That there has to be a way to get those people out, there's got to be. Well, some of the news says that. That the people were going to vote, they were going to do a referendum or whatever. I mean, there's ways to get them out because they don't listen to the citizens. Well, that's what I'm saying. And that's the right thing. I mean, they researched it. They know how they can legally do that. And to me, I think if that's done more often, maybe we would start moving the little gauge. I just don't understand. We have problems with water here, we have problems with electricity here. Why would you vote for something that's going to hog it?",
+       "index_in_conversation": 89,
+       "audio_start_offset": 1403.61,
+       "audio_end_offset": 1567.93,
+       "span": {
+        "start_index": 5,
+        "end_index": 148
+       },
+       "span_text": "The people at the top are the, they've set the example. And the examples, the examples that the younger, you know, people underneath are learning are not the things that probably should happen to help. It's also following, trickling down to the local. Well, that's. It is, it's all on the low. I mean that. Well, it has to go to the local because when you start at the top, where else is it going to go? I'm talking about that, where they don't care about people. I kind of got that feeling when I watched the news about these data centers. You know, the townspeople said, we do not want one in our county. And, and the, the councils or whatever those people are, they ignore it and vote for it. So. But you're not listening to the people that you represent.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2813,
+       "snippet_cortico_id": 1108000116,
+       "conversation_id": 10,
+       "speaker_id": 44,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "So we did have the rolling blackouts where I was, but we lost water. And so for three Weeks, I had no water. And when it did come back on, every pipe in my house burst. And so we had all of that to deal with. And thankfully, there was snow. The snow saved us because we were able to make a fire in the backyard and melt water. Melt snow for watering the animals because, I mean, they use gallons.",
+       "index_in_conversation": 116,
+       "audio_start_offset": 1856.67,
+       "audio_end_offset": 1884.8,
+       "span": {
+        "start_index": 0,
+        "end_index": 81
+       },
+       "span_text": "So we did have the rolling blackouts where I was, but we lost water. And so for three Weeks, I had no water. And when it did come back on, every pipe in my house burst. And so we had all of that to deal with. And thankfully, there was snow. The snow saved us because we were able to make a fire in the backyard and melt water. Melt snow for watering the animals because, I mean, they use gallons.",
+       "evidence_source": "user"
+      }
+     ]
+    }
+   ],
+   "exemplars": [],
+   "children": []
+  },
+  {
+   "id": "td-family-3",
+   "name": "Young people’s weakened social connection and opportunity",
+   "definition": "Young people experience disconnection through pandemic isolation, technology-mediated relationships, limited interpersonal communication, economic disadvantage, and restricted educational or career opportunities. These conditions can reinforce inherited disadvantage and make it harder for young people to engage with people and possibilities beyond their immediate circumstances.",
+   "source": "top_down",
+   "rq_provenance": {
+    "id": 3,
+    "name": "Where do people experience friction or disconnection?"
+   },
+   "highlights": [
+    {
+     "connection_id": 9,
+     "conversation_id": 44,
+     "insight_text": "People described young people experiencing disconnection through technology, COVID-related isolation, economic disadvantage, limited opportunities, and difficulty developing interpersonal communication skills. The reflection also notes that there may be more interest in creating new connections than repairing disrupted ones.",
+     "evidence": [
+      {
+       "snippet_id": 9914,
+       "snippet_cortico_id": 1120900032,
+       "conversation_id": 44,
+       "speaker_id": 228,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "Well, I grew up in a family that was very religious. We went to church and we're very caring people. So I'm so blessed. But in my work with juvenile delinquents, I learned that there is a small proportion of our society that didn't have that blessed. Okay. And I, for example, I work with kids and I asked the kids. It was in the facility in Tecumseh which was a secure facility. Hey, what are you going to do when you get out? He said, oh, I'm going to go to prison. What? So why are you saying that? He said, that's where my dad is and that's where my brothers are and that's where my cousins are. That's what we do in my family. It's generational and so what can we do to stop that from him? And then all of the generations after m's wouldn't think they have to go to. So I think we still have a small portion of the population that we don't relate to. We don't understand. We don't understand poverty that they live in. I think our society is really trying to make a difference. Oklahoma, I think is one of the best places. I can't help but feel that an educational system, especially in those early years can help develop values in those kids. And that may be much different than what they're growing up at home and. And I think that early education plays a great part",
+       "index_in_conversation": 32,
+       "audio_start_offset": 671.83,
+       "audio_end_offset": 763.53,
+       "span": {
+        "start_index": 0,
+        "end_index": 247
+       },
+       "span_text": "Well, I grew up in a family that was very religious. We went to church and we're very caring people. So I'm so blessed. But in my work with juvenile delinquents, I learned that there is a small proportion of our society that didn't have that blessed. Okay. And I, for example, I work with kids and I asked the kids. It was in the facility in Tecumseh which was a secure facility. Hey, what are you going to do when you get out? He said, oh, I'm going to go to prison. What? So why are you saying that? He said, that's where my dad is and that's where my brothers are and that's where my cousins are. That's what we do in my family. It's generational and so what can we do to stop that from him? And then all of the generations after m's wouldn't think they have to go to. So I think we still have a small portion of the population that we don't relate to. We don't understand. We don't understand poverty that they live in. I think our society is really trying to make a difference. Oklahoma, I think is one of the best places. I can't help but feel that an educational system, especially in those early years can help develop values in those kids. And that may be much different than what they're growing up at home and. And I think that early education plays a great part",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9917,
+       "snippet_cortico_id": 1120900035,
+       "conversation_id": 44,
+       "speaker_id": 229,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "but there's one similarity that I like about West Texas in Oklahoma City is the work ethic. Here everybody has really strong work ethic. But to your point, it's almost a shame to see, I guess education failing these hardworking individuals. It makes you wonder how many innovators out of those individuals that may be stuck in the is being overlooked that can create the next company, that can create the next tech company. They're out there. They just have to have that opportunity to work at those there, you know.",
+       "index_in_conversation": 35,
+       "audio_start_offset": 769.13,
+       "audio_end_offset": 803.2,
+       "span": {
+        "start_index": 28,
+        "end_index": 91
+       },
+       "span_text": "it's almost a shame to see, I guess education failing these hardworking individuals. It makes you wonder how many innovators out of those individuals that may be stuck in the is being overlooked that can create the next company, that can create the next tech company. They're out there. They just have to have that opportunity to work at those there, you know.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9918,
+       "snippet_cortico_id": 1120900036,
+       "conversation_id": 44,
+       "speaker_id": 224,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "Do you think it's perhaps part of that is because we've become more isolated and younger generations are not communicating or interacting with others as much. The pandemic exacerbated that. And I'm not sure that that pendulum has sworn back to a happy medium. To your point about this is what my family does. What is this young man's exposure to anything different than the reality that he was brought up with in that how do. How do we come back together to include the people who I don't want to say been left behind, but who are perhaps on the outside and not connected?",
+       "index_in_conversation": 36,
+       "audio_start_offset": 803.2,
+       "audio_end_offset": 843.74,
+       "span": {
+        "start_index": 0,
+        "end_index": 105
+       },
+       "span_text": "Do you think it's perhaps part of that is because we've become more isolated and younger generations are not communicating or interacting with others as much. The pandemic exacerbated that. And I'm not sure that that pendulum has sworn back to a happy medium. To your point about this is what my family does. What is this young man's exposure to anything different than the reality that he was brought up with in that how do. How do we come back together to include the people who I don't want to say been left behind, but who are perhaps on the outside and not connected?",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9922,
+       "snippet_cortico_id": 1120900040,
+       "conversation_id": 44,
+       "speaker_id": 228,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "I think you made a point about this younger generation because they were numbered their cell phones completely focused on the energy. I have a psychiatrist that I work with. Let me tell you a story. I have a little girl that was sent. I have a young teenage girl that was sent to me because she tried to commit suicide. I said, oh, that's important. Why did she do that? Well, her boyfriend broke up with her. I said, well, that's pretty common, isn't? He Said, well, they were boyfriend and girlfriend on the Internet, never actually met each other. Wow, you broke up with her on the Internet. She tried to kill us. What is that saying? So I think we're now starting to realize that what are we going to do with these reports? How are we going to.",
+       "index_in_conversation": 40,
+       "audio_start_offset": 906.21,
+       "audio_end_offset": 953.16,
+       "span": {
+        "start_index": 0,
+        "end_index": 137
+       },
+       "span_text": "I think you made a point about this younger generation because they were numbered their cell phones completely focused on the energy. I have a psychiatrist that I work with. Let me tell you a story. I have a little girl that was sent. I have a young teenage girl that was sent to me because she tried to commit suicide. I said, oh, that's important. Why did she do that? Well, her boyfriend broke up with her. I said, well, that's pretty common, isn't? He Said, well, they were boyfriend and girlfriend on the Internet, never actually met each other. Wow, you broke up with her on the Internet. She tried to kill us. What is that saying? So I think we're now starting to realize that what are we going to do with these reports?",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9928,
+       "snippet_cortico_id": 1120900046,
+       "conversation_id": 44,
+       "speaker_id": 225,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "During the pandemic it was constantly freeing time. So it's harder to connect. But that's why it's important for that community. I know it feels like such a huge shift, especially between the different generations.",
+       "index_in_conversation": 46,
+       "audio_start_offset": 979.67,
+       "audio_end_offset": 993.51,
+       "span": {
+        "start_index": 0,
+        "end_index": 35
+       },
+       "span_text": "During the pandemic it was constantly freeing time. So it's harder to connect. But that's why it's important for that community. I know it feels like such a huge shift, especially between the different generations.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9929,
+       "snippet_cortico_id": 1120900047,
+       "conversation_id": 44,
+       "speaker_id": 224,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "I think it's. If I could just have one more thing. I think it's a skill for life. I can't tell you the number of young employees. I see. And even right out of college that if they have to talk to a donor on the telephone, they literally, they couldn't. They'll email and you know, I'm sure",
+       "index_in_conversation": 47,
+       "audio_start_offset": 993.51,
+       "audio_end_offset": 1010.14,
+       "span": {
+        "start_index": 0,
+        "end_index": 58
+       },
+       "span_text": "I think it's. If I could just have one more thing. I think it's a skill for life. I can't tell you the number of young employees. I see. And even right out of college that if they have to talk to a donor on the telephone, they literally, they couldn't. They'll email and you know, I'm sure",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9931,
+       "snippet_cortico_id": 1120900049,
+       "conversation_id": 44,
+       "speaker_id": 224,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "interpersonal communication and so how do we be more civil and practice these things that we think are important to society if we don't have that on a personal scale?",
+       "index_in_conversation": 49,
+       "audio_start_offset": 1012.5,
+       "audio_end_offset": 1026.64,
+       "span": {
+        "start_index": 0,
+        "end_index": 30
+       },
+       "span_text": "interpersonal communication and so how do we be more civil and practice these things that we think are important to society if we don't have that on a personal scale?",
+       "evidence_source": "user"
+      }
+     ]
+    }
+   ],
+   "exemplars": [],
+   "children": []
+  },
+  {
+   "id": "td-family-7",
+   "name": "Collective adaptation to community change",
+   "definition": "Communities must navigate major changes to shared institutions and social composition, including school and church mergers, elections, taxes, and immigration. These changes are emotionally and politically difficult because people are attached to local institutions, disagree about consequences, or view newcomers and disruption negatively; constructive adaptation depends on remaining civil, listening across differences, recognizing potential benefits, and helping people integrate rather than simply preserving the status quo.",
+   "source": "top_down",
+   "rq_provenance": {
+    "id": 3,
+    "name": "Where do people experience friction or disconnection?"
+   },
+   "highlights": [
+    {
+     "connection_id": 16,
+     "conversation_id": 91,
+     "insight_text": "when communities have to navigate “big change and big loss together,” including school mergers, church mergers, taxes, and elections. These decisions become emotional because people are attached to local institutions and disagree about their costs and consequences.",
+     "evidence": [
+      {
+       "snippet_id": 18638,
+       "snippet_cortico_id": 1094500098,
+       "conversation_id": 91,
+       "speaker_id": 455,
+       "speaker_name": "D",
+       "is_facilitator": false,
+       "text": "Building, like, schools and, like, what to do with the.",
+       "index_in_conversation": 98,
+       "audio_start_offset": 848.53,
+       "audio_end_offset": 852.45,
+       "span": {
+        "start_index": 0,
+        "end_index": 10
+       },
+       "span_text": "Building, like, schools and, like, what to do with the.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18640,
+       "snippet_cortico_id": 1094500100,
+       "conversation_id": 91,
+       "speaker_id": 455,
+       "speaker_name": "D",
+       "is_facilitator": false,
+       "text": "They should build a new school or just add on to the bigger school.",
+       "index_in_conversation": 100,
+       "audio_start_offset": 858.69,
+       "audio_end_offset": 864.05,
+       "span": {
+        "start_index": 0,
+        "end_index": 14
+       },
+       "span_text": "They should build a new school or just add on to the bigger school.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18642,
+       "snippet_cortico_id": 1094500102,
+       "conversation_id": 91,
+       "speaker_id": 455,
+       "speaker_name": "D",
+       "is_facilitator": false,
+       "text": "Taxes.",
+       "index_in_conversation": 102,
+       "audio_start_offset": 868.77,
+       "audio_end_offset": 869.57,
+       "span": {
+        "start_index": 0,
+        "end_index": 1
+       },
+       "span_text": "Taxes.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18652,
+       "snippet_cortico_id": 1094500112,
+       "conversation_id": 91,
+       "speaker_id": 452,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "That's a really good one, Louis. And there were some other. It wasn't just about taxes, too. Like, which school was going to close school that you go to. Right. So that's kind of emotional for people. Right. Like, they don't want their school to close. Yeah. So people were upset about that, weren't they? Yeah. That's a really good example. Did Louis take the one that you guys were going to talk about? Say yes. Levine.",
+       "index_in_conversation": 112,
+       "audio_start_offset": 901.48,
+       "audio_end_offset": 925.96,
+       "span": {
+        "start_index": 0,
+        "end_index": 55
+       },
+       "span_text": "That's a really good one, Louis. And there were some other. It wasn't just about taxes, too. Like, which school was going to close school that you go to. Right. So that's kind of emotional for people. Right. Like, they don't want their school to close. Yeah. So people were upset about that, weren't they?",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18657,
+       "snippet_cortico_id": 1094500117,
+       "conversation_id": 91,
+       "speaker_id": 454,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "There's one really big one, like, posting down, like, a bunch of, like, churches, because I think they don't have, like, something like that. And it's gonna be, like, harder for, like, different people. Like, from where I am, there's. We're gonna have to drive, like, either end of dubuque or, like, 20 minutes out of our way to, like, go to church.",
+       "index_in_conversation": 117,
+       "audio_start_offset": 937.79,
+       "audio_end_offset": 958.93,
+       "span": {
+        "start_index": 0,
+        "end_index": 63
+       },
+       "span_text": "There's one really big one, like, posting down, like, a bunch of, like, churches, because I think they don't have, like, something like that. And it's gonna be, like, harder for, like, different people. Like, from where I am, there's. We're gonna have to drive, like, either end of dubuque or, like, 20 minutes out of our way to, like, go to church.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18669,
+       "snippet_cortico_id": 1094500129,
+       "conversation_id": 91,
+       "speaker_id": 457,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "And we had a pastor and she wanted to help them, so they would. We would go back and forth with churches. And then we decided that we should merge. So we would have two buildings and we would have a downtown building and like a west side building. And we use mostly the west building. So it was hard to get used to the west built west building than our downtown building.",
+       "index_in_conversation": 129,
+       "audio_start_offset": 1027.37,
+       "audio_end_offset": 1063.189,
+       "span": {
+        "start_index": 0,
+        "end_index": 73
+       },
+       "span_text": "And we had a pastor and she wanted to help them, so they would. We would go back and forth with churches. And then we decided that we should merge. So we would have two buildings and we would have a downtown building and like a west side building. And we use mostly the west building. So it was hard to get used to the west built west building than our downtown building.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18677,
+       "snippet_cortico_id": 1094500137,
+       "conversation_id": 91,
+       "speaker_id": 457,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "I mean, it was kind of hard to agree. Merging churches because some people thought they were forced to go to the church. So it was kind of kind of argument and like, merged the churches.",
+       "index_in_conversation": 137,
+       "audio_start_offset": 1102.44,
+       "audio_end_offset": 1124.13,
+       "span": {
+        "start_index": 0,
+        "end_index": 36
+       },
+       "span_text": "I mean, it was kind of hard to agree. Merging churches because some people thought they were forced to go to the church. So it was kind of kind of argument and like, merged the churches.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18699,
+       "snippet_cortico_id": 1094500159,
+       "conversation_id": 91,
+       "speaker_id": 458,
+       "speaker_name": "G",
+       "is_facilitator": false,
+       "text": "And if you can remain civil and be willing to hear them rather than try and change their mind. It's pretty interesting too, hearing other people's thoughts on why they voted for who or what's going on currently. But that's always been impressive, is that we have this problem every four years of who's going to be our next leader and we sort it out by voting. And I will admit we don't always, in my opinion, come to the best conclusion about like the final outrunner or the final Runners, but it's. You don't get there without that process.",
+       "index_in_conversation": 159,
+       "audio_start_offset": 1259.27,
+       "audio_end_offset": 1291.98,
+       "span": {
+        "start_index": 0,
+        "end_index": 100
+       },
+       "span_text": "And if you can remain civil and be willing to hear them rather than try and change their mind. It's pretty interesting too, hearing other people's thoughts on why they voted for who or what's going on currently. But that's always been impressive, is that we have this problem every four years of who's going to be our next leader and we sort it out by voting. And I will admit we don't always, in my opinion, come to the best conclusion about like the final outrunner or the final Runners, but it's. You don't get there without that process.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 20,
+     "conversation_id": 91,
+     "insight_text": "proposed cross-case theme: communities are dealing with inevitable change—through churches, schools, elections, and immigration—and the difficulty lies in handling that change together rather than preserving the status quo.",
+     "evidence": [
+      {
+       "snippet_id": 18711,
+       "snippet_cortico_id": 1094500171,
+       "conversation_id": 91,
+       "speaker_id": 453,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "Was any of that staying the same?",
+       "index_in_conversation": 171,
+       "audio_start_offset": 1371.12,
+       "audio_end_offset": 1375.28,
+       "span": {
+        "start_index": 0,
+        "end_index": 7
+       },
+       "span_text": "Was any of that staying the same?",
+       "evidence_source": "ai"
+      },
+      {
+       "snippet_id": 18712,
+       "snippet_cortico_id": 1094500172,
+       "conversation_id": 91,
+       "speaker_id": 452,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "A lot of it's about change, right? Like change needs to happen. And how do people deal effectively with change? Like, your congregation worked really well together to accept that change and find a good solution. Kind of what Joey's talking about is really difficult, but people figure it out and we kind of keep moving ahead.",
+       "index_in_conversation": 172,
+       "audio_start_offset": 1375.28,
+       "audio_end_offset": 1396.76,
+       "span": {
+        "start_index": 0,
+        "end_index": 57
+       },
+       "span_text": "A lot of it's about change, right? Like change needs to happen. And how do people deal effectively with change? Like, your congregation worked really well together to accept that change and find a good solution. Kind of what Joey's talking about is really difficult, but people figure it out and we kind of keep moving ahead.",
+       "evidence_source": "ai"
+      },
+      {
+       "snippet_id": 18789,
+       "snippet_cortico_id": 1094500249,
+       "conversation_id": 91,
+       "speaker_id": 458,
+       "speaker_name": "G",
+       "is_facilitator": false,
+       "text": "This kind of things I've noticed is as a country, we're a country of immigrants and with immigrants comes change and people aren't good with change. And so yeah, all experience the next immigration and wave or whatever and that's a good thing. Immigrants bring jobs, new perspective and change. But try to remember we were all immigrants at one point. Our ancestors.",
+       "index_in_conversation": 249,
+       "audio_start_offset": 2039.01,
+       "audio_end_offset": 2068.1,
+       "span": {
+        "start_index": 0,
+        "end_index": 63
+       },
+       "span_text": "This kind of things I've noticed is as a country, we're a country of immigrants and with immigrants comes change and people aren't good with change. And so yeah, all experience the next immigration and wave or whatever and that's a good thing. Immigrants bring jobs, new perspective and change. But try to remember we were all immigrants at one point. Our ancestors.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18794,
+       "snippet_cortico_id": 1094500254,
+       "conversation_id": 91,
+       "speaker_id": 458,
+       "speaker_name": "G",
+       "is_facilitator": false,
+       "text": "Before you judge them poorly or view the change as negative, think about all the positive impacts and try and help them integrate with the community better. Make their integration less painful than our ancestors were.",
+       "index_in_conversation": 254,
+       "audio_start_offset": 2077.26,
+       "audio_end_offset": 2089.74,
+       "span": {
+        "start_index": 0,
+        "end_index": 36
+       },
+       "span_text": "Before you judge them poorly or view the change as negative, think about all the positive impacts and try and help them integrate with the community better. Make their integration less painful than our ancestors were.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 27,
+     "conversation_id": 140,
+     "insight_text": "People experienced friction or disconnection around municipal decisions, public-school funding, the loss of community resources, and protests or disagreement in public spaces. The reflection describes division over rec centers and schools, concern about reduced public resources, and skepticism about people “protesting downtown.”",
+     "evidence": [
+      {
+       "snippet_id": 29494,
+       "snippet_cortico_id": 1126700038,
+       "conversation_id": 140,
+       "speaker_id": 722,
+       "speaker_name": "D",
+       "is_facilitator": false,
+       "text": "I look at some of the things that. Like the rec center when they wanted to build the schools and you had the two sides and. Yeah, people did not agree and they would argue over it.",
+       "index_in_conversation": 38,
+       "audio_start_offset": 592.34,
+       "audio_end_offset": 617.24,
+       "span": {
+        "start_index": 0,
+        "end_index": 37
+       },
+       "span_text": "I look at some of the things that. Like the rec center when they wanted to build the schools and you had the two sides and. Yeah, people did not agree and they would argue over it.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 29520,
+       "snippet_cortico_id": 1126700064,
+       "conversation_id": 140,
+       "speaker_id": 721,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "I do think the one thing that pulls this community apart right now is. Is our school system having the funding that it needs and that people are saying, you know, that we're including. We have a state legislature who thinks we don't do a very good job at our public schools. And I think that's a community thing that is an alarm for a lot of people. Going to parochial schools, losing our funding",
+       "index_in_conversation": 64,
+       "audio_start_offset": 894.85,
+       "audio_end_offset": 926.09,
+       "span": {
+        "start_index": 0,
+        "end_index": 75
+       },
+       "span_text": "I do think the one thing that pulls this community apart right now is. Is our school system having the funding that it needs and that people are saying, you know, that we're including. We have a state legislature who thinks we don't do a very good job at our public schools. And I think that's a community thing that is an alarm for a lot of people. Going to parochial schools, losing our funding",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 29526,
+       "snippet_cortico_id": 1126700070,
+       "conversation_id": 140,
+       "speaker_id": 723,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "It's scary that a lot of kids are feeling that they aren't getting enough one on one help in schools and their parents let them finish their school online. And that's scary because I think they need the interaction with other kids. And it's getting very scary because there's a lot of that going on now and there's so much cyberbullying that kids can't handle that. And it's very, I don't know, technology I think is going way too fast at a pace.",
+       "index_in_conversation": 70,
+       "audio_start_offset": 968.61,
+       "audio_end_offset": 1015.06,
+       "span": {
+        "start_index": 0,
+        "end_index": 66
+       },
+       "span_text": "It's scary that a lot of kids are feeling that they aren't getting enough one on one help in schools and their parents let them finish their school online. And that's scary because I think they need the interaction with other kids. And it's getting very scary because there's a lot of that going on now and there's so much cyberbullying that kids can't handle that.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 29544,
+       "snippet_cortico_id": 1126700088,
+       "conversation_id": 140,
+       "speaker_id": 720,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "I don't know, just something that actually would bring people together. We're so divided on so many things, it seems. I don't care if it's the paint on the wall or the carpet, it's sometimes just hard to come to common ground. Everybody has their opinion, which is as it should be. But we should be able to come to a conclusion on a better level than riots and standing down on Story street with placards and whatever. I just. I have a hard time with that. I don't know what the answer is.",
+       "index_in_conversation": 88,
+       "audio_start_offset": 1125.17,
+       "audio_end_offset": 1173.64,
+       "span": {
+        "start_index": 0,
+        "end_index": 94
+       },
+       "span_text": "I don't know, just something that actually would bring people together. We're so divided on so many things, it seems. I don't care if it's the paint on the wall or the carpet, it's sometimes just hard to come to common ground. Everybody has their opinion, which is as it should be. But we should be able to come to a conclusion on a better level than riots and standing down on Story street with placards and whatever. I just. I have a hard time with that. I don't know what the answer is.",
+       "evidence_source": "user"
+      }
+     ]
+    }
+   ],
+   "exemplars": [],
+   "children": []
+  },
+  {
+   "id": "td-family-4",
+   "name": "Practices for rebuilding connection and trust",
+   "definition": "Participants describe repairing disconnection and softening divides through open, face-to-face communication; listening to understand; replacing judgment with curiosity; finding common ground; and creating inclusive opportunities for families, generations, and community members to gather and bond. These practices emphasize concrete relationship-building rather than claiming that repair is already common.",
+   "source": "top_down",
+   "rq_provenance": {
+    "id": 4,
+    "name": "How have people seen disconnect repaired?"
+   },
+   "highlights": [
+    {
+     "connection_id": 3,
+     "conversation_id": 10,
+     "insight_text": "Disconnect is repaired through open communication, in-person gathering, family and intergenerational programming, and people taking concrete action for one another. The reflection says people seemed interested in “conversation, open communication,” and that library programming could help people bond across families and generations.",
+     "evidence": [
+      {
+       "snippet_id": 2884,
+       "snippet_cortico_id": 1108000187,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "That that's what I want to see is. But not just in Lake Dallas. I want to push it for all the locals that could come here. And I said, you know, we don't just want Lake Dallas people. We want anybody. You can come. We welcome you. So I'm pushing that. I think we need to be a little bit more open to communicate with people. I. I think, you know, not be scared to walk up and introduce yourself and then, you know, you'll know whether they're going to respond to you or not right off the bat.",
+       "index_in_conversation": 187,
+       "audio_start_offset": 2839.21,
+       "audio_end_offset": 2878.27,
+       "span": {
+        "start_index": 0,
+        "end_index": 100
+       },
+       "span_text": "That that's what I want to see is. But not just in Lake Dallas. I want to push it for all the locals that could come here. And I said, you know, we don't just want Lake Dallas people. We want anybody. You can come. We welcome you. So I'm pushing that. I think we need to be a little bit more open to communicate with people. I. I think, you know, not be scared to walk up and introduce yourself and then, you know, you'll know whether they're going to respond to you or not right off the bat.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2886,
+       "snippet_cortico_id": 1108000189,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "I mean, and if they're, if they're eager to listen and then find some common ground to talk about. I mean, I, I just think more communications and being more open with people, maybe that would bring back more trust. It could, I mean, you know, be honest, open and just try to communicate.",
+       "index_in_conversation": 189,
+       "audio_start_offset": 2878.71,
+       "audio_end_offset": 2902.65,
+       "span": {
+        "start_index": 0,
+        "end_index": 54
+       },
+       "span_text": "I mean, and if they're, if they're eager to listen and then find some common ground to talk about. I mean, I, I just think more communications and being more open with people, maybe that would bring back more trust. It could, I mean, you know, be honest, open and just try to communicate.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2898,
+       "snippet_cortico_id": 1108000201,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "Well, when I buy groceries, I'll buy time more. I think it's. I know it's harder when school starts like before the library. I think, I think opening it up to more family instead of just like children's program, adult programs, I think maybe more family interaction. Maybe have family some night or something. You know what I'm saying? Maybe that would be a better way to look at it. But it might be, you know, single parent night. Cuz, you know, family would be. Would make a difference. Just family, mom and the kids or community night or community night or some. Something to draw. Let them know that, you know, we want the whole family. Maybe do it in the. When the weather's nice and do it out in the picnic area. Have a cookout, library cookout, you know, come.",
+       "index_in_conversation": 201,
+       "audio_start_offset": 3016.6,
+       "audio_end_offset": 3069.5,
+       "span": {
+        "start_index": 23,
+        "end_index": 142
+       },
+       "span_text": "I think, I think opening it up to more family instead of just like children's program, adult programs, I think maybe more family interaction. Maybe have family some night or something. You know what I'm saying? Maybe that would be a better way to look at it. But it might be, you know, single parent night. Cuz, you know, family would be. Would make a difference. Just family, mom and the kids or community night or community night or some. Something to draw. Let them know that, you know, we want the whole family. Maybe do it in the. When the weather's nice and do it out in the picnic area. Have a cookout, library cookout, you know, come.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2900,
+       "snippet_cortico_id": 1108000203,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "But I mean, I think I like the idea. I mean, we, you do. We have a lot of kids things and it's wonderful things and that brings them up, but it doesn't involve the whole family. It might, it, it might bring the family together if we have that. And maybe if, and then if we did. If you did game night or even a cookout or something, bring up covered dish tonight. A covered dish family game night or something. And that way you sit down and you eat as a family. I think you go away from all that. What used to be, if you go back to the old timey movies, they actually talked about sitting down and communicating as a family. I remember we used to watch movies Saturday night as a family. Yeah, we did too, growing up. I remember, I don't know, I remember the bubbles with Lawrence. Well, it was like Saturday night, the movies on NBC or, you know, or Walt Disney. Disney World. We'd all, you know, gather in front of the tv. I don't know that they do that. See, we couldn't, we couldn't. I came from a large family, so we couldn't sit down. We, we didn't have a big enough dining room. You had several tables, you know, when you got together. But, but we always did watch. There was, we had. Sunday nights was our TV night for us that was Bonanza. Yeah, I remember that. Can it. Camera. And I mean, we got to where we knew all the songs to the commercials. We just had a good time. I love the beer commercials. I don't like beer, but I love their commercials. No, I used to love the ones about the colorful. The Chiclets with the colorful flower. Did you ever hear that one about Chiclets? No, I don't believe so. But they had clever commercials. They did. They had really clever and they were wholesome. I mean, you know, they were cute. But I think that would be a good thing for the library. Yeah, I do think that's a good idea. Families to help bonding with, have. Hopefully help the families bond. Bond. And then if they bond, I think that will ripple up because I'm. I'm going to tell you that growing up, as my kids got older, we always met once a month for breakfast. Even after they had their own kids that came with their kids. We still. And then we went bowling afterwards. It was a family day once a month. That we did for years until they moved away. So bonding is important. Bonding is important. And bonding, learning very young to me. You take with you and you want to bond when you get older.",
+       "index_in_conversation": 203,
+       "audio_start_offset": 3088.55,
+       "audio_end_offset": 3254.14,
+       "span": {
+        "start_index": 339,
+        "end_index": 469
+       },
+       "span_text": "But I think that would be a good thing for the library. Yeah, I do think that's a good idea. Families to help bonding with, have. Hopefully help the families bond. Bond. And then if they bond, I think that will ripple up because I'm. I'm going to tell you that growing up, as my kids got older, we always met once a month for breakfast. Even after they had their own kids that came with their kids. We still. And then we went bowling afterwards. It was a family day once a month. That we did for years until they moved away. So bonding is important. Bonding is important. And bonding, learning very young to me. You take with you and you want to bond when you get older.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 10,
+     "conversation_id": 44,
+     "insight_text": "The reflection found relatively few examples of actual repair. Instead, participants emphasized practices for forging connections or softening divides: curiosity over judgment, listening to understand, finding common ground, and sometimes avoiding politics.",
+     "evidence": [
+      {
+       "snippet_id": 9958,
+       "snippet_cortico_id": 1120900076,
+       "conversation_id": 44,
+       "speaker_id": 227,
+       "speaker_name": "D",
+       "is_facilitator": false,
+       "text": "This is. I was at the bank a couple weeks ago and I'm reading, I'm reading a book. It was how to win Friends, influence people. I've Read it a number of times. Wonderful book. And I was. There's a lady behind me who I don't know in line. And I said, well, I'm going to strike up Sid to myself. I'm going to strike up a conversation with her. And so in this, I think is relevant in that I found something that we had in common. We're both in line at the bank. So the conversation started with something that we had in common, like sport, like community. And developed from then and developed. We had a nice conversation five or ten minutes. And I think if we can like Rotary, if we can find common areas of agreement to start those discussions and build those relationships, the other things will just kind of fall into place. Some people I don't discuss politics with for a very good reason because I like them and I don't want to not like them. So, yeah, if we can find common. Common ground to have a dispute. That's the goal.",
+       "index_in_conversation": 76,
+       "audio_start_offset": 1422.11,
+       "audio_end_offset": 1492.67,
+       "span": {
+        "start_index": 0,
+        "end_index": 199
+       },
+       "span_text": "This is. I was at the bank a couple weeks ago and I'm reading, I'm reading a book. It was how to win Friends, influence people. I've Read it a number of times. Wonderful book. And I was. There's a lady behind me who I don't know in line. And I said, well, I'm going to strike up Sid to myself. I'm going to strike up a conversation with her. And so in this, I think is relevant in that I found something that we had in common. We're both in line at the bank. So the conversation started with something that we had in common, like sport, like community. And developed from then and developed. We had a nice conversation five or ten minutes. And I think if we can like Rotary, if we can find common areas of agreement to start those discussions and build those relationships, the other things will just kind of fall into place. Some people I don't discuss politics with for a very good reason because I like them and I don't want to not like them. So, yeah, if we can find common. Common ground to have a dispute. That's the goal.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9973,
+       "snippet_cortico_id": 1120900091,
+       "conversation_id": 44,
+       "speaker_id": 229,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "Right. But have a healthy debate, have a healthy conversation with them. Do that more as opposed to having conversations with people that we know all the time. Because how easy is life? Right? It's easy to find common ground with people that we like, we know a little uncomfortable with somebody that we don't have. More open dialogue logs consistently kind of build that muscle, if you will. That's kind of what I've tried to do. Because somebody who disliked or had a disagreement could end up being your best friend the next year. I found that to be very, very true.",
+       "index_in_conversation": 91,
+       "audio_start_offset": 1566.97,
+       "audio_end_offset": 1602.79,
+       "span": {
+        "start_index": 0,
+        "end_index": 103
+       },
+       "span_text": "Right. But have a healthy debate, have a healthy conversation with them. Do that more as opposed to having conversations with people that we know all the time. Because how easy is life? Right? It's easy to find common ground with people that we like, we know a little uncomfortable with somebody that we don't have. More open dialogue logs consistently kind of build that muscle, if you will. That's kind of what I've tried to do. Because somebody who disliked or had a disagreement could end up being your best friend the next year. I found that to be very, very true.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9975,
+       "snippet_cortico_id": 1120900093,
+       "conversation_id": 44,
+       "speaker_id": 224,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "I think part of that is our listening skills. Now are we listening for understanding or are we just all right, we're listening and you know the old you're thinking about what you're going to say next or you're thinking about the next thing or it's how do we really come together as you're suggesting if we're not really listening and trying to understand.",
+       "index_in_conversation": 93,
+       "audio_start_offset": 1618.08,
+       "audio_end_offset": 1638.4,
+       "span": {
+        "start_index": 0,
+        "end_index": 64
+       },
+       "span_text": "I think part of that is our listening skills. Now are we listening for understanding or are we just all right, we're listening and you know the old you're thinking about what you're going to say next or you're thinking about the next thing or it's how do we really come together as you're suggesting if we're not really listening and trying to understand.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9977,
+       "snippet_cortico_id": 1120900095,
+       "conversation_id": 44,
+       "speaker_id": 226,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "And I think it's a great segue for what I'm thinking is if you could replace judgment for curiosity and try to learn more and understand the other person instead of judging them because they say something that is against what we believe, it's not exactly what we do. And just be curious like why this person's face this way and try to understand and goes back to the saying, but self understanding.",
+       "index_in_conversation": 95,
+       "audio_start_offset": 1645.54,
+       "audio_end_offset": 1673.48,
+       "span": {
+        "start_index": 0,
+        "end_index": 73
+       },
+       "span_text": "And I think it's a great segue for what I'm thinking is if you could replace judgment for curiosity and try to learn more and understand the other person instead of judging them because they say something that is against what we believe, it's not exactly what we do. And just be curious like why this person's face this way and try to understand and goes back to the saying, but self understanding.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9979,
+       "snippet_cortico_id": 1120900097,
+       "conversation_id": 44,
+       "speaker_id": 228,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "Particularly in this political environment. Keep talking about, let's not. When I get friends over to my house, we're not talking politics, okay? Because I got it all generations and all different. No, no, no, stop that. We're not going to talk about politics.",
+       "index_in_conversation": 97,
+       "audio_start_offset": 1680.84,
+       "audio_end_offset": 1697.48,
+       "span": {
+        "start_index": 0,
+        "end_index": 44
+       },
+       "span_text": "Particularly in this political environment. Keep talking about, let's not. When I get friends over to my house, we're not talking politics, okay? Because I got it all generations and all different. No, no, no, stop that. We're not going to talk about politics.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9981,
+       "snippet_cortico_id": 1120900099,
+       "conversation_id": 44,
+       "speaker_id": 228,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "So but let's talk about our family, let's talk about our friends, let's talk about our history together. Why are we here? Why do we know each other?",
+       "index_in_conversation": 99,
+       "audio_start_offset": 1699.77,
+       "audio_end_offset": 1712.57,
+       "span": {
+        "start_index": 0,
+        "end_index": 28
+       },
+       "span_text": "So but let's talk about our family, let's talk about our friends, let's talk about our history together. Why are we here? Why do we know each other?",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 18,
+     "conversation_id": 91,
+     "insight_text": "through collective adaptation, respectful listening, humility, treating young people as peers, and small acts of kindness. It summarizes the broader pattern as connecting with one another through common ground and shared interests while navigating unavoidable change.",
+     "evidence": [
+      {
+       "snippet_id": 18720,
+       "snippet_cortico_id": 1094500180,
+       "conversation_id": 91,
+       "speaker_id": 456,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "You can always, like. I've noticed a lot that especially older adults, children, there's like, whatever.",
+       "index_in_conversation": 180,
+       "audio_start_offset": 1495.04,
+       "audio_end_offset": 1501.57,
+       "span": {
+        "start_index": 0,
+        "end_index": 16
+       },
+       "span_text": "You can always, like. I've noticed a lot that especially older adults, children, there's like, whatever.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18725,
+       "snippet_cortico_id": 1094500185,
+       "conversation_id": 91,
+       "speaker_id": 456,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "Make sure we all feel like we can talk and there's going. You don't have to be like four.",
+       "index_in_conversation": 185,
+       "audio_start_offset": 1515.65,
+       "audio_end_offset": 1522.91,
+       "span": {
+        "start_index": 0,
+        "end_index": 19
+       },
+       "span_text": "Make sure we all feel like we can talk and there's going. You don't have to be like four.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18732,
+       "snippet_cortico_id": 1094500192,
+       "conversation_id": 91,
+       "speaker_id": 457,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "Probably treating others like you want to be treated.",
+       "index_in_conversation": 192,
+       "audio_start_offset": 1550.76,
+       "audio_end_offset": 1553.72,
+       "span": {
+        "start_index": 0,
+        "end_index": 9
+       },
+       "span_text": "Probably treating others like you want to be treated.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18736,
+       "snippet_cortico_id": 1094500196,
+       "conversation_id": 91,
+       "speaker_id": 454,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "You can do, like, small acts of kindness. Like, you'll, like, get to know more people, like, really nice. What's your name? And like, you'll, like, eventually, like, more people and more people, like, start, like, coming together.",
+       "index_in_conversation": 196,
+       "audio_start_offset": 1578.61,
+       "audio_end_offset": 1594.05,
+       "span": {
+        "start_index": 0,
+        "end_index": 38
+       },
+       "span_text": "You can do, like, small acts of kindness. Like, you'll, like, get to know more people, like, really nice. What's your name? And like, you'll, like, eventually, like, more people and more people, like, start, like, coming together.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18750,
+       "snippet_cortico_id": 1094500210,
+       "conversation_id": 91,
+       "speaker_id": 458,
+       "speaker_name": "G",
+       "is_facilitator": false,
+       "text": "If you like something like, you know, if you like seeing other people holding the doors open or you like an organization, you're involved in donating time and to that and making sure you're. You're doing good.",
+       "index_in_conversation": 210,
+       "audio_start_offset": 1661.19,
+       "audio_end_offset": 1676.39,
+       "span": {
+        "start_index": 0,
+        "end_index": 37
+       },
+       "span_text": "If you like something like, you know, if you like seeing other people holding the doors open or you like an organization, you're involved in donating time and to that and making sure you're. You're doing good.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18769,
+       "snippet_cortico_id": 1094500229,
+       "conversation_id": 91,
+       "speaker_id": 452,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "No, that's a good one. I like that. One of the things that I. That I'll throw in there from my. One of my personal stories is I always feel like I need to be a better listener and stop talking and genuinely listen. Not listen so that I can argue with somebody, but really listen to understand people. Because, like, in, like, the scenario that Louie was talking about with the school bond referendum, it was really hard for me to listen to why people oppose. Because I was in. I was in favor of it. And when people would talk against it, my instant reaction was argue instead of just like, okay, I need to slow down and actually listen and maybe understand why they feel so strongly on that side and just being a good listener. And I think with being a good listener comes with humility. Do you know what humility is, Levi? Like, maybe thinking that you don't have all the answers all the time. I think that's hard for a lot of people to do is to feel humble and actually think that maybe I should just listen to someone that I disagree with and maybe they can teach me something. Is hard for a lot of people to do. It's hard for me to do. So being a good listener and listening with humility is something that I think I can do as a small act to help heal divides in the community.",
+       "index_in_conversation": 229,
+       "audio_start_offset": 1764.9,
+       "audio_end_offset": 1859.25,
+       "span": {
+        "start_index": 8,
+        "end_index": 150
+       },
+       "span_text": "One of the things that I. That I'll throw in there from my. One of my personal stories is I always feel like I need to be a better listener and stop talking and genuinely listen. Not listen so that I can argue with somebody, but really listen to understand people. Because, like, in, like, the scenario that Louie was talking about with the school bond referendum, it was really hard for me to listen to why people oppose. Because I was in. I was in favor of it. And when people would talk against it, my instant reaction was argue instead of just like, okay, I need to slow down and actually listen and maybe understand why they feel so strongly on that side and just being a good listener. And I think with being a good listener comes with humility.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 23,
+     "conversation_id": 92,
+     "insight_text": "Primarily repaired through listening to one another, in-person opportunities to voice feelings, and feeling heard even when the decision does not change. The examples also include public meetings, education, visualization, and trusted leaders who help people move through conflict.",
+     "evidence": [
+      {
+       "snippet_id": 18851,
+       "snippet_cortico_id": 1105700036,
+       "conversation_id": 92,
+       "speaker_id": 467,
+       "speaker_name": "I",
+       "is_facilitator": false,
+       "text": "Well, on top of, you know, the education aspect of it, just informing everybody what the vision was, they also had storyboards. And so people could visualize it, too, and not just kind of dream it up in their head or. Or see how it couldn't work. They were looking at. They were looking at illustrations that showed how they do work. And there was other studies done and other examples used in town, similar to our size of how they built new libraries. And it was successful. So people were able to see those examples, and I think that was very helpful. They also had a chance for their voices to be heard and, you know, just to be able to voice your concern or, you know, ask the unknown questions and feel safe in that environment was very helpful.",
+       "index_in_conversation": 36,
+       "audio_start_offset": 1113.36,
+       "audio_end_offset": 1177.5,
+       "span": {
+        "start_index": 0,
+        "end_index": 141
+       },
+       "span_text": "Well, on top of, you know, the education aspect of it, just informing everybody what the vision was, they also had storyboards. And so people could visualize it, too, and not just kind of dream it up in their head or. Or see how it couldn't work. They were looking at. They were looking at illustrations that showed how they do work. And there was other studies done and other examples used in town, similar to our size of how they built new libraries. And it was successful. So people were able to see those examples, and I think that was very helpful. They also had a chance for their voices to be heard and, you know, just to be able to voice your concern or, you know, ask the unknown questions and feel safe in that environment was very helpful.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18854,
+       "snippet_cortico_id": 1105700039,
+       "conversation_id": 92,
+       "speaker_id": 466,
+       "speaker_name": "H",
+       "is_facilitator": false,
+       "text": "When we got news that our bridge was shutting down basically a whole year earlier, obviously the community was very upset. And Main Street Lancing, we hosted a community public gathering. We had poster boards with, like, what can we do? How can we bring in new traffic? What are solutions? And then we also had one board where you could just like, put the good, bad, and the ugly of your emotions to get them out in a safe place and not on social media. Just ragging on everything to then hopefully move that into a positive. Okay, how do we move through this in a positive manner if we are feeling X, Y and z?",
+       "index_in_conversation": 39,
+       "audio_start_offset": 1182.53,
+       "audio_end_offset": 1222.69,
+       "span": {
+        "start_index": 0,
+        "end_index": 117
+       },
+       "span_text": "When we got news that our bridge was shutting down basically a whole year earlier, obviously the community was very upset. And Main Street Lancing, we hosted a community public gathering. We had poster boards with, like, what can we do? How can we bring in new traffic? What are solutions? And then we also had one board where you could just like, put the good, bad, and the ugly of your emotions to get them out in a safe place and not on social media. Just ragging on everything to then hopefully move that into a positive. Okay, how do we move through this in a positive manner if we are feeling X, Y and z?",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18856,
+       "snippet_cortico_id": 1105700041,
+       "conversation_id": 92,
+       "speaker_id": 462,
+       "speaker_name": "D",
+       "is_facilitator": false,
+       "text": "And I love that idea of taking it off social media and making it a real life thing because I think people are so much more accountable in person. Plus that whole aspect of like this does not now exist forever on the Internet for everyone and their brother to comment on.",
+       "index_in_conversation": 41,
+       "audio_start_offset": 1232.06,
+       "audio_end_offset": 1252.14,
+       "span": {
+        "start_index": 0,
+        "end_index": 52
+       },
+       "span_text": "And I love that idea of taking it off social media and making it a real life thing because I think people are so much more accountable in person. Plus that whole aspect of like this does not now exist forever on the Internet for everyone and their brother to comment on.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18848,
+       "snippet_cortico_id": 1105700033,
+       "conversation_id": 92,
+       "speaker_id": 462,
+       "speaker_name": "D",
+       "is_facilitator": false,
+       "text": "Mark has inspired me, again, to think of something that happened in Guttenberg and another sort of similar transition. And I think what helps it dissolve is, like Mark said, a group of people kind of standing up for together what they believe in. In our situation, I think it's another trusted leader stepping to the front or becoming the person that's in charge, and then that kind of just helps smooth things over. Like, maybe things weren't going so well, but now we trust Jane, and she's going to handle things in a way that, you know, we all can respect because we know her and have worked with her for a long time.",
+       "index_in_conversation": 33,
+       "audio_start_offset": 999.48,
+       "audio_end_offset": 1045.24,
+       "span": {
+        "start_index": 14,
+        "end_index": 115
+       },
+       "span_text": "another sort of similar transition. And I think what helps it dissolve is, like Mark said, a group of people kind of standing up for together what they believe in. In our situation, I think it's another trusted leader stepping to the front or becoming the person that's in charge, and then that kind of just helps smooth things over. Like, maybe things weren't going so well, but now we trust Jane, and she's going to handle things in a way that, you know, we all can respect because we know her and have worked with her for a long time.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18859,
+       "snippet_cortico_id": 1105700044,
+       "conversation_id": 92,
+       "speaker_id": 459,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "But so important that that somebody just said let's get everybody together and be heard. So what's common in all of these examples from Molly and Jackie and Amanda Willameck and you, Mark, is just the role that exchange or conversation plays in a community moving beyond a division. And that part of what our role is. And you all embody this, that you're good listeners, you're not afraid of hard questions. You, you face division or maybe conflicting views. Not necessarily afraid of, of that happening, but rather, you know, how can we validate everybody's voice? And when we come to a consensus or a solution, it's fair to say some people will remain disappointed. But we do still live in a democracy. And part of what this American Conversation Project validates is that through consensus building, just like the original framers, we do move beyond. It does fade. It's probably always remembered because we remember them still. But the last question that we touch on as part of this is what small steps do you see in yourself that you now have confidence to take when there is a division or a conflict? And I'll just use an example from my practice and my involvement as a citizen leader. We here in Guttenberg have a family resource center that serves probably two thirds of Clayton county and then some of Dubuque and Delaware County. And it's led by just some amazing servant leaders who sought to establish a one stop shop for people in need. So it's everything from job coaching to food relief to clothing to household supplies, to toys, to health information. This week there's going to be a dental clinic there. But as it sought to move to a brand new building, and it was about a four and a half million dollar project, there was certainly not, not a resounding majority, but a healthy minority that just disagreed with the whole concept of why, you know, why those without were going to get a new building. And so with. With listening, with direct meetings, with those that disagreed, we didn't change their mind, but we. They were listened to and their. Their thoughts were considered. They didn't end up being part of the donor base because we had to raise. And Molly was. Molly and Emily both were involved in. In the fundraising and the grant writing. They didn't participate in that. They didn't turn around and all of a sudden become a cheerleader for the vulnerable that are served. But they did kind of fade away and they didn't derail the project. But without a certain really courage to engage with somebody who's just flat out against something that you believe in with all your heart, we wouldn't have had the type of resolution that came about. So more than anything today, you know, what I leave you with, is that you represent the whole community in your job. You would never have taken this job if you didn't have a big heart for moving things forward and be injected today with a little boost of courage and a little boost of confidence that conflicts and division, small or large, will always be a part of the American experience and the American conversation they have for 250 years. But it's through our leadership, our caring, our respect, all of which you embody, that we do eventually leave those behind. So, you know, that's kind of the ending point that we have for this. I would just invite anybody who wants to comment maybe on a division or a conflict, maybe that you're in the middle of right now or a divisive issue that you're anticipating, because we could use the small time that we have left to kind of group problem solve or give you an extra boost of. Of courage.",
+       "index_in_conversation": 44,
+       "audio_start_offset": 1276.22,
+       "audio_end_offset": 1607.32,
+       "span": {
+        "start_index": 211,
+        "end_index": 474
+       },
+       "span_text": "We here in Guttenberg have a family resource center that serves probably two thirds of Clayton county and then some of Dubuque and Delaware County. And it's led by just some amazing servant leaders who sought to establish a one stop shop for people in need. So it's everything from job coaching to food relief to clothing to household supplies, to toys, to health information. This week there's going to be a dental clinic there. But as it sought to move to a brand new building, and it was about a four and a half million dollar project, there was certainly not, not a resounding majority, but a healthy minority that just disagreed with the whole concept of why, you know, why those without were going to get a new building. And so with. With listening, with direct meetings, with those that disagreed, we didn't change their mind, but we. They were listened to and their. Their thoughts were considered. They didn't end up being part of the donor base because we had to raise. And Molly was. Molly and Emily both were involved in. In the fundraising and the grant writing. They didn't participate in that. They didn't turn around and all of a sudden become a cheerleader for the vulnerable that are served. But they did kind of fade away and they didn't derail the project. But without a certain really courage to engage with somebody who's just flat out against something that you believe in with all your heart, we wouldn't have had the type of resolution that came about.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 36,
+     "conversation_id": 120,
+     "insight_text": "The reflection identifies partial forms of repair: repeated face-to-face interactions at markets help people recognize one another; compassionate, patient conversation may help someone reconsider hateful views; and one person accepted his son's sexuality because preserving their relationship mattered more than his prior anti-gay position. These repairs are described as difficult and incomplete rather than reliable solutions.",
+     "evidence": [
+      {
+       "snippet_id": 24088,
+       "snippet_cortico_id": 1100600110,
+       "conversation_id": 120,
+       "speaker_id": 593,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "Well, yeah, I think it's a. I think it is a talent. Some. Some. Some of us, I'm not including myself, but know how to just kind of guide the person and not, you know, be more supportive and get them to come kind of back up a little bit.",
+       "index_in_conversation": 110,
+       "audio_start_offset": 1605.62,
+       "audio_end_offset": 1625.17,
+       "span": {
+        "start_index": 6,
+        "end_index": 50
+       },
+       "span_text": "I think it is a talent. Some. Some. Some of us, I'm not including myself, but know how to just kind of guide the person and not, you know, be more supportive and get them to come kind of back up a little bit.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 24089,
+       "snippet_cortico_id": 1100600111,
+       "conversation_id": 120,
+       "speaker_id": 595,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "They have to already trust you a little bit and know you first. And you have to be able to have patience and, like, you know, and. And compassion because, you know, it's. It sounds really. It sounds.",
+       "index_in_conversation": 111,
+       "audio_start_offset": 1625.17,
+       "audio_end_offset": 1640.56,
+       "span": {
+        "start_index": 0,
+        "end_index": 38
+       },
+       "span_text": "They have to already trust you a little bit and know you first. And you have to be able to have patience and, like, you know, and. And compassion because, you know, it's. It sounds really. It sounds.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 24042,
+       "snippet_cortico_id": 1100600064,
+       "conversation_id": 120,
+       "speaker_id": 595,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "But as somebody who works on the other side of that. Yes, I was thinking about that. Yeah. It's really. I personally am not the kind of person that goes out and does things all the time. I used to do it whenever I was in college sometimes. But, like, it was always. I never knew what was happening around me. But being one of the people who works at the. Who works at, like, those events and sometimes has a stall there. It's really interesting because you meet so many people, because the same people come by every time and every once In a while, you run into the same woman who is just a absolute treat and. But, you know, there's so many people that come by. They know you or they know. At least they know your. They know your business. They know, like, you see, and you connect with the community that way. And I've. I've recognized people from the. From those places. Like, I recognize people gone out and been like, oh, you were. I know you from this. Oh, hi. How have you been? And it really helps to create that kind of connection so, you know, you feel a little bit closer.",
+       "index_in_conversation": 64,
+       "audio_start_offset": 1001.92,
+       "audio_end_offset": 1073.61,
+       "span": {
+        "start_index": 20,
+        "end_index": 209
+       },
+       "span_text": "I personally am not the kind of person that goes out and does things all the time. I used to do it whenever I was in college sometimes. But, like, it was always. I never knew what was happening around me. But being one of the people who works at the. Who works at, like, those events and sometimes has a stall there. It's really interesting because you meet so many people, because the same people come by every time and every once In a while, you run into the same woman who is just a absolute treat and. But, you know, there's so many people that come by. They know you or they know. At least they know your. They know your business. They know, like, you see, and you connect with the community that way. And I've. I've recognized people from the. From those places. Like, I recognize people gone out and been like, oh, you were. I know you from this. Oh, hi. How have you been? And it really helps to create that kind of connection so, you know, you feel a little bit closer.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 24054,
+       "snippet_cortico_id": 1100600076,
+       "conversation_id": 120,
+       "speaker_id": 593,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "My nephew, he was. He's very anti gay, but then his son is gay.",
+       "index_in_conversation": 76,
+       "audio_start_offset": 1260.32,
+       "audio_end_offset": 1270.08,
+       "span": {
+        "start_index": 0,
+        "end_index": 14
+       },
+       "span_text": "My nephew, he was. He's very anti gay, but then his son is gay.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 24056,
+       "snippet_cortico_id": 1100600078,
+       "conversation_id": 120,
+       "speaker_id": 593,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "and he said he accepted it because he didn't want to lose his son.",
+       "index_in_conversation": 78,
+       "audio_start_offset": 1272.56,
+       "audio_end_offset": 1277.78,
+       "span": {
+        "start_index": 0,
+        "end_index": 14
+       },
+       "span_text": "and he said he accepted it because he didn't want to lose his son.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 44,
+     "conversation_id": 95,
+     "insight_text": "Disconnect is repaired through information, dialogue, outreach, and leaders making room for healthy public debate. The reflection also identifies sustained conversation as what enabled rival schools to merge with 94% approval.",
+     "evidence": [
+      {
+       "snippet_id": 19094,
+       "snippet_cortico_id": 1138400000,
+       "conversation_id": 95,
+       "speaker_id": 479,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "Okay, so we are here today. It's September 9, 2026, and we're in Dubuque, and I'm meeting with staff members at the Community foundation of Greater Dubuque. And our. Our first question is really just to kind of ground us all in this idea of community. And the first question is just to share a moment or an experience where you felt proud of your own community could be today or it could be some time ago. And if you're new to your community, it could be in a previous community, but just a time you remember where you felt proud. And I can maybe share. I was involved in the early 2000s in a rural school merger, and I did have a leadership role in this effort. We had declining enrollment in two districts that had honestly been rivals for decades. You know, sports rivals, academic rivals. Not that you didn't know people from the next town. But as far as school was concerned, especially athletics, there was a lot of rivalry, and it wasn't always necessarily friendly rivalry. But due to changes in our rural communities, it was simply necessary for these schools to face stark choices. And so we were part of a first whole grade sharing and then a merger, which passed on a vote of 94%. And this was after a period of a lot of conversations like this where we just talked about what was important, especially for students and academic achievement. So it was a moment I'll never forget the. The idea that people came together, and I was so proud that a lot of history had been at least put aside for the sake of that time. So now, do each of you have something that you'd want to share?",
+       "index_in_conversation": 0,
+       "audio_start_offset": 0.0,
+       "audio_end_offset": 146.579,
+       "span": {
+        "start_index": 106,
+        "end_index": 285
+       },
+       "span_text": "I was involved in the early 2000s in a rural school merger, and I did have a leadership role in this effort. We had declining enrollment in two districts that had honestly been rivals for decades. You know, sports rivals, academic rivals. Not that you didn't know people from the next town. But as far as school was concerned, especially athletics, there was a lot of rivalry, and it wasn't always necessarily friendly rivalry. But due to changes in our rural communities, it was simply necessary for these schools to face stark choices. And so we were part of a first whole grade sharing and then a merger, which passed on a vote of 94%. And this was after a period of a lot of conversations like this where we just talked about what was important, especially for students and academic achievement. So it was a moment I'll never forget the. The idea that people came together, and I was so proud that a lot of history had been at least put aside for the sake of that time.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 19111,
+       "snippet_cortico_id": 1138400017,
+       "conversation_id": 95,
+       "speaker_id": 480,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "One comes to mind when. And it's kind of similar to yours, but it was school board related. We had some very opposite views on what the school board future should look like. There's a few people that were very vocal on one side and it really started to tear. I mean, you could see the division happening within our community. But there was, instead of people just getting divided and arguing, there were the leaders that stepped up and said, no, I'm going to run and we're going to have, you know, healthy debates and be informative and know, you know, what everybody but one side or the other side was thinking. So, yeah, it was a little scary of a time because there was media, like social media bickering and everybody can be brave behind a keyboard. But then, you know, to have People step up and have those. Those discussions in public town hall meetings and things like that to be able to listen to each other. That helped very much.",
+       "index_in_conversation": 17,
+       "audio_start_offset": 611.53,
+       "audio_end_offset": 693.56,
+       "span": {
+        "start_index": 93,
+        "end_index": 174
+       },
+       "span_text": "healthy debates and be informative and know, you know, what everybody but one side or the other side was thinking. So, yeah, it was a little scary of a time because there was media, like social media bickering and everybody can be brave behind a keyboard. But then, you know, to have People step up and have those. Those discussions in public town hall meetings and things like that to be able to listen to each other. That helped very much.",
+       "evidence_source": "user"
+      }
+     ]
+    }
+   ],
+   "exemplars": [],
+   "children": []
+  },
+  {
+   "id": "td-family-5",
+   "name": "Collective Community Care and Mutual Aid",
+   "definition": "Pride in communities mobilizing to support one another and respond to shared needs, including volunteering, cross-community assistance, preserving local institutions, helping people and animals during disasters, and creating opportunities through collaborative projects.",
+   "source": "top_down",
+   "rq_provenance": {
+    "id": 5,
+    "name": "What are communities proud of?"
+   },
+   "highlights": [
+    {
+     "connection_id": 4,
+     "conversation_id": 10,
+     "insight_text": "Communities are proud of volunteering, cross-community support, saving and sustaining the library, and helping people and animals during disasters. The reflection highlights “individuals or local volunteer efforts,” the effort to save the library, and communities helping surrounding communities.",
+     "evidence": [
+      {
+       "snippet_id": 2720,
+       "snippet_cortico_id": 1108000023,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "And. And it's still going on to some extent, but right now we don't quite have as many volunteers as we had. But I was very proud of the community because it wasn't just for Lake Dallas, it was for Lake Cities. I think one of the things that I was proud to be part of about our community was when we were saving the library, the community really stepped up and we were able to raise quite a bit of money to help save the library. And we had a lot of people volunteer their time and efforts. So that was a nice thing, especially when a lot of people didn't even know we had a library.",
+       "index_in_conversation": 23,
+       "audio_start_offset": 305.18,
+       "audio_end_offset": 354.72,
+       "span": {
+        "start_index": 42,
+        "end_index": 118
+       },
+       "span_text": "I think one of the things that I was proud to be part of about our community was when we were saving the library, the community really stepped up and we were able to raise quite a bit of money to help save the library. And we had a lot of people volunteer their time and efforts. So that was a nice thing, especially when a lot of people didn't even know we had a library.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2721,
+       "snippet_cortico_id": 1108000024,
+       "conversation_id": 10,
+       "speaker_id": 44,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "I'm really proud when I see different groups come together for something. And right now I'm thinking About our garden, because there have been so many different groups involved in creating this garden at the library. It started as a boy scout project, and the master gardeners have been involved and the master naturalists. And now we've got 4H doing rain barrel demonstrations and keep Corinth beautiful. Bought our insect house. And it's just. I don't know. To me, it's just kind of beautiful that all these different groups are kind of putting aside their own egos, and it's creating a lot of opportunities. I mean, the garden itself is great, and I love it. But I was also at the rain barrel class we. That was taught by two teenagers who'd never really given a presentation before, and they did so well. Like, so well. And they're inspired to go do more, and the city of Corinth has asked them to come do rain barrel talks there. And so for these young teens to have an opportunity like that that came out of something like this, it just makes me really proud.",
+       "index_in_conversation": 24,
+       "audio_start_offset": 354.72,
+       "audio_end_offset": 415.11,
+       "span": {
+        "start_index": 0,
+        "end_index": 193
+       },
+       "span_text": "I'm really proud when I see different groups come together for something. And right now I'm thinking About our garden, because there have been so many different groups involved in creating this garden at the library. It started as a boy scout project, and the master gardeners have been involved and the master naturalists. And now we've got 4H doing rain barrel demonstrations and keep Corinth beautiful. Bought our insect house. And it's just. I don't know. To me, it's just kind of beautiful that all these different groups are kind of putting aside their own egos, and it's creating a lot of opportunities. I mean, the garden itself is great, and I love it. But I was also at the rain barrel class we. That was taught by two teenagers who'd never really given a presentation before, and they did so well. Like, so well. And they're inspired to go do more, and the city of Corinth has asked them to come do rain barrel talks there. And so for these young teens to have an opportunity like that that came out of something like this, it just makes me really proud.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2724,
+       "snippet_cortico_id": 1108000027,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "Well, even now, though, I do see it. Because, like, you know, when we have floods, people want to help people. People want to help animals. When there's disasters, you know, there are people that still want to help. I'm sure there's ones that think, well, that's not my problem. But I like to see the ones that just want to jump in and help. And I think that's wonderful. I think it's a. I think it's actually great because after Covid, everybody was, you know, not socializing or even being around other people. So to see Communities. Like, even if you look at the Lake Cities area with the Agora, all the people that are participating there, Hickory Creek has got an amphitheater now, and they're starting getting ready to start doing things. I mean, there's a lot of activity where it involves gatherings, which is good.",
+       "index_in_conversation": 27,
+       "audio_start_offset": 490.91,
+       "audio_end_offset": 555.17,
+       "span": {
+        "start_index": 10,
+        "end_index": 148
+       },
+       "span_text": "you know, when we have floods, people want to help people. People want to help animals. When there's disasters, you know, there are people that still want to help. I'm sure there's ones that think, well, that's not my problem. But I like to see the ones that just want to jump in and help. And I think that's wonderful. I think it's a. I think it's actually great because after Covid, everybody was, you know, not socializing or even being around other people. So to see Communities. Like, even if you look at the Lake Cities area with the Agora, all the people that are participating there, Hickory Creek has got an amphitheater now, and they're starting getting ready to start doing things. I mean, there's a lot of activity where it involves gatherings, which is good.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2725,
+       "snippet_cortico_id": 1108000028,
+       "conversation_id": 10,
+       "speaker_id": 44,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "I love that. So I was on a. I was in a meeting last week about the disaster preparedness workshops, and they ended with a question that said, what about your community gives you hope that this work will make a difference? And I said, Lake Dallas, everyone helps everyone. Like, everyone talks to everyone. So I feel really hopeful that a little bit of resources will go a long way in Lake Dallas. Lived in communities where people don't talk to each other as much or want to help each other in the same way.",
+       "index_in_conversation": 28,
+       "audio_start_offset": 555.17,
+       "audio_end_offset": 590.44,
+       "span": {
+        "start_index": 8,
+        "end_index": 96
+       },
+       "span_text": "I was in a meeting last week about the disaster preparedness workshops, and they ended with a question that said, what about your community gives you hope that this work will make a difference? And I said, Lake Dallas, everyone helps everyone. Like, everyone talks to everyone. So I feel really hopeful that a little bit of resources will go a long way in Lake Dallas. Lived in communities where people don't talk to each other as much or want to help each other in the same way.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 2754,
+       "snippet_cortico_id": 1108000057,
+       "conversation_id": 10,
+       "speaker_id": 45,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "Oh my gosh. Yeah, that was wonderful. But. And we also. I'm thankful for, of, of the other communities. I, because I, I got to watch the trucks go by and we had lake cities and then we had Lewisville and we had a couple other cities that comes with their trucks and their, their big ladder trucks, you know, so I was proud to see other cities coming to help.",
+       "index_in_conversation": 57,
+       "audio_start_offset": 845.69,
+       "audio_end_offset": 876.4,
+       "span": {
+        "start_index": 11,
+        "end_index": 71
+       },
+       "span_text": "I'm thankful for, of, of the other communities. I, because I, I got to watch the trucks go by and we had lake cities and then we had Lewisville and we had a couple other cities that comes with their trucks and their, their big ladder trucks, you know, so I was proud to see other cities coming to help.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 15,
+     "conversation_id": 91,
+     "insight_text": "community mutual aid and organizing around food insecurity ",
+     "evidence": [
+      {
+       "snippet_id": 18551,
+       "snippet_cortico_id": 1094500011,
+       "conversation_id": 91,
+       "speaker_id": 452,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "All right, so to get us started, I'd like you to think about a moment or an experience that made you really proud of the community that you live in. Like, something you saw happening where you're like, God dang it, living where I live is a really cool thing. So. And I'll start out with an experience from me. Just to give you an example is during. Remember when Covid first started and you guys were in school and. And, like, one day you're in school, and next day school stopped. I mean, just almost overnight, we didn't know if you were going to go to school, and suddenly you just weren't going to school anymore. I saw people in our community. One of the biggest problems with that was that school lunches stopped. And a lot of people depend on school lunches for their meal every day. Like, a lot of kids, when they go home, don't have food, so they depend on those school lunches. And when I saw the whole community came together and. And started saying, how are we going to feed these kids? And right overnight, different agencies and different nonprofits and different people decided, we're going to start cooking food. We're going to start getting food to these kids and set up outdoor distribution systems and things so that kids in our community could be fed still. So that made me really proud. We saw an emergency, and we saw a need, and we really took it on head first and made sure that kids weren't going to go hungry. So. So that's something that I witnessed. What else. What. What makes you get. And we don't have to go around the. I don't want to put you on the spot, Sam, if anybody has a good story, but I do want to hear from each one of you if anybody has something that immediately comes to mind.",
+       "index_in_conversation": 11,
+       "audio_start_offset": 140.55,
+       "audio_end_offset": 231.37,
+       "span": {
+        "start_index": 68,
+        "end_index": 274
+       },
+       "span_text": "Remember when Covid first started and you guys were in school and. And, like, one day you're in school, and next day school stopped. I mean, just almost overnight, we didn't know if you were going to go to school, and suddenly you just weren't going to school anymore. I saw people in our community. One of the biggest problems with that was that school lunches stopped. And a lot of people depend on school lunches for their meal every day. Like, a lot of kids, when they go home, don't have food, so they depend on those school lunches. And when I saw the whole community came together and. And started saying, how are we going to feed these kids? And right overnight, different agencies and different nonprofits and different people decided, we're going to start cooking food. We're going to start getting food to these kids and set up outdoor distribution systems and things so that kids in our community could be fed still. So that made me really proud. We saw an emergency, and we saw a need, and we really took it on head first and made sure that kids weren't going to go hungry. So. So that's something that I witnessed.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18552,
+       "snippet_cortico_id": 1094500012,
+       "conversation_id": 91,
+       "speaker_id": 457,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "My church does, like, a hunger outreach. People can, like, all of them, like, don't have money that they can use to buy food, so we give them food so they don't have to buy food.",
+       "index_in_conversation": 12,
+       "audio_start_offset": 231.37,
+       "audio_end_offset": 249.31,
+       "span": {
+        "start_index": 0,
+        "end_index": 36
+       },
+       "span_text": "My church does, like, a hunger outreach. People can, like, all of them, like, don't have money that they can use to buy food, so we give them food so they don't have to buy food.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18633,
+       "snippet_cortico_id": 1094500093,
+       "conversation_id": 91,
+       "speaker_id": 452,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "For the community. What do we do for the community that we should be proud of? Scouting for food. Scouting for food. That's a really good one. What happens with that? Describe that for me a little bit.",
+       "index_in_conversation": 93,
+       "audio_start_offset": 761.51,
+       "audio_end_offset": 774.21,
+       "span": {
+        "start_index": 0,
+        "end_index": 38
+       },
+       "span_text": "For the community. What do we do for the community that we should be proud of? Scouting for food. Scouting for food. That's a really good one. What happens with that? Describe that for me a little bit.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18634,
+       "snippet_cortico_id": 1094500094,
+       "conversation_id": 91,
+       "speaker_id": 453,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "People donate food, or they give the food to us, and we give it to the food pantries, and the Scouts",
+       "index_in_conversation": 94,
+       "audio_start_offset": 774.21,
+       "audio_end_offset": 780.93,
+       "span": {
+        "start_index": 0,
+        "end_index": 21
+       },
+       "span_text": "People donate food, or they give the food to us, and we give it to the food pantries, and the Scouts",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 24,
+     "conversation_id": 92,
+     "insight_text": "The community is proud of its “bounce back” after COVID, renewed in-person gathering, deep engagement, and people becoming organizers rather than only participants. More broadly, the reflection describes pride in a community committed to working together, listening, and developing leadership across counties.",
+     "evidence": [
+      {
+       "snippet_id": 18832,
+       "snippet_cortico_id": 1105700017,
+       "conversation_id": 92,
+       "speaker_id": 466,
+       "speaker_name": "H",
+       "is_facilitator": false,
+       "text": "Yeah, I was just trying to think, putting the whole county hat on. I think I'm just most proud of, you know, since COVID everyone's kind of like been in a shell. And I just feel like this year, 2026, I don't know if it's the 250th birthday or what's happen. It just feels like the energy is up, the vibes are up and people are wanting to get out and be engaged. I feel like every community within all county, there are those struggles. Like for example, Lansing, we have the bridge construction, but I think there's just resilience in every single one of our communities in Allah county. They're trying to get things going, they're trying to be doing things, get people out and about again. And I think I'm just proud of those people that are being engaged in wanting to participate because if we didn't have those people, we wouldn't have much going on. And it's good to have community. And community is a huge part of everything we stand for, I feel like in our country. So, yeah, just proud of the engagement.",
+       "index_in_conversation": 17,
+       "audio_start_offset": 448.63,
+       "audio_end_offset": 515.32,
+       "span": {
+        "start_index": 13,
+        "end_index": 188
+       },
+       "span_text": "I think I'm just most proud of, you know, since COVID everyone's kind of like been in a shell. And I just feel like this year, 2026, I don't know if it's the 250th birthday or what's happen. It just feels like the energy is up, the vibes are up and people are wanting to get out and be engaged. I feel like every community within all county, there are those struggles. Like for example, Lansing, we have the bridge construction, but I think there's just resilience in every single one of our communities in Allah county. They're trying to get things going, they're trying to be doing things, get people out and about again. And I think I'm just proud of those people that are being engaged in wanting to participate because if we didn't have those people, we wouldn't have much going on. And it's good to have community. And community is a huge part of everything we stand for, I feel like in our country. So, yeah, just proud of the engagement.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18815,
+       "snippet_cortico_id": 1105700000,
+       "conversation_id": 92,
+       "speaker_id": 459,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "Now I'm going to start the conversation. The first thing that we'll do is just go around and answer this question as briefly as you can. And the question is, when you think of being in your community today, what is something that you're especially proud of? Now? It doesn't have to be just recently. It could be from some time ago. And I'll start. I recently attended an introductory meeting for the Heart and Soul model to be introduced in Guttenberg. And I was so proud of the just spontaneous response of a new group of people working together to advance Heart and Soul in Guttenberg. It wouldn't have been anything I would have foreseen walking into that room. And sometimes as leaders, we walk in feeling responsible for what happens because people know we could lead it if we had the gumption. We've led other things before. But when I left that meeting, I was so gratified that a new group of people had joined forces, maybe had never worked together before, but now that model is being advanced in Gothenburg. So if you want to, you can raise your hand if you had something come to mind that you're proud of. Sheila?",
+       "index_in_conversation": 0,
+       "audio_start_offset": 0.0,
+       "audio_end_offset": 99.06,
+       "span": {
+        "start_index": 65,
+        "end_index": 183
+       },
+       "span_text": "I recently attended an introductory meeting for the Heart and Soul model to be introduced in Guttenberg. And I was so proud of the just spontaneous response of a new group of people working together to advance Heart and Soul in Guttenberg. It wouldn't have been anything I would have foreseen walking into that room. And sometimes as leaders, we walk in feeling responsible for what happens because people know we could lead it if we had the gumption. We've led other things before. But when I left that meeting, I was so gratified that a new group of people had joined forces, maybe had never worked together before, but now that model is being advanced in Gothenburg.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18825,
+       "snippet_cortico_id": 1105700010,
+       "conversation_id": 92,
+       "speaker_id": 464,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "Well, you and they both said 2. Two of the things that were coming to mind for me with Heart and Soul. I've been involved with the Heart and Soul group and have been really proud to see them come together and everybody kind of picking up their piece of the puzzle and moving it forward so we can get started with that and with our Stars and Stripes event that has sort of what Molly said, become more of a community led event versus the Chamber. So it's been really cool to see those people come together, some of them for the first time working on a committee and take on such a huge process and something that the community really looks forward to and bring it to life. So it's been really cool to see both of those things happening.",
+       "index_in_conversation": 10,
+       "audio_start_offset": 303.13,
+       "audio_end_offset": 355.44,
+       "span": {
+        "start_index": 22,
+        "end_index": 130
+       },
+       "span_text": "I've been involved with the Heart and Soul group and have been really proud to see them come together and everybody kind of picking up their piece of the puzzle and moving it forward so we can get started with that and with our Stars and Stripes event that has sort of what Molly said, become more of a community led event versus the Chamber. So it's been really cool to see those people come together, some of them for the first time working on a committee and take on such a huge process and something that the community really looks forward to and bring it to life.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18836,
+       "snippet_cortico_id": 1105700021,
+       "conversation_id": 92,
+       "speaker_id": 463,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "Yeah, I can have some feedback now. I have to wait till I get off the phone anyway because I can't send an email. But I was gonna also kind of talk about the line, same lines as Amanda, with Small Town Dreams. Just how people come together that I've witnessed it from the first one I was part of to the most recent One, especially in Elwood and Lost Nation. And we just have a couple people there that are being really good connectors and just, I guess the word introducers, like we have a gentleman there that thinks of Lincoln Way and of Jackson county and of, you know, their small town dreams, bringing people together to just help with different projects. So kind of echoing the small town dreams, but also with our Voices of America. I have seen our historical society just really jump on this. They went from having, you know, two things planned to now four things. They were going to have a veterans program and then like a soiree, and some things got changed up. But they have done so many different things to bring people together to celebrate now four different times throughout the year versus just the. The two times they had planned and the other groups that they're bringing into that is more than just the Historical Society. And more people are participating. So that's really exciting. But also just talking about engaging the communities. When we had our Heritage Day celebration last weekend, and I know mj, you dealt with bad weather too, and everybody had to like regroup. Our groups did too, and everybody just jumped in, whether it was like changing the times of events or changing the locations and, you know, helping people get there. So you just see, yeah, a lot of good community people coming together, whether it's community club or the city or all of them working together.",
+       "index_in_conversation": 21,
+       "audio_start_offset": 582.38,
+       "audio_end_offset": 696.51,
+       "span": {
+        "start_index": 25,
+        "end_index": 325
+       },
+       "span_text": "I was gonna also kind of talk about the line, same lines as Amanda, with Small Town Dreams. Just how people come together that I've witnessed it from the first one I was part of to the most recent One, especially in Elwood and Lost Nation. And we just have a couple people there that are being really good connectors and just, I guess the word introducers, like we have a gentleman there that thinks of Lincoln Way and of Jackson county and of, you know, their small town dreams, bringing people together to just help with different projects. So kind of echoing the small town dreams, but also with our Voices of America. I have seen our historical society just really jump on this. They went from having, you know, two things planned to now four things. They were going to have a veterans program and then like a soiree, and some things got changed up. But they have done so many different things to bring people together to celebrate now four different times throughout the year versus just the. The two times they had planned and the other groups that they're bringing into that is more than just the Historical Society. And more people are participating. So that's really exciting. But also just talking about engaging the communities. When we had our Heritage Day celebration last weekend, and I know mj, you dealt with bad weather too, and everybody had to like regroup. Our groups did too, and everybody just jumped in, whether it was like changing the times of events or changing the locations and, you know, helping people get there. So you just see, yeah, a lot of good community people coming together, whether it's community club or the city or all of them working together.",
+       "evidence_source": "user"
+      }
+     ]
+    }
+   ],
+   "exemplars": [],
+   "children": []
+  },
+  {
+   "id": "td-family-6",
+   "name": "Collective Action for Community and Institutional Change",
+   "definition": "Pride in residents and organizations taking ownership of persistent problems, working together to improve institutions, and achieving concrete social or educational changes through sustained advocacy and collective effort.",
+   "source": "top_down",
+   "rq_provenance": {
+    "id": 5,
+    "name": "What are communities proud of?"
+   },
+   "highlights": [
+    {
+     "connection_id": 11,
+     "conversation_id": 44,
+     "insight_text": "Participants were proud of hard work ethic, community members taking ownership and pushing for change together, and concrete institutional or school changes for young people. The reflection describes people as “really proud of hard work ethic” and of “pushing for change together as a community.”",
+     "evidence": [
+      {
+       "snippet_id": 9917,
+       "snippet_cortico_id": 1120900035,
+       "conversation_id": 44,
+       "speaker_id": 229,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "but there's one similarity that I like about West Texas in Oklahoma City is the work ethic. Here everybody has really strong work ethic. But to your point, it's almost a shame to see, I guess education failing these hardworking individuals. It makes you wonder how many innovators out of those individuals that may be stuck in the is being overlooked that can create the next company, that can create the next tech company. They're out there. They just have to have that opportunity to work at those there, you know.",
+       "index_in_conversation": 35,
+       "audio_start_offset": 769.13,
+       "audio_end_offset": 803.2,
+       "span": {
+        "start_index": 1,
+        "end_index": 24
+       },
+       "span_text": "there's one similarity that I like about West Texas in Oklahoma City is the work ethic. Here everybody has really strong work ethic.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9897,
+       "snippet_cortico_id": 1120900015,
+       "conversation_id": 44,
+       "speaker_id": 228,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "Well, I'll be happy. As a student we worked in the juvenile system in the past. The system in Oklahoma was awful, very abusive to children. And the people of this community and the attorneys and the folks stepped up and said we've got to change this system. I'm part of that. We went from an abusive system, very supportive system. In 1977 we had 1100 kids locked up all over the state. Today we have less than. So I'm really proud of our community stepping up, fixing that problem. Not there yet. We never will be. Continually have to improve. But I've been so proud to be",
+       "index_in_conversation": 15,
+       "audio_start_offset": 357.77,
+       "audio_end_offset": 408.3,
+       "span": {
+        "start_index": 4,
+        "end_index": 108
+       },
+       "span_text": "As a student we worked in the juvenile system in the past. The system in Oklahoma was awful, very abusive to children. And the people of this community and the attorneys and the folks stepped up and said we've got to change this system. I'm part of that. We went from an abusive system, very supportive system. In 1977 we had 1100 kids locked up all over the state. Today we have less than. So I'm really proud of our community stepping up, fixing that problem. Not there yet. We never will be. Continually have to improve. But I've been so proud to be",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9900,
+       "snippet_cortico_id": 1120900018,
+       "conversation_id": 44,
+       "speaker_id": 224,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "I've only lived in Oklahoma for 23 years. My husband was born here and I don't know that it's my pride to take in the state of Oklahoma. But I have lived in Illinois, Connecticut, Ohio, Texas, Arizona, California and I have not seen a state that so many people come together to try to address situations that make something happen in our state. It really is unparalleled and I think, I'm sure there are good things happening in Texas too. But I think it is unparalleled across the country how like minded individuals in our community come together and say we're going to do something about this. Whether it's juvenile justice, whether it's Palomar, whether it's Remerge, whatever organization that is within the community.",
+       "index_in_conversation": 18,
+       "audio_start_offset": 428.38,
+       "audio_end_offset": 473.23,
+       "span": {
+        "start_index": 0,
+        "end_index": 125
+       },
+       "span_text": "I've only lived in Oklahoma for 23 years. My husband was born here and I don't know that it's my pride to take in the state of Oklahoma. But I have lived in Illinois, Connecticut, Ohio, Texas, Arizona, California and I have not seen a state that so many people come together to try to address situations that make something happen in our state. It really is unparalleled and I think, I'm sure there are good things happening in Texas too. But I think it is unparalleled across the country how like minded individuals in our community come together and say we're going to do something about this. Whether it's juvenile justice, whether it's Palomar, whether it's Remerge, whatever organization that is within the community.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 9942,
+       "snippet_cortico_id": 1120900060,
+       "conversation_id": 44,
+       "speaker_id": 229,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "I think it's changed, though. So to Jeff's point about the school systems implementing the cell phone policy, I'm so proud of Oklahoma. We're taking a really aggressive stance with the education system. Not only the cell phone use, which by the way, in Texas is just unheard of, but the 40 minute recess as well too. Is that. That's something as well. I absolutely love that. And I was so on that because for a child such as. Such as I was, I had a lot of energy. And to have me sit in a seat for that long, there was just no shot. I had to release it. I'm really proud of Oklahoma taking these really aggressive steps in one year. That's the thing about us, is there is a lot of urgency in this state when it comes to that. I thought you made a good point about that.",
+       "index_in_conversation": 60,
+       "audio_start_offset": 1174.98,
+       "audio_end_offset": 1223.31,
+       "span": {
+        "start_index": 5,
+        "end_index": 152
+       },
+       "span_text": "So to Jeff's point about the school systems implementing the cell phone policy, I'm so proud of Oklahoma. We're taking a really aggressive stance with the education system. Not only the cell phone use, which by the way, in Texas is just unheard of, but the 40 minute recess as well too. Is that. That's something as well. I absolutely love that. And I was so on that because for a child such as. Such as I was, I had a lot of energy. And to have me sit in a seat for that long, there was just no shot. I had to release it. I'm really proud of Oklahoma taking these really aggressive steps in one year. That's the thing about us, is there is a lot of urgency in this state when it comes to that. I thought you made a good point about that.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 24,
+     "conversation_id": 92,
+     "insight_text": "The community is proud of its “bounce back” after COVID, renewed in-person gathering, deep engagement, and people becoming organizers rather than only participants. More broadly, the reflection describes pride in a community committed to working together, listening, and developing leadership across counties.",
+     "evidence": [
+      {
+       "snippet_id": 18832,
+       "snippet_cortico_id": 1105700017,
+       "conversation_id": 92,
+       "speaker_id": 466,
+       "speaker_name": "H",
+       "is_facilitator": false,
+       "text": "Yeah, I was just trying to think, putting the whole county hat on. I think I'm just most proud of, you know, since COVID everyone's kind of like been in a shell. And I just feel like this year, 2026, I don't know if it's the 250th birthday or what's happen. It just feels like the energy is up, the vibes are up and people are wanting to get out and be engaged. I feel like every community within all county, there are those struggles. Like for example, Lansing, we have the bridge construction, but I think there's just resilience in every single one of our communities in Allah county. They're trying to get things going, they're trying to be doing things, get people out and about again. And I think I'm just proud of those people that are being engaged in wanting to participate because if we didn't have those people, we wouldn't have much going on. And it's good to have community. And community is a huge part of everything we stand for, I feel like in our country. So, yeah, just proud of the engagement.",
+       "index_in_conversation": 17,
+       "audio_start_offset": 448.63,
+       "audio_end_offset": 515.32,
+       "span": {
+        "start_index": 13,
+        "end_index": 188
+       },
+       "span_text": "I think I'm just most proud of, you know, since COVID everyone's kind of like been in a shell. And I just feel like this year, 2026, I don't know if it's the 250th birthday or what's happen. It just feels like the energy is up, the vibes are up and people are wanting to get out and be engaged. I feel like every community within all county, there are those struggles. Like for example, Lansing, we have the bridge construction, but I think there's just resilience in every single one of our communities in Allah county. They're trying to get things going, they're trying to be doing things, get people out and about again. And I think I'm just proud of those people that are being engaged in wanting to participate because if we didn't have those people, we wouldn't have much going on. And it's good to have community. And community is a huge part of everything we stand for, I feel like in our country. So, yeah, just proud of the engagement.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18815,
+       "snippet_cortico_id": 1105700000,
+       "conversation_id": 92,
+       "speaker_id": 459,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "Now I'm going to start the conversation. The first thing that we'll do is just go around and answer this question as briefly as you can. And the question is, when you think of being in your community today, what is something that you're especially proud of? Now? It doesn't have to be just recently. It could be from some time ago. And I'll start. I recently attended an introductory meeting for the Heart and Soul model to be introduced in Guttenberg. And I was so proud of the just spontaneous response of a new group of people working together to advance Heart and Soul in Guttenberg. It wouldn't have been anything I would have foreseen walking into that room. And sometimes as leaders, we walk in feeling responsible for what happens because people know we could lead it if we had the gumption. We've led other things before. But when I left that meeting, I was so gratified that a new group of people had joined forces, maybe had never worked together before, but now that model is being advanced in Gothenburg. So if you want to, you can raise your hand if you had something come to mind that you're proud of. Sheila?",
+       "index_in_conversation": 0,
+       "audio_start_offset": 0.0,
+       "audio_end_offset": 99.06,
+       "span": {
+        "start_index": 65,
+        "end_index": 183
+       },
+       "span_text": "I recently attended an introductory meeting for the Heart and Soul model to be introduced in Guttenberg. And I was so proud of the just spontaneous response of a new group of people working together to advance Heart and Soul in Guttenberg. It wouldn't have been anything I would have foreseen walking into that room. And sometimes as leaders, we walk in feeling responsible for what happens because people know we could lead it if we had the gumption. We've led other things before. But when I left that meeting, I was so gratified that a new group of people had joined forces, maybe had never worked together before, but now that model is being advanced in Gothenburg.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18825,
+       "snippet_cortico_id": 1105700010,
+       "conversation_id": 92,
+       "speaker_id": 464,
+       "speaker_name": "F",
+       "is_facilitator": false,
+       "text": "Well, you and they both said 2. Two of the things that were coming to mind for me with Heart and Soul. I've been involved with the Heart and Soul group and have been really proud to see them come together and everybody kind of picking up their piece of the puzzle and moving it forward so we can get started with that and with our Stars and Stripes event that has sort of what Molly said, become more of a community led event versus the Chamber. So it's been really cool to see those people come together, some of them for the first time working on a committee and take on such a huge process and something that the community really looks forward to and bring it to life. So it's been really cool to see both of those things happening.",
+       "index_in_conversation": 10,
+       "audio_start_offset": 303.13,
+       "audio_end_offset": 355.44,
+       "span": {
+        "start_index": 22,
+        "end_index": 130
+       },
+       "span_text": "I've been involved with the Heart and Soul group and have been really proud to see them come together and everybody kind of picking up their piece of the puzzle and moving it forward so we can get started with that and with our Stars and Stripes event that has sort of what Molly said, become more of a community led event versus the Chamber. So it's been really cool to see those people come together, some of them for the first time working on a committee and take on such a huge process and something that the community really looks forward to and bring it to life.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 18836,
+       "snippet_cortico_id": 1105700021,
+       "conversation_id": 92,
+       "speaker_id": 463,
+       "speaker_name": "E",
+       "is_facilitator": false,
+       "text": "Yeah, I can have some feedback now. I have to wait till I get off the phone anyway because I can't send an email. But I was gonna also kind of talk about the line, same lines as Amanda, with Small Town Dreams. Just how people come together that I've witnessed it from the first one I was part of to the most recent One, especially in Elwood and Lost Nation. And we just have a couple people there that are being really good connectors and just, I guess the word introducers, like we have a gentleman there that thinks of Lincoln Way and of Jackson county and of, you know, their small town dreams, bringing people together to just help with different projects. So kind of echoing the small town dreams, but also with our Voices of America. I have seen our historical society just really jump on this. They went from having, you know, two things planned to now four things. They were going to have a veterans program and then like a soiree, and some things got changed up. But they have done so many different things to bring people together to celebrate now four different times throughout the year versus just the. The two times they had planned and the other groups that they're bringing into that is more than just the Historical Society. And more people are participating. So that's really exciting. But also just talking about engaging the communities. When we had our Heritage Day celebration last weekend, and I know mj, you dealt with bad weather too, and everybody had to like regroup. Our groups did too, and everybody just jumped in, whether it was like changing the times of events or changing the locations and, you know, helping people get there. So you just see, yeah, a lot of good community people coming together, whether it's community club or the city or all of them working together.",
+       "index_in_conversation": 21,
+       "audio_start_offset": 582.38,
+       "audio_end_offset": 696.51,
+       "span": {
+        "start_index": 25,
+        "end_index": 325
+       },
+       "span_text": "I was gonna also kind of talk about the line, same lines as Amanda, with Small Town Dreams. Just how people come together that I've witnessed it from the first one I was part of to the most recent One, especially in Elwood and Lost Nation. And we just have a couple people there that are being really good connectors and just, I guess the word introducers, like we have a gentleman there that thinks of Lincoln Way and of Jackson county and of, you know, their small town dreams, bringing people together to just help with different projects. So kind of echoing the small town dreams, but also with our Voices of America. I have seen our historical society just really jump on this. They went from having, you know, two things planned to now four things. They were going to have a veterans program and then like a soiree, and some things got changed up. But they have done so many different things to bring people together to celebrate now four different times throughout the year versus just the. The two times they had planned and the other groups that they're bringing into that is more than just the Historical Society. And more people are participating. So that's really exciting. But also just talking about engaging the communities. When we had our Heritage Day celebration last weekend, and I know mj, you dealt with bad weather too, and everybody had to like regroup. Our groups did too, and everybody just jumped in, whether it was like changing the times of events or changing the locations and, you know, helping people get there. So you just see, yeah, a lot of good community people coming together, whether it's community club or the city or all of them working together.",
+       "evidence_source": "user"
+      }
+     ]
+    },
+    {
+     "connection_id": 45,
+     "conversation_id": 95,
+     "insight_text": "Communities are proud when they come together across differences to accomplish something: merging rival schools, hosting a major event under time pressure, holding a community celebration, and supporting grieving families through shared labor. The reflection emphasizes pride in communities that are practiced at navigating change together.",
+     "evidence": [
+      {
+       "snippet_id": 19094,
+       "snippet_cortico_id": 1138400000,
+       "conversation_id": 95,
+       "speaker_id": 479,
+       "speaker_name": "A",
+       "is_facilitator": true,
+       "text": "Okay, so we are here today. It's September 9, 2026, and we're in Dubuque, and I'm meeting with staff members at the Community foundation of Greater Dubuque. And our. Our first question is really just to kind of ground us all in this idea of community. And the first question is just to share a moment or an experience where you felt proud of your own community could be today or it could be some time ago. And if you're new to your community, it could be in a previous community, but just a time you remember where you felt proud. And I can maybe share. I was involved in the early 2000s in a rural school merger, and I did have a leadership role in this effort. We had declining enrollment in two districts that had honestly been rivals for decades. You know, sports rivals, academic rivals. Not that you didn't know people from the next town. But as far as school was concerned, especially athletics, there was a lot of rivalry, and it wasn't always necessarily friendly rivalry. But due to changes in our rural communities, it was simply necessary for these schools to face stark choices. And so we were part of a first whole grade sharing and then a merger, which passed on a vote of 94%. And this was after a period of a lot of conversations like this where we just talked about what was important, especially for students and academic achievement. So it was a moment I'll never forget the. The idea that people came together, and I was so proud that a lot of history had been at least put aside for the sake of that time. So now, do each of you have something that you'd want to share?",
+       "index_in_conversation": 0,
+       "audio_start_offset": 0.0,
+       "audio_end_offset": 146.579,
+       "span": {
+        "start_index": 106,
+        "end_index": 285
+       },
+       "span_text": "I was involved in the early 2000s in a rural school merger, and I did have a leadership role in this effort. We had declining enrollment in two districts that had honestly been rivals for decades. You know, sports rivals, academic rivals. Not that you didn't know people from the next town. But as far as school was concerned, especially athletics, there was a lot of rivalry, and it wasn't always necessarily friendly rivalry. But due to changes in our rural communities, it was simply necessary for these schools to face stark choices. And so we were part of a first whole grade sharing and then a merger, which passed on a vote of 94%. And this was after a period of a lot of conversations like this where we just talked about what was important, especially for students and academic achievement. So it was a moment I'll never forget the. The idea that people came together, and I was so proud that a lot of history had been at least put aside for the sake of that time.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 19101,
+       "snippet_cortico_id": 1138400007,
+       "conversation_id": 95,
+       "speaker_id": 481,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "Cool. So maybe a couple of things in the community. I think it was in 1982 that the community of Cascade celebrated their sesquicentennial. And it was amazing to me, being new to the area just a couple years, how people. I mean, the whole community came together and had this huge celebration. So that was. That would be something that I will always remember. And then another is a smaller community where I live. And all of this is a church. But that community. I mean, how we do things together all the time. No matter what it is, all it is is a phone call or an email, and people are there. One of the best ones. And it's kind of. Well, some people might consider it morbid, but it's not. At our cemetery, whenever we have a burial, the parishioners get together and they're the ones that dig the hole for whoever's. That's been a tradition ever since I can remember, you know, way back when I first moved there in the early 80s. And they're still doing that today. And that's. It's. It's a lot of. I don't know, it's like a different feeling for the family, what you're doing for them. And it's, you know, it's respectful and it's. It's just community getting together and getting things done.",
+       "index_in_conversation": 7,
+       "audio_start_offset": 229.21,
+       "audio_end_offset": 346.97,
+       "span": {
+        "start_index": 67,
+        "end_index": 223
+       },
+       "span_text": "another is a smaller community where I live. And all of this is a church. But that community. I mean, how we do things together all the time. No matter what it is, all it is is a phone call or an email, and people are there. One of the best ones. And it's kind of. Well, some people might consider it morbid, but it's not. At our cemetery, whenever we have a burial, the parishioners get together and they're the ones that dig the hole for whoever's. That's been a tradition ever since I can remember, you know, way back when I first moved there in the early 80s. And they're still doing that today. And that's. It's. It's a lot of. I don't know, it's like a different feeling for the family, what you're doing for them. And it's, you know, it's respectful and it's. It's just community getting together and getting things done.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 19095,
+       "snippet_cortico_id": 1138400001,
+       "conversation_id": 95,
+       "speaker_id": 480,
+       "speaker_name": "B",
+       "is_facilitator": false,
+       "text": "I do. I'll go first. Eatsa. It was a few years back. I'm not sure exactly what year it was, but neighboring town was scheduled to host Ragbrai, and they had to back out. So the Ragbry committee came to our town and asked our chamber and development to be able to host. So a group got together, and on a. On a much shorter timeline than other towns had to prepare, but all different groups within the community came together, and they stepped up, and we were able to pull it off. And we didn't only pull it off. There was so many comments that year that our community was the most favorite.",
+       "index_in_conversation": 1,
+       "audio_start_offset": 146.579,
+       "audio_end_offset": 199.52,
+       "span": {
+        "start_index": 6,
+        "end_index": 114
+       },
+       "span_text": "It was a few years back. I'm not sure exactly what year it was, but neighboring town was scheduled to host Ragbrai, and they had to back out. So the Ragbry committee came to our town and asked our chamber and development to be able to host. So a group got together, and on a. On a much shorter timeline than other towns had to prepare, but all different groups within the community came together, and they stepped up, and we were able to pull it off. And we didn't only pull it off. There was so many comments that year that our community was the most favorite.",
+       "evidence_source": "user"
+      },
+      {
+       "snippet_id": 19101,
+       "snippet_cortico_id": 1138400007,
+       "conversation_id": 95,
+       "speaker_id": 481,
+       "speaker_name": "C",
+       "is_facilitator": false,
+       "text": "Cool. So maybe a couple of things in the community. I think it was in 1982 that the community of Cascade celebrated their sesquicentennial. And it was amazing to me, being new to the area just a couple years, how people. I mean, the whole community came together and had this huge celebration. So that was. That would be something that I will always remember. And then another is a smaller community where I live. And all of this is a church. But that community. I mean, how we do things together all the time. No matter what it is, all it is is a phone call or an email, and people are there. One of the best ones. And it's kind of. Well, some people might consider it morbid, but it's not. At our cemetery, whenever we have a burial, the parishioners get together and they're the ones that dig the hole for whoever's. That's been a tradition ever since I can remember, you know, way back when I first moved there in the early 80s. And they're still doing that today. And that's. It's. It's a lot of. I don't know, it's like a different feeling for the family, what you're doing for them. And it's, you know, it's respectful and it's. It's just community getting together and getting things done.",
+       "index_in_conversation": 7,
+       "audio_start_offset": 229.21,
+       "audio_end_offset": 346.97,
+       "span": {
+        "start_index": 10,
+        "end_index": 65
+       },
+       "span_text": "I think it was in 1982 that the community of Cascade celebrated their sesquicentennial. And it was amazing to me, being new to the area just a couple years, how people. I mean, the whole community came together and had this huge celebration. So that was. That would be something that I will always remember.",
+       "evidence_source": "user"
+      }
+     ]
+    }
+   ],
+   "exemplars": [],
+   "children": []
+  }
+ ]
+}
