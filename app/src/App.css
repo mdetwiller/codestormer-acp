@@ -110,3 +110,5 @@
 .new-code { display: flex; gap: 6px; margin-bottom: 8px; }
 .new-code input { flex: 1; padding: 3px 8px; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
 .rc-children .new-code { margin: 0 0 6px; }
+.more { margin: 6px 0 12px; }
+.ai-tag { font-size: 10px; font-weight: 600; color: #fff; background: #8b8f97; border-radius: 4px; padding: 0 4px; }

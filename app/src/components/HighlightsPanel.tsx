@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { entryKey } from '../lib/reconciled'
 import type { Code, Entry, PanelId } from '../lib/types'
 import { HighlightCard } from './HighlightCard'
@@ -12,6 +13,8 @@ interface Props {
   onCancelPin: () => void
   onUnpin: (codeId: string, index: number) => void
 }
+
+const PAGE = 30
 
 const PANEL_LABEL: Record<PanelId, string> = {
   bottom_up: 'Bottom-up',
@@ -29,8 +32,20 @@ export function HighlightsPanel({
   onCancelPin,
   onUnpin,
 }: Props) {
+  const [limit, setLimit] = useState(PAGE)
   const pinMode = pinTarget !== null
   const pinnedKeys = new Set((pinTarget?.exemplars ?? []).map(entryKey))
+
+  // Interleave child codes so the first page samples every child, not just the first one.
+  const fromChildren: { e: Entry; name: string }[] = []
+  const kids = code?.children ?? []
+  const longest = Math.max(0, ...kids.map((k) => k.highlights.length))
+  for (let i = 0; i < longest; i++) {
+    for (const k of kids) if (i < k.highlights.length) fromChildren.push({ e: k.highlights[i], name: k.name })
+  }
+  const childTotal = fromChildren.length
+  const total = (code?.highlights.length ?? 0) + childTotal
+  const shown = Math.min(total, limit)
 
   const card = (entry: Entry, label?: string) => {
     const key = entryKey(entry)
@@ -89,11 +104,17 @@ export function HighlightsPanel({
             </>
           )}
 
-          {code.highlights.length > 0 && <h3>Highlights</h3>}
-          {code.highlights.map((e) => card(e))}
+          {code.highlights.length > 0 && <h3>Highlights ({code.highlights.length})</h3>}
+          {code.highlights.slice(0, limit).map((e) => card(e))}
 
-          {(code.children ?? []).some((k) => k.highlights.length > 0) && <h3>From child codes</h3>}
-          {(code.children ?? []).flatMap((k) => k.highlights.map((e) => card(e, k.name)))}
+          {childTotal > 0 && <h3>From child codes ({childTotal})</h3>}
+          {fromChildren.slice(0, Math.max(0, limit - code.highlights.length)).map(({ e, name }) => card(e, name))}
+
+          {shown < total && (
+            <button className="more" onClick={() => setLimit(limit + PAGE)}>
+              Show {Math.min(PAGE, total - shown)} more of {total - shown} remaining
+            </button>
+          )}
 
           {code.highlights.length === 0 &&
             code.exemplars.length === 0 &&

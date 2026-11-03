@@ -75,7 +75,15 @@ function TreeNode({
           <span className="twisty" />
         )}
         <span className="node-name">{code.name}</span>
-        {code.rq_provenance && (
+        {code.generated && (
+          <span
+            className="ai-tag"
+            title={`AI-generated from the transcripts${code.name_warnings?.length ? `; name ${code.name_warnings.join(', ')}` : ''}`}
+          >
+            AI
+          </span>
+        )}
+        {code.rq_provenance && depth === 0 && (
           <span className="rq-badge" title={code.rq_provenance.name}>
             RQ {code.rq_provenance.id}
           </span>

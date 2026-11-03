@@ -108,6 +108,7 @@ export default function App() {
               Placeholder: hand-drafted from 7 conversations until the LLM pass runs.
             </p>
           )}
+          {bottomUp?.coverage_note && <p className="banner">{bottomUp.coverage_note}</p>}
           {bottomUp ? (
             <CodeTree
               codes={bottomUp.codes}
@@ -172,6 +173,7 @@ export default function App() {
 
       <footer className="dock">
         <HighlightsPanel
+          key={selected ? `${selected.panel}:${selected.id}` : 'none'}
           code={selectedCode}
           panel={selected?.panel ?? null}
           pinTarget={pinTarget}

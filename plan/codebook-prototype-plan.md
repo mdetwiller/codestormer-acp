@@ -330,6 +330,8 @@ interface ReconciledCodebook {
 - [x] RAG search: keyword stub over all 198 conversations (top 50, facilitator turns hidden by default)
 - [x] Export reconciled codebook as JSON, plus a Cortico flat `codes[]` export with `parent_id` (provenance kept under `x_codestormer`)
 - [ ] Drag search results into the highlights panel (pinning uses checkboxes for now)
+- [x] Replace the bottom-up placeholder with the sensemaking-codebook-prototype's final codebook (`scripts/import_legacy_bottom_up.py`): 10 parents and 75 children after dropping "Empathy for homeless hardship", "Low turnout repeated volunteers" and "takeaways". It covers conversations 1-50 only and was coded from Cortico AI-suggested highlights, mapped to speaker turns by word timings
+- [ ] Top-down child codes (`scripts/top_down_children.py`, OpenAI): embed all turns, retrieve the closest turns per family (definition plus the researcher's evidence as the query), one `gpt-5.5` call per family for child codes with example turns; RQ 9 and RQ 12 get families and children from the RQ text. Built and dry-run; the paid run is waiting for the researcher
 
 ### Phase 2 — Real pipelines
 - [ ] Full bottom-up pipeline: open coding → clustering on 50 conversations

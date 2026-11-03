@@ -41,6 +41,9 @@ export interface Code {
   highlights: Entry[]
   exemplars: Entry[]
   children?: Code[]
+  /** true for codes the top-down pipeline generated (scripts/top_down_children.py) */
+  generated?: boolean
+  name_warnings?: string[]
   /** id of the bottom-up or top-down code this reconciled code was dragged from */
   origin_id?: string
 }
@@ -61,6 +64,7 @@ export interface Codebook {
   warnings?: string[]
   placeholder?: boolean
   placeholder_note?: string
+  coverage_note?: string
 }
 
 export interface ReconciledCodebook {

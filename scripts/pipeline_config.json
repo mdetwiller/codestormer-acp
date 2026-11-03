@@ -1,0 +1,19 @@
+{
+  "env_file": "../../acp-sensemaking-pipeline/backend/.env",
+  "embedding_model": "text-embedding-3-small",
+  "embedding_batch_size": 100,
+  "embedding_max_chars": 8000,
+  "generation_model": "gpt-5.5",
+  "retrieval": {
+    "top_k": 60,
+    "min_words": 12,
+    "exclude_facilitator": true,
+    "max_words_per_turn_in_prompt": 150
+  },
+  "families": { "max_children": 6, "min_examples": 2, "max_examples": 4 },
+  "empty_rqs": { "max_families": 3, "max_children_per_family": 4, "top_k": 80 },
+  "price_per_million_tokens_usd": {
+    "_note": "Assumptions for the dry-run estimate only; check current OpenAI pricing.",
+    "text-embedding-3-small": 0.02
+  }
+}
