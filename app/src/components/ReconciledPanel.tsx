@@ -72,6 +72,15 @@ function readPayload(e: DragEvent): DragPayload | null {
 export function ReconciledPanel(props: Props) {
   const { codes, onDropCode } = props
   const [over, setOver] = useState(false)
+  const [collapsed, setCollapsed] = useState<Set<string>>(new Set())
+  const toggleCollapse = (id: string) =>
+    setCollapsed((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  const parentsWithKids = codes.filter((c) => c.children?.length).map((c) => c.id)
 
   return (
     <div
@@ -96,6 +105,12 @@ export function ReconciledPanel(props: Props) {
         placeholder="New parent code name"
         onCreate={(name) => props.dispatch({ type: 'create', name, definition: '', parentId: null })}
       />
+      {parentsWithKids.length > 0 && (
+        <div className="collapse-all">
+          <button onClick={() => setCollapsed(new Set(parentsWithKids))}>Collapse all</button>
+          <button onClick={() => setCollapsed(new Set())}>Expand all</button>
+        </div>
+      )}
       {codes.length === 0 ? (
         <p className="empty">
           Drag codes here from either side. Drop onto a parent code to add it as a child, or onto a
@@ -104,7 +119,16 @@ export function ReconciledPanel(props: Props) {
       ) : (
         <ol className="rc-list">
           {codes.map((c, i) => (
-            <RcCode key={c.id} code={c} isChild={false} first={i === 0} last={i === codes.length - 1} {...props} />
+            <RcCode
+              key={c.id}
+              code={c}
+              isChild={false}
+              first={i === 0}
+              last={i === codes.length - 1}
+              collapsed={collapsed.has(c.id)}
+              onToggleCollapse={() => toggleCollapse(c.id)}
+              {...props}
+            />
           ))}
         </ol>
       )}
@@ -124,7 +148,16 @@ function RcCode({
   onSelect,
   pinTargetId,
   onStartPin,
-}: Props & { code: Code; isChild: boolean; first: boolean; last: boolean }) {
+  collapsed = false,
+  onToggleCollapse,
+}: Props & {
+  code: Code
+  isChild: boolean
+  first: boolean
+  last: boolean
+  collapsed?: boolean
+  onToggleCollapse?: () => void
+}) {
   const [editing, setEditing] = useState(false)
   const [overParent, setOverParent] = useState(false)
   const [addingChild, setAddingChild] = useState(false)
@@ -179,6 +212,20 @@ function RcCode({
         {...dropHandlers}
       >
         <div className="rc-head">
+          {!isChild && (
+            <button
+              className="twisty"
+              disabled={kids.length === 0}
+              aria-label={collapsed ? 'Expand' : 'Collapse'}
+              title={collapsed ? 'Show child codes' : 'Collapse to one line'}
+              onClick={(e) => {
+                e.stopPropagation()
+                onToggleCollapse?.()
+              }}
+            >
+              {collapsed ? '▸' : '▾'}
+            </button>
+          )}
           {isChild && (
             <span
               className="grip"
@@ -235,12 +282,19 @@ function RcCode({
             {code.source === 'bottom_up' ? 'bottom-up' : code.source === 'top_down' ? `RQ ${code.rq_provenance?.id ?? '?'}` : 'new'}
           </span>
           {overMerge && <span className="merge-hint">Drop to merge</span>}
+          {collapsed && (
+            <span className="muted" title={kids.map((k) => k.name).join(', ')}>
+              {kids.length} child code{kids.length === 1 ? '' : 's'}
+            </span>
+          )}
           {code.exemplars.length > 0 && (
             <span className="exemplar-count" title="Pinned exemplars">
               ★ {code.exemplars.length}
             </span>
           )}
         </div>
+        {!collapsed && (
+          <>
         <textarea
           className="rc-def"
           defaultValue={code.definition}
@@ -304,8 +358,10 @@ function RcCode({
             ✕
           </button>
         </div>
+          </>
+        )}
       </div>
-      {kids.length > 0 && (
+      {kids.length > 0 && !collapsed && (
         <ol className="rc-children">
           {kids.map((k, i) => (
             <RcCode

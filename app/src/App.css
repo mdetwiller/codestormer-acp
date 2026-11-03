@@ -120,3 +120,6 @@
 .merged-chip.src-bottom_up { background: var(--bu-soft); }
 .merged-chip.src-top_down { background: var(--td-soft); }
 .merged-chip .link { font-size: 11px; }
+.collapse-all { display: flex; gap: 6px; margin: -2px 0 8px; }
+.collapse-all button { font-size: 11px; padding: 1px 7px; }
+.rc-head .twisty { border: none; background: none; padding: 0; width: 16px; color: var(--muted); }
