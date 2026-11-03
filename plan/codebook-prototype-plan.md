@@ -324,6 +324,7 @@ interface ReconciledCodebook {
 - [x] Left panel: render bottom-up tree, click-to-highlight
 - [x] Right panel: render top-down tree with RQ provenance badges (not tabs or filters), click-to-highlight; RQs with no families listed underneath
 - [x] Center panel: drop zone, drag-and-drop from either side; drop onto a parent to nest. Codes stay two levels deep: a parent dropped onto a parent comes in with its children lifted to siblings
+- [x] Merge child codes: drop a child code (from the center by its ⠿ grip, or from either side panel) onto a center child code. The target keeps its name and definition; merged codes are kept whole under `merged_from`, their highlights show under the target, their exemplars move to it, and "split" restores one as a separate child. Codes with children can't be merged
 - [x] Center editing: create new parent codes and child codes, rename (double-click), edit definition, reorder (↑ ↓), promote, demote (only codes without children), remove. Saved to browser storage
 - [x] Highlights panel: surfaces highlights for selected code, plus its child codes' highlights
 - [x] "Add example" flow: pick highlights from any code or from search results → pin to the code in the center

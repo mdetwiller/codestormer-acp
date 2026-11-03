@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { entryKey } from '../lib/reconciled'
+import { entryKey, mergedHighlights } from '../lib/reconciled'
 import type { Code, Entry, PanelId } from '../lib/types'
 import { HighlightCard } from './HighlightCard'
 
@@ -44,7 +44,9 @@ export function HighlightsPanel({
     for (const k of kids) if (i < k.highlights.length) fromChildren.push({ e: k.highlights[i], name: k.name })
   }
   const childTotal = fromChildren.length
-  const total = (code?.highlights.length ?? 0) + childTotal
+  const fromMerged = code ? mergedHighlights(code) : []
+  const ownAndMerged = (code?.highlights.length ?? 0) + fromMerged.length
+  const total = ownAndMerged + childTotal
   const shown = Math.min(total, limit)
 
   const card = (entry: Entry, label?: string) => {
@@ -107,8 +109,13 @@ export function HighlightsPanel({
           {code.highlights.length > 0 && <h3>Highlights ({code.highlights.length})</h3>}
           {code.highlights.slice(0, limit).map((e) => card(e))}
 
+          {fromMerged.length > 0 && <h3>From merged codes ({fromMerged.length})</h3>}
+          {fromMerged
+            .slice(0, Math.max(0, limit - code.highlights.length))
+            .map(({ entry, from }) => card(entry, `merged: ${from}`))}
+
           {childTotal > 0 && <h3>From child codes ({childTotal})</h3>}
-          {fromChildren.slice(0, Math.max(0, limit - code.highlights.length)).map(({ e, name }) => card(e, name))}
+          {fromChildren.slice(0, Math.max(0, limit - ownAndMerged)).map(({ e, name }) => card(e, name))}
 
           {shown < total && (
             <button className="more" onClick={() => setLimit(limit + PAGE)}>
@@ -118,6 +125,7 @@ export function HighlightsPanel({
 
           {code.highlights.length === 0 &&
             code.exemplars.length === 0 &&
+            fromMerged.length === 0 &&
             !(code.children ?? []).some((k) => k.highlights.length > 0) && (
               <p className="empty">No highlights for this code yet.</p>
             )}

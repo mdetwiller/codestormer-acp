@@ -7,6 +7,7 @@ interface Props {
   codes: Code[]
   dispatch: (a: Action) => void
   onDropCode: (payload: DragPayload, parentId: string | null) => void
+  onMergeCode: (payload: DragPayload, targetId: string) => void
   selectedId: string | null
   onSelect: (id: string) => void
   pinTargetId: string | null
@@ -97,7 +98,8 @@ export function ReconciledPanel(props: Props) {
       />
       {codes.length === 0 ? (
         <p className="empty">
-          Drag codes here from either side. Drop onto a parent code to add it as a child.
+          Drag codes here from either side. Drop onto a parent code to add it as a child, or onto a
+          child code to merge into it.
         </p>
       ) : (
         <ol className="rc-list">
@@ -117,6 +119,7 @@ function RcCode({
   last,
   dispatch,
   onDropCode,
+  onMergeCode,
   selectedId,
   onSelect,
   pinTargetId,
@@ -127,8 +130,27 @@ function RcCode({
   const [addingChild, setAddingChild] = useState(false)
   const kids = code.children ?? []
 
+  const [overMerge, setOverMerge] = useState(false)
+  const merged = code.merged_from ?? []
+
   const dropHandlers = isChild
-    ? {}
+    ? {
+        onDragOver: (e: DragEvent) => {
+          if (e.dataTransfer.types.includes(DRAG_MIME)) {
+            e.preventDefault()
+            e.stopPropagation()
+            setOverMerge(true)
+          }
+        },
+        onDragLeave: () => setOverMerge(false),
+        onDrop: (e: DragEvent) => {
+          e.preventDefault()
+          e.stopPropagation()
+          setOverMerge(false)
+          const payload = readPayload(e)
+          if (payload) onMergeCode(payload, code.id)
+        },
+      }
     : {
         onDragOver: (e: DragEvent) => {
           if (e.dataTransfer.types.includes(DRAG_MIME)) {
@@ -152,11 +174,26 @@ function RcCode({
       <div
         className={`rc-card src-${code.source} ${selectedId === code.id ? 'selected' : ''} ${
           pinTargetId === code.id ? 'pin-target' : ''
-        } ${overParent ? 'over' : ''}`}
+        } ${overParent ? 'over' : ''} ${overMerge ? 'over-merge' : ''}`}
         onClick={() => onSelect(code.id)}
         {...dropHandlers}
       >
         <div className="rc-head">
+          {isChild && (
+            <span
+              className="grip"
+              draggable
+              title="Drag onto another child code to merge"
+              onClick={(e) => e.stopPropagation()}
+              onDragStart={(e) => {
+                const payload: DragPayload = { panel: 'reconciled', id: code.id }
+                e.dataTransfer.setData(DRAG_MIME, JSON.stringify(payload))
+                e.dataTransfer.effectAllowed = 'move'
+              }}
+            >
+              ⠿
+            </span>
+          )}
           {editing ? (
             <input
               className="rc-name-input"
@@ -197,6 +234,7 @@ function RcCode({
           >
             {code.source === 'bottom_up' ? 'bottom-up' : code.source === 'top_down' ? `RQ ${code.rq_provenance?.id ?? '?'}` : 'new'}
           </span>
+          {overMerge && <span className="merge-hint">Drop to merge</span>}
           {code.exemplars.length > 0 && (
             <span className="exemplar-count" title="Pinned exemplars">
               ★ {code.exemplars.length}
@@ -213,6 +251,23 @@ function RcCode({
             if (definition !== code.definition) dispatch({ type: 'define', id: code.id, definition })
           }}
         />
+        {merged.length > 0 && (
+          <div className="merged" onClick={(e) => e.stopPropagation()}>
+            <span className="muted">Merged:</span>
+            {merged.map((m, i) => (
+              <span key={m.id} className={`merged-chip src-${m.source}`} title={m.definition}>
+                {m.name}
+                <button
+                  className="link"
+                  title="Split this code back out as a separate child code"
+                  onClick={() => dispatch({ type: 'unmerge', targetId: code.id, index: i })}
+                >
+                  split
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
         <div className="rc-actions" onClick={(e) => e.stopPropagation()}>
           <button onClick={() => onStartPin(code.id)} title="Pick highlights to pin as exemplars">
             + Add example
@@ -262,6 +317,7 @@ function RcCode({
               codes={kids}
               dispatch={dispatch}
               onDropCode={onDropCode}
+              onMergeCode={onMergeCode}
               selectedId={selectedId}
               onSelect={onSelect}
               pinTargetId={pinTargetId}

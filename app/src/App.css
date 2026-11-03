@@ -112,3 +112,11 @@
 .rc-children .new-code { margin: 0 0 6px; }
 .more { margin: 6px 0 12px; }
 .ai-tag { font-size: 10px; font-weight: 600; color: #fff; background: #8b8f97; border-radius: 4px; padding: 0 4px; }
+.grip { cursor: grab; color: var(--muted); padding: 0 2px; user-select: none; }
+.rc-card.over-merge { outline: 2px dashed var(--accent); background: #f3f7ff; }
+.merge-hint { font-size: 11px; color: var(--accent); }
+.merged { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: 11px; margin: 2px 0 4px; }
+.merged-chip { border-radius: 10px; padding: 0 7px; background: #f1efea; display: inline-flex; gap: 5px; align-items: center; }
+.merged-chip.src-bottom_up { background: var(--bu-soft); }
+.merged-chip.src-top_down { background: var(--td-soft); }
+.merged-chip .link { font-size: 11px; }

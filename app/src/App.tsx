@@ -65,6 +65,11 @@ export default function App() {
     if (code) dispatch({ type: 'add', code, parentId })
   }
 
+  const onMergeCode = (payload: DragPayload, targetId: string) => {
+    const code = findCode(codesFor(payload.panel), payload.id)
+    if (code) dispatch({ type: 'merge', code, targetId })
+  }
+
   const emptyRqs = (topDown?.research_questions ?? []).filter((rq) => rq.family_ids.length === 0)
 
   return (
@@ -130,6 +135,7 @@ export default function App() {
             codes={reconciled}
             dispatch={dispatch}
             onDropCode={onDropCode}
+            onMergeCode={onMergeCode}
             selectedId={selected?.panel === 'reconciled' ? selected.id : null}
             onSelect={(id) => setSelected({ panel: 'reconciled', id })}
             pinTargetId={pinTargetId}

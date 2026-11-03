@@ -41,6 +41,8 @@ export interface Code {
   highlights: Entry[]
   exemplars: Entry[]
   children?: Code[]
+  /** codes merged into this one; kept whole so a merge can be split back out */
+  merged_from?: Code[]
   /** true for codes the top-down pipeline generated (scripts/top_down_children.py) */
   generated?: boolean
   name_warnings?: string[]

@@ -4,6 +4,8 @@ export type Action =
   | { type: 'add'; code: Code; parentId: string | null }
   | { type: 'create'; name: string; definition: string; parentId: string | null }
   | { type: 'remove'; id: string }
+  | { type: 'merge'; code: Code; targetId: string }
+  | { type: 'unmerge'; targetId: string; index: number }
   | { type: 'rename'; id: string; name: string }
   | { type: 'define'; id: string; definition: string }
   | { type: 'move'; id: string; dir: -1 | 1 }
@@ -70,6 +72,22 @@ function parentOf(codes: Code[], id: string): Code | null {
   return codes.find((c) => c.children?.some((k) => k.id === id)) ?? null
 }
 
+function strip(list: Code[], id: string): Code[] {
+  return list.filter((c) => c.id !== id).map((c) => ({ ...c, children: strip(c.children ?? [], id) }))
+}
+
+/** Insert `code` as the sibling right after `afterId`, at whichever level `afterId` sits. */
+function insertAfter(codes: Code[], afterId: string, code: Code): Code[] {
+  const at = codes.findIndex((c) => c.id === afterId)
+  if (at >= 0) return [...codes.slice(0, at + 1), code, ...codes.slice(at + 1)]
+  return codes.map((c) => ({ ...c, children: insertAfter(c.children ?? [], afterId, code) }))
+}
+
+/** Every highlight a code carries, including those of codes merged into it. */
+export function mergedHighlights(code: Code): { entry: Entry; from: string }[] {
+  return (code.merged_from ?? []).flatMap((m) => m.highlights.map((entry) => ({ entry, from: m.name })))
+}
+
 function swap<T>(list: T[], i: number, j: number): T[] {
   if (j < 0 || j >= list.length) return list
   const next = [...list]
@@ -108,10 +126,33 @@ export function reducer(codes: Code[], action: Action): Code[] {
       }
       return [...codes, code]
     }
-    case 'remove': {
-      const strip = (list: Code[]): Code[] =>
-        list.filter((c) => c.id !== action.id).map((c) => ({ ...c, children: strip(c.children ?? []) }))
-      return strip(codes)
+    case 'remove':
+      return strip(codes, action.id)
+    case 'merge': {
+      // Only leaf codes merge; a code with children would lose its subtree.
+      if (action.code.id === action.targetId || action.code.children?.length) return codes
+      if (!findCode(codes, action.targetId)) return codes
+      const inTree = findCode(codes, action.code.id)
+      const src = inTree ?? cloneForReconciled(action.code)
+      const rest = inTree ? strip(codes, src.id) : codes
+      // Flatten: codes previously merged into the source become direct merges of the target.
+      // Pinned exemplars move to the target and stay there if the code is split back out.
+      const absorbed = [{ ...src, merged_from: [], exemplars: [] }, ...(src.merged_from ?? [])]
+      return mapCode(rest, action.targetId, (t) => ({
+        ...t,
+        merged_from: [...(t.merged_from ?? []), ...absorbed],
+        exemplars: [...t.exemplars, ...src.exemplars.filter((e) => !t.exemplars.some((x) => entryKey(x) === entryKey(e)))],
+      }))
+    }
+    case 'unmerge': {
+      const target = findCode(codes, action.targetId)
+      const out = target?.merged_from?.[action.index]
+      if (!target || !out) return codes
+      const without = mapCode(codes, action.targetId, (t) => ({
+        ...t,
+        merged_from: (t.merged_from ?? []).filter((_, i) => i !== action.index),
+      }))
+      return insertAfter(without, action.targetId, out)
     }
     case 'rename':
       return mapCode(codes, action.id, (c) => ({ ...c, name: action.name }))
@@ -228,6 +269,12 @@ function corticoCode(c: Code, id: number, parentId: number | null, color: string
     x_codestormer: {
       source: c.source,
       origin_id: c.origin_id ?? null,
+      merged_from: (c.merged_from ?? []).map((m) => ({
+        name: m.name,
+        source: m.source,
+        origin_id: m.origin_id ?? null,
+        rq_provenance: m.rq_provenance ?? null,
+      })),
       rq_provenance: c.rq_provenance ?? null,
       exemplar_snippet_ids: c.exemplars.flatMap((e) => e.evidence.map((t) => t.snippet_id)),
     },
