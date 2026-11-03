@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { Placement } from '../lib/reconciled'
 import type { Code, PanelId } from '../lib/types'
 
 export const DRAG_MIME = 'application/x-codestormer-code'
@@ -13,7 +14,7 @@ interface Props {
   panel: 'bottom_up' | 'top_down'
   selectedId: string | null
   onSelect: (id: string) => void
-  inReconciled: Set<string>
+  inReconciled: Map<string, Placement>
 }
 
 export function CodeTree({ codes, panel, selectedId, onSelect, inReconciled }: Props) {
@@ -45,7 +46,8 @@ function TreeNode({
   const [open, setOpen] = useState(true)
   const kids = code.children ?? []
   const count = code.highlights.length + kids.reduce((n, k) => n + k.highlights.length, 0)
-  const placed = inReconciled.has(code.id)
+  const placement = inReconciled.get(code.id)
+  const placed = placement !== undefined
 
   return (
     <li>
@@ -89,7 +91,14 @@ function TreeNode({
           </span>
         )}
         {placed && (
-          <span className="placed-mark" title="Already in the reconciled codebook">
+          <span
+            className="placed-mark"
+            title={
+              placement.kind === 'merged'
+                ? `Merged into "${placement.into}" in the reconciled codebook`
+                : 'Already in the reconciled codebook'
+            }
+          >
             ✓
           </span>
         )}

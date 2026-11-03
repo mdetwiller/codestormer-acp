@@ -224,11 +224,17 @@ export function toReconciledFile(codes: Code[]): ReconciledCodebook {
   return { version: 1, last_saved: new Date().toISOString(), codes }
 }
 
-export function originIds(codes: Code[]): Set<string> {
-  const out = new Set<string>()
+/** Where each side-panel code ended up: placed directly, or merged into a reconciled code. */
+export type Placement = { kind: 'placed' } | { kind: 'merged'; into: string }
+
+export function originIds(codes: Code[]): Map<string, Placement> {
+  const out = new Map<string, Placement>()
   const walk = (list: Code[]) =>
     list.forEach((c) => {
-      if (c.origin_id) out.add(c.origin_id)
+      if (c.origin_id) out.set(c.origin_id, { kind: 'placed' })
+      for (const m of c.merged_from ?? []) {
+        if (m.origin_id && !out.has(m.origin_id)) out.set(m.origin_id, { kind: 'merged', into: c.name })
+      }
       walk(c.children ?? [])
     })
   walk(codes)
