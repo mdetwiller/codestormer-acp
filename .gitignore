@@ -1,5 +1,8 @@
 # Regenerate with scripts/export_transcripts.py (needs the snapshot one level up)
 data/transcripts/
+# Regenerate with scripts/top_down_children.py embed (~$0.04 of API calls)
+data/embeddings/
+data/derived/generated/dry_run/
 
 node_modules/
 dist/

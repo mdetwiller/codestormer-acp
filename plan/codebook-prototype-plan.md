@@ -64,7 +64,7 @@ The corpus is **198 conversations** (the snapshot has 201; three have no transcr
 
 **Pipeline steps:**
 
-1. **Embed** — Embed each code family definition + its existing evidence snippets as a composite query vector.
+1. **Embed** — Embed every speaker turn once (`text-embedding-3-small`); the query for each code family is the mean of its definition's and its existing evidence snippets' embeddings.
 2. **Retrieve** — For each code family, retrieve semantically similar speaker turns from the full 198-conversation corpus.
 3. **Generate child codes** — Prompt an LLM to cluster retrieved turns into child codes under each family. Same naming constraints as bottom-up (2–3 words, no conjunctions).
 4. **Handle empty research questions** — For RQs with no code families yet (currently RQ 9 on change/navigation and RQ 12 on technology), use the RQ description itself as the retrieval query, then generate both code families and their child codes in a single pass.
@@ -318,16 +318,22 @@ interface ReconciledCodebook {
 ### Phase 1 — Interface prototype (current focus)
 - [x] Organize data: export transcripts from the snapshot, move the prep JSON under `data/source/`
 - [x] Transform `codebook-prep.json` into `top_down_codebook.json` shape (`scripts/build_top_down.py`)
-- [ ] Scaffold React app (Vite) in `app/`
-- [ ] Stub data: a placeholder `bottom_up_codebook.json` built from real turns in the 7 cited conversations (marked `placeholder: true`), replaced by a quick LLM pass once that paid run is approved
-- [ ] Build three-panel layout
-- [ ] Left panel: render bottom-up tree, click-to-highlight
-- [ ] Right panel: render top-down tree with RQ provenance badges (not tabs or filters), click-to-highlight
-- [ ] Center panel: drop zone, basic drag-and-drop from either side
-- [ ] Highlights panel: surfaces highlights for selected code
-- [ ] "Add example" flow: select highlight → pin to code in center
-- [ ] RAG search: stub (keyword filter for now, real embeddings later)
-- [ ] Export reconciled codebook as JSON
+- [x] Scaffold React app (Vite) in `app/` (dev server on port 5174, so it doesn't clash with Notes in the Margin on 5173)
+- [x] Stub data: a placeholder `bottom_up_codebook.json` hand-drafted from real participant turns in the 7 cited conversations (5 parents, 15 children, 47 highlights; marked `placeholder: true`). Replace with a quick LLM pass once that paid run is approved
+- [x] Build three-panel layout
+- [x] Left panel: render bottom-up tree, click-to-highlight
+- [x] Right panel: render top-down tree with RQ provenance badges (not tabs or filters), click-to-highlight; RQs with no families listed underneath
+- [x] Center panel: drop zone, drag-and-drop from either side; drop onto a parent to nest. Codes stay two levels deep: a parent dropped onto a parent comes in with its children lifted to siblings
+- [x] Collapse parent codes in the center (▾/▸ on each parent, plus Collapse all / Expand all); a collapsed parent shows one line with its child-code count and still accepts drops
+- [x] Merge child codes: drop a child code (from the center by its ⠿ grip, or from either side panel) onto a center child code. The target keeps its name and definition; merged codes are kept whole under `merged_from`, their highlights show under the target, their exemplars move to it, and "split" restores one as a separate child. Codes with children can't be merged. Side-panel codes merged into a reconciled code get the same ✓ as placed codes, with "Merged into …" on hover
+- [x] Center editing: create new parent codes and child codes, rename (double-click), edit definition, reorder (↑ ↓), promote, demote (only codes without children), remove. Saved to browser storage
+- [x] Highlights panel: surfaces highlights for selected code, plus its child codes' highlights
+- [x] "Add example" flow: pick highlights from any code or from search results → pin to the code in the center
+- [x] RAG search: keyword stub over all 198 conversations (top 50, facilitator turns hidden by default)
+- [x] Export reconciled codebook as JSON, plus a Cortico flat `codes[]` export with `parent_id` (provenance kept under `x_codestormer`)
+- [ ] Drag search results into the highlights panel (pinning uses checkboxes for now)
+- [x] Replace the bottom-up placeholder with the sensemaking-codebook-prototype's final codebook (`scripts/import_legacy_bottom_up.py`): 10 parents and 75 children after dropping "Empathy for homeless hardship", "Low turnout repeated volunteers" and "takeaways". It covers conversations 1-50 only and was coded from Cortico AI-suggested highlights, mapped to speaker turns by word timings
+- [x] Top-down child codes (`scripts/top_down_children.py`, OpenAI, run 2026-11-03 with the Notes in the Margin key): embedded all 41,913 turns (`text-embedding-3-small`); retrieved the 60 closest participant turns per family (definition plus the researcher's evidence as the query); one `gpt-5.6-luna` call per family produced 48 child codes; RQ 9 and RQ 12 got 3 families each (21 children) from the RQ text. An evidence check (`expand`) attached the 15 most similar turns to each child, so each child has 17-19 highlights
 
 ### Phase 2 — Real pipelines
 - [ ] Full bottom-up pipeline: open coding → clustering on 50 conversations
