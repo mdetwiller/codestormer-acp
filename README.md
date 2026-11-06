@@ -8,6 +8,14 @@ A codebook sensemaking prototype. See `plan/codebook-prototype-plan.md`.
 cd app && npm install && npm run dev    # http://localhost:5174
 ```
 
+For search by meaning, also start the similarity search server in a second terminal (from this folder, after the pipeline setup below):
+
+```
+.venv/bin/python scripts/search_server.py    # http://127.0.0.1:5175, reached by the app through Vite's /api proxy
+```
+
+It loads the turn embeddings (`data/embeddings/`, about 260 MB in memory) and embeds each new query with `text-embedding-3-small`, which is a paid call of a few tokens; repeated queries are cached. Without it, the search panel says so and offers keyword search.
+
 The app reads `../data` directly; export the transcripts first or search will be empty. The reconciled codebook is kept in browser storage, so export it to keep a copy.
 
 ## Data
@@ -20,7 +28,7 @@ The app reads `../data` directly; export the transcripts first or search will be
 | `data/derived/bottom_up_codebook.json` | The sensemaking-codebook-prototype's final codebook (10 parents, 75 children; conversations 1-50), highlights mapped to speaker turns by word timings | `python3 scripts/import_legacy_bottom_up.py` |
 | `data/derived/top_down_codebook.json` | The prep file in the plan's `Code` shape, evidence enriched with speaker and turn index, plus generated child codes when they exist | `python3 scripts/build_top_down.py` |
 | `data/derived/generated/top_down_children.json` | AI-generated child codes and RQ 9/12 families, with prompts, retrieved turns and raw responses | `scripts/top_down_children.py generate` (paid) |
-| `data/embeddings/` | `text-embedding-3-small` vectors for every turn (gitignored) | `scripts/top_down_children.py embed` (paid, ~$0.04) |
+| `data/embeddings/` | `text-embedding-3-small` vectors for every turn (gitignored) | `scripts/top_down_children.py embed` (paid, ~$0.04); also used by `scripts/search_server.py` |
 
 `export_transcripts.py` reads `../acp_pipeline_snapshot.db` read-only (pass `--snapshot PATH` to use another copy).
 Conversations 160, 162 and 201 have no transcript in the snapshot.

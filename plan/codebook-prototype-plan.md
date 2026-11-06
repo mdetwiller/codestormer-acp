@@ -329,7 +329,7 @@ interface ReconciledCodebook {
 - [x] Center editing: create new parent codes and child codes, rename (double-click), edit definition, reorder (↑ ↓), promote, demote (only codes without children), remove. Saved to browser storage
 - [x] Highlights panel: surfaces highlights for selected code, plus its child codes' highlights
 - [x] "Add example" flow: pick highlights from any code or from search results → pin to the code in the center
-- [x] RAG search: keyword stub over all 198 conversations (top 50, facilitator turns hidden by default)
+- [x] Search over all 198 conversations (top 50, facilitator turns hidden by default), by meaning or by keyword. Meaning uses `scripts/search_server.py`: the query is embedded with `text-embedding-3-small` and compared with every turn's stored embedding; the app falls back to keyword search when the server isn't running
 - [x] Export reconciled codebook as JSON, plus a Cortico flat `codes[]` export with `parent_id` (provenance kept under `x_codestormer`)
 - [ ] Drag search results into the highlights panel (pinning uses checkboxes for now)
 - [x] Replace the bottom-up placeholder with the sensemaking-codebook-prototype's final codebook (`scripts/import_legacy_bottom_up.py`): 10 parents and 75 children after dropping "Empathy for homeless hardship", "Low turnout repeated volunteers" and "takeaways". It covers conversations 1-50 only and was coded from Cortico AI-suggested highlights, mapped to speaker turns by word timings
@@ -337,8 +337,8 @@ interface ReconciledCodebook {
 
 ### Phase 2 — Real pipelines
 - [ ] Full bottom-up pipeline: open coding → clustering on 50 conversations
-- [ ] Full top-down pipeline: embedding retrieval + child code generation for all code families
-- [ ] Real RAG: embed all 198 conversations by speaker turn, serve similarity search
+- [x] Full top-down pipeline: embedding retrieval + child code generation for all code families (run 2026-11-03; see Phase 1)
+- [x] Real RAG: embed all 198 conversations by speaker turn, serve similarity search (`scripts/search_server.py`, 2026-11-06)
 
 ### Phase 3 — Tagging integration
 - [ ] Exemplar highlights → formatted tagging instructions
@@ -349,8 +349,8 @@ interface ReconciledCodebook {
 
 ## Open Questions
 
-1. **Cortico V2 API data model** — needed only for the final export (`POST /v2/codebooks`) and to confirm whether `snippet_cortico_id` can replace `snippet_uuid`. Not blocking Phase 1 or 2, since transcripts come from the snapshot.
+1. **Cortico V2 API data model** — set aside for now (researcher, 2026-11-06). Needed only for the final export (`POST /v2/codebooks`) and to confirm whether `snippet_cortico_id` can replace `snippet_uuid`. Not blocking Phase 1 or 2, since transcripts come from the snapshot.
 2. ~~**Conversation transcript paths**~~ — resolved: transcripts come from `acp_pipeline_snapshot.db` (198 of 201 conversations have transcripts; 160, 162 and 201 do not), exported by `scripts/export_transcripts.py`.
-3. **Open coding granularity** — currently: one open code per speaker turn. Should very long turns (multi-paragraph) be split, or coded as one?
-4. **Bottom-up hierarchy depth** — currently: two levels (parent → child). Should the parent level be named/editable by the researcher before they see child codes, or is the LLM-generated name the starting point?
-5. **RAG scope** — currently scoped to 198 conversations. Should researcher-pinned exemplars from the existing JSON also be searchable?
+3. ~~**Open coding granularity**~~ — resolved (researcher, 2026-11-06): one open code per speaker turn; long turns are kept whole, not split.
+4. ~~**Bottom-up hierarchy depth**~~ — resolved (researcher, 2026-11-06): two levels; the LLM-generated parent names are the starting point, and the researcher doesn't name parents first.
+5. ~~**RAG scope**~~ — resolved (researcher, 2026-11-06): search covers the 198 conversations only; pinned exemplars are not searchable.
