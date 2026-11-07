@@ -17,7 +17,12 @@ import {
 } from './lib/reconciled'
 import type { Entry, PanelId } from './lib/types'
 
-const bottomUp = loadCodebook('bottom_up_codebook')
+// The Jev-scored pipeline's codebook, and the imported sensemaking-prototype one kept for comparison.
+const bottomUpVersions = {
+  new: loadCodebook('bottom_up_codebook'),
+  legacy: loadCodebook('bottom_up_legacy_codebook'),
+}
+type BottomUpVersion = keyof typeof bottomUpVersions
 const topDown = loadCodebook('top_down_codebook')
 
 function download(name: string, data: unknown) {
@@ -35,6 +40,8 @@ export default function App() {
   const [pinTargetId, setPinTargetId] = useState<string | null>(null)
   const [checked, setChecked] = useState<Map<string, Entry>>(new Map())
   const [confirmClear, setConfirmClear] = useState(false)
+  const [buVersion, setBuVersion] = useState<BottomUpVersion>(bottomUpVersions.new ? 'new' : 'legacy')
+  const bottomUp = bottomUpVersions[buVersion]
 
   useEffect(() => save(reconciled), [reconciled])
 
@@ -107,6 +114,20 @@ export default function App() {
         <section className="panel bottom-up">
           <h2>
             Bottom-up <span className="muted">topic-driven</span>
+            {bottomUpVersions.new && bottomUpVersions.legacy && (
+              <select
+                className="bu-version"
+                value={buVersion}
+                title="Which bottom-up codebook to show"
+                onChange={(e) => {
+                  setBuVersion(e.target.value as BottomUpVersion)
+                  if (selected?.panel === 'bottom_up') setSelected(null)
+                }}
+              >
+                <option value="new">Jev-scored turns</option>
+                <option value="legacy">Old codebook (highlights)</option>
+              </select>
+            )}
           </h2>
           {bottomUp?.placeholder && (
             <p className="banner" title={bottomUp.placeholder_note}>
@@ -123,7 +144,7 @@ export default function App() {
               inReconciled={placed}
             />
           ) : (
-            <p className="empty">No bottom_up_codebook.json in data/derived yet.</p>
+            <p className="empty">No bottom-up codebook in data/derived yet.</p>
           )}
         </section>
 

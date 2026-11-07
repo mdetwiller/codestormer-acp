@@ -27,5 +27,41 @@
   "expand": {
     "top_n": 15,
     "_note": "Evidence check: extra highlights per child code, by similarity to its name and definition."
+  },
+  "bottom_up": {
+    "_note": "scripts/bottom_up_pipeline.py. The rubric is the Jev Score question's ordered levels (0 = lowest); the researcher approved it on 2026-11-06.",
+    "conversations": "1-50",
+    "jev_url": "https://api.typesafe.ai/v1/systemone",
+    "jev_model": "jev-latest",
+    "jev_env_file": ".env",
+    "jev_key_var": "TYPESAFE_API_KEY",
+    "jev_chunk_turns": 20,
+    "jev_chunk_max_words": 2500,
+    "jev_concurrency": 4,
+    "context_turn_max_words": 60,
+    "jev_state_note": "Consecutive speaker turns from a recorded small-group community conversation (the American Conversation Project). Turns marked scored=false are context only.",
+    "jev_instructions": "How codeable and substantive is turn {turn_id} for qualitative research? Judge only that turn, using the turns around it as context.",
+    "rubric": [
+      "Not codeable: logistics, the consent script, facilitator instructions, or back-channel replies like 'mm-hm'",
+      "Minimal: agreeing or reacting with nothing new, or a fragment",
+      "Some content: states a fact or opinion without reasons or experience",
+      "Substantive: an opinion with reasons, or a concrete experience",
+      "Rich: a personal story, an explanation of values, or reasoning that could support several codes"
+    ],
+    "low_confidence_below": 0.5,
+    "project_objective": "understand how people across the United States experience their communities, civic life and each other, through recorded small-group conversations (the American Conversation Project)",
+    "project_participants": "community members and volunteer facilitators in small-group conversations across the United States",
+    "coding_batch_turns": 20,
+    "coding_batch_max_words": 3000,
+    "coding_concurrency": 4,
+    "label_merge_similarity": 0.9,
+    "max_labels_in_prompt": 3000,
+    "specificity": "the most common",
+    "audience": "of diverse backgrounds",
+    "max_parents": 12,
+    "max_children": 8,
+    "min_examples": 2,
+    "max_examples": 4,
+    "assign_min_similarity": 0.35
   }
 }

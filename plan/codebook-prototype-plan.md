@@ -336,7 +336,13 @@ interface ReconciledCodebook {
 - [x] Top-down child codes (`scripts/top_down_children.py`, OpenAI, run 2026-11-03 with the Notes in the Margin key): embedded all 41,913 turns (`text-embedding-3-small`); retrieved the 60 closest participant turns per family (definition plus the researcher's evidence as the query); one `gpt-5.6-luna` call per family produced 48 child codes; RQ 9 and RQ 12 got 3 families each (21 children) from the RQ text. An evidence check (`expand`) attached the 15 most similar turns to each child, so each child has 17-19 highlights
 
 ### Phase 2 — Real pipelines
-- [ ] Full bottom-up pipeline: open coding → clustering on 50 conversations
+- [ ] Full bottom-up pipeline (`scripts/bottom_up_pipeline.py`, built 2026-11-06, not yet run). Adapted from the AI Sensemaking `highlights-codebook.ipynb` notebook, but starting from speaker turns, not highlights:
+  1. **Score:** Jev (TypeSafe's System One model; `plan/jev-explainer.md`) scores every turn in conversations 1-50 for codeable, substantive content. It sees about 20 consecutive turns per request, plus the turn before them for context, and answers one Score question per turn on a rubric the researcher approved: 0 not codeable (logistics, consent script, facilitator instructions, back-channel), 1 minimal, 2 some content, 3 substantive (an opinion with reasons, or a concrete experience), 4 rich (a story, values, or reasoning that supports several codes).
+  2. **Threshold:** the researcher picks the minimum score from a free report. Turns where Jev is less confident are counted so they can be spot-checked.
+  3. **Open code:** the notebook's labelling prompt, run on passing turns. Long turns are coded whole.
+  4. **Themes:** near-identical labels are merged by embedding, then the notebook's theme prompt, with the plan's naming rules added, produces parent and child codes, each citing example labels.
+  5. **Build:** every label is assigned to its closest child code by embedding, and the child's turns become its highlights.
+  The old imported codebook stays in `bottom_up_legacy_codebook.json`, and the left panel can switch between the two.
 - [x] Full top-down pipeline: embedding retrieval + child code generation for all code families (run 2026-11-03; see Phase 1)
 - [x] Real RAG: embed all 198 conversations by speaker turn, serve similarity search (`scripts/search_server.py`, 2026-11-06)
 
