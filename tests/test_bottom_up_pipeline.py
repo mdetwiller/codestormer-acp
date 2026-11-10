@@ -12,6 +12,7 @@ from bottom_up_pipeline import (  # noqa: E402
     clean_open_codes,
     clean_themes,
     coded_at_threshold,
+    duplicate_ids,
     group_near_duplicates,
     jev_request,
     label_occurrences,
@@ -116,3 +117,15 @@ def test_assign_labels_respects_minimum():
     children = np.array([[1, 0]], dtype=np.float32)
     out = assign_labels(labels, children, 0.5)
     assert out[0] == (0, 1.0) and out[1] is None and out[2][0] == 0
+
+
+def test_duplicate_ids_keeps_the_copy_in_the_larger_conversation():
+    long = "we never hear back from the council about anything"
+    turns = [
+        turn(1, 1, 0, long), turn(2, 1, 1, "Yes."),
+        turn(3, 2, 0, "Hello there."), turn(4, 2, 1, long.upper() + "  "), turn(5, 2, 2, "Yes."),
+        turn(6, 3, 0, long), turn(7, 3, 1, long),
+    ]
+    # conversations 2 and 3 tie on size, so the lower id (2) keeps it; short repeats and repeats
+    # inside one conversation's kept copy are left alone
+    assert duplicate_ids(turns, min_words=8) == {1, 6, 7}

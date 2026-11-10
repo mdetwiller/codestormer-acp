@@ -49,6 +49,8 @@
       "Rich: a personal story, an explanation of values, or reasoning that could support several codes"
     ],
     "low_confidence_below": 0.5,
+    "threshold": 1.75,
+    "duplicate_min_words": 8,
     "project_objective": "understand how people across the United States experience their communities, civic life and each other, through recorded small-group conversations (the American Conversation Project)",
     "project_participants": "community members and volunteer facilitators in small-group conversations across the United States",
     "coding_batch_turns": 20,

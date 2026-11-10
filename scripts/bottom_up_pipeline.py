@@ -6,9 +6,9 @@ Stages (run in order; each resumes and skips work already saved):
   score    Jev (TypeSafe's System One model) scores each turn in the chosen conversations on the
            rubric in pipeline_config.json. Consecutive turns are sent together so each is judged
            in context, one Score question per turn. Paid: TypeSafe input tokens.
-  report   Free. Shows how many turns pass at each threshold, plus turns near a threshold.
+  report   Free. Shows how many turns pass at each threshold, plus turns near the threshold.
   code     Open coding (the notebook's prompt): several stand-alone labels for each turn scoring
-           at or above --threshold. Paid: OpenAI.
+           at or above the threshold (bottom_up.threshold, or --threshold). Paid: OpenAI.
   themes   Merges near-identical labels by embedding, then asks the model for themes (parent codes)
            and sub-themes (child codes) with definitions and example labels (the notebook's codebook
            prompt plus the plan's naming rules). Paid: OpenAI.
@@ -22,12 +22,17 @@ Usage:
   .venv/bin/python scripts/bottom_up_pipeline.py score --dry-run
   .venv/bin/python scripts/bottom_up_pipeline.py score
   .venv/bin/python scripts/bottom_up_pipeline.py report [--threshold 2.5]
-  .venv/bin/python scripts/bottom_up_pipeline.py code --threshold 2.5 [--dry-run]
+  .venv/bin/python scripts/bottom_up_pipeline.py code [--threshold 2.5] [--dry-run]
   .venv/bin/python scripts/bottom_up_pipeline.py themes [--dry-run] [--force]
   .venv/bin/python scripts/bottom_up_pipeline.py build
 
 Changing the threshold: re-run `code` with the new value (only newly passing turns are paid for),
 then `themes --force` and `build`.
+
+Duplicate turns: some conversations contain copies of another's turns (all of conversation 1
+reappears in 2, and 60 turns of 15 in 26). A turn of at least bottom_up.duplicate_min_words words
+whose text also appears in another conversation is kept only in the conversation with more turns,
+and its copies are skipped by every stage.
 """
 from __future__ import annotations
 
@@ -103,6 +108,35 @@ def selected_turns(cfg: dict[str, Any], spec: str | None) -> tuple[str, list[dic
     turns = [t for t in load_turns() if t["conversation_id"] in convs]
     turns.sort(key=lambda t: (t["conversation_id"], t["index_in_conversation"]))
     return spec, turns
+
+
+def normalized_text(text: str) -> str:
+    return " ".join(text.lower().split())
+
+
+def duplicate_ids(turns: list[dict], min_words: int) -> set[int]:
+    """Snippet ids of turns whose text is copied from a turn in another conversation. The copy in
+    the conversation with more turns (then the lower conversation id) is kept, so a conversation
+    that contains a whole shorter one keeps its context. Repeats within one conversation are kept."""
+    size: dict[int, int] = {}
+    for t in turns:
+        size[t["conversation_id"]] = size.get(t["conversation_id"], 0) + 1
+    by_text: dict[str, list[dict]] = {}
+    for t in turns:
+        if word_count(t["text"]) >= min_words:
+            by_text.setdefault(normalized_text(t["text"]), []).append(t)
+    dupes: set[int] = set()
+    for copies in by_text.values():
+        convs = {t["conversation_id"] for t in copies}
+        if len(convs) < 2:
+            continue
+        keep = min(convs, key=lambda c: (-size[c], c))
+        dupes.update(t["snippet_id"] for t in copies if t["conversation_id"] != keep)
+    return dupes
+
+
+def without_duplicates(scores: dict[str, dict], dupes: set[int]) -> dict[str, dict]:
+    return {sid: s for sid, s in scores.items() if int(sid) not in dupes}
 
 
 # ---------- score (Jev) ----------
@@ -212,14 +246,18 @@ def call_jev(client, url: str, key: str, body: dict, retries: int = 5) -> dict:
 def stage_score(cfg: dict[str, Any], spec: str | None, dry_run: bool) -> None:
     b = cfg["bottom_up"]
     spec, turns = selected_turns(cfg, spec)
+    dupes = duplicate_ids(load_turns(), b["duplicate_min_words"])
+    skipped = sum(1 for t in turns if t["snippet_id"] in dupes)
+    turns = [t for t in turns if t["snippet_id"] not in dupes]
     chunks = chunk_turns(turns, b["jev_chunk_turns"], b["jev_chunk_max_words"])
     saved = read_json(SCORES, {"chunks_done": [], "scores": {}, "missing": []})
     done = set(saved["chunks_done"])
-    todo = [c for c in chunks if c["key"] not in done]
+    todo = [c for c in chunks
+            if c["key"] not in done and any(str(t["snippet_id"]) not in saved["scores"] for t in c["turns"])]
     bodies = [jev_request(c, cfg) for c in todo]
     tokens = sum(approx_tokens(json.dumps(body)) for body in bodies)
-    print(f"conversations {spec}: {len(turns):,} turns in {len(chunks)} requests; "
-          f"already scored: {len(chunks) - len(todo)}; to call: {len(todo)}")
+    print(f"conversations {spec}: {len(turns):,} turns in {len(chunks)} requests "
+          f"({skipped:,} duplicate turns skipped); already scored: {len(chunks) - len(todo)}; to call: {len(todo)}")
     print(f"model: {b['jev_model']}  approx input tokens: {tokens:,} (TypeSafe bills input tokens only)")
     if dry_run:
         DRY_DIR.mkdir(parents=True, exist_ok=True)
@@ -265,26 +303,27 @@ def passing_ids(scores: dict[str, dict], threshold: float) -> list[int]:
     return sorted(int(sid) for sid, s in scores.items() if s["score"] >= threshold)
 
 
-def stage_report(cfg: dict[str, Any], threshold: float | None) -> None:
+def stage_report(cfg: dict[str, Any], threshold: float) -> None:
     saved = read_json(SCORES, None)
     if not saved:
         sys.exit("run the score stage first")
-    scores = saved["scores"]
-    turns_by_id = {t["snippet_id"]: t for t in load_turns()}
-    low_conf = cfg["bottom_up"]["low_confidence_below"]
-    levels = len(cfg["bottom_up"]["rubric"])
-    print(f"{len(scores):,} turns scored (conversations {saved['meta']['conversations']}); "
-          f"no answer for {len(saved['missing'])}")
+    b = cfg["bottom_up"]
+    all_turns = load_turns()
+    dupes = duplicate_ids(all_turns, b["duplicate_min_words"])
+    scores = without_duplicates(saved["scores"], dupes)
+    turns_by_id = {t["snippet_id"]: t for t in all_turns}
+    low_conf = b["low_confidence_below"]
+    levels = len(b["rubric"])
+    print(f"{len(scores):,} turns scored (conversations {saved['meta']['conversations']}; "
+          f"{len(saved['scores']) - len(scores):,} duplicate turns left out); no answer for {len(saved['missing'])}")
     print("\nthreshold  turns at or above  of which participant  low confidence (<%s)" % low_conf)
-    for step in range(1, (levels - 1) * 2 + 1):
-        th = step / 2
+    steps = sorted({step / 2 for step in range(1, (levels - 1) * 2 + 1)} | {threshold})
+    for th in steps:
         ids = passing_ids(scores, th)
         part = sum(1 for i in ids if not turns_by_id[i]["is_facilitator"])
         lc = sum(1 for i in ids if scores[str(i)]["confidence"] < low_conf)
-        print(f"  >= {th:<5}  {len(ids):>8,}           {part:>8,}           {lc:>6,}")
-    if threshold is None:
-        print("\nPass --threshold N to see turns just above and below N.")
-        return
+        mark = "  <- threshold" if th == threshold else ""
+        print(f"  >= {th:<5}  {len(ids):>8,}           {part:>8,}           {lc:>6,}{mark}")
     near = sorted(scores.items(), key=lambda kv: abs(kv[1]["score"] - threshold))[:12]
     print(f"\nTurns closest to {threshold}:")
     for sid, s in sorted(near, key=lambda kv: -kv[1]["score"]):
@@ -384,7 +423,8 @@ def stage_code(cfg: dict[str, Any], threshold: float, dry_run: bool) -> None:
         for a, c in zip(conv, conv[1:]):
             prev_of[c["snippet_id"]] = a
 
-    ids = passing_ids(saved["scores"], threshold)
+    dupes = duplicate_ids(all_turns, b["duplicate_min_words"])
+    ids = passing_ids(without_duplicates(saved["scores"], dupes), threshold)
     coded = read_json(OPEN_CODES, {"labels": {}, "log": []})
     todo = [sid for sid in ids if str(sid) not in coded["labels"]]
     batches = coding_batches(todo, turns_by_id, b["coding_batch_turns"], b["coding_batch_max_words"])
@@ -718,19 +758,19 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("stage", choices=["score", "report", "code", "themes", "build"])
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--threshold", type=float, help="minimum Jev score for a turn to be coded")
+    parser.add_argument("--threshold", type=float,
+                        help="minimum Jev score for a turn to be coded (default: bottom_up.threshold in the config)")
     parser.add_argument("--conversations", help="e.g. 1-50 (default from pipeline_config.json)")
     parser.add_argument("--force", action="store_true", help="themes: rebuild even if themes.json exists")
     args = parser.parse_args()
     cfg = load_config()
+    threshold = args.threshold if args.threshold is not None else cfg["bottom_up"]["threshold"]
     if args.stage == "score":
         stage_score(cfg, args.conversations, args.dry_run)
     elif args.stage == "report":
-        stage_report(cfg, args.threshold)
+        stage_report(cfg, threshold)
     elif args.stage == "code":
-        if args.threshold is None:
-            sys.exit("code needs --threshold (see the report stage)")
-        stage_code(cfg, args.threshold, args.dry_run)
+        stage_code(cfg, threshold, args.dry_run)
     elif args.stage == "themes":
         stage_themes(cfg, args.dry_run, args.force)
     else:

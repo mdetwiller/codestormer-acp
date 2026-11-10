@@ -56,14 +56,14 @@ Adapted from the AI Sensemaking `highlights-codebook.ipynb` notebook, but starti
 .venv/bin/python scripts/bottom_up_pipeline.py score --dry-run                  # free: request count, token estimate, example request
 .venv/bin/python scripts/bottom_up_pipeline.py score --conversations 1-2        # pilot: check real token usage first
 .venv/bin/python scripts/bottom_up_pipeline.py score                            # conversations 1-50 (585 requests)
-.venv/bin/python scripts/bottom_up_pipeline.py report --threshold 2.5           # free: turns passing at each threshold
-.venv/bin/python scripts/bottom_up_pipeline.py code --threshold 2.5 --dry-run   # free
-.venv/bin/python scripts/bottom_up_pipeline.py code --threshold 2.5             # open coding (gpt-5.6-luna)
+.venv/bin/python scripts/bottom_up_pipeline.py report                           # free: turns passing at each threshold
+.venv/bin/python scripts/bottom_up_pipeline.py code --dry-run                   # free
+.venv/bin/python scripts/bottom_up_pipeline.py code                             # open coding (gpt-5.6-luna)
 .venv/bin/python scripts/bottom_up_pipeline.py themes                           # label embeddings + one theme call
 .venv/bin/python scripts/bottom_up_pipeline.py build                            # writes data/derived/bottom_up_codebook.json
 ```
 
-Every stage resumes where it stopped. To change the threshold, re-run `code` with the new value (only newly passing turns cost anything), then `themes --force` and `build`. Every turn id and example label the model returns is checked against what it was sent. After `build`, restart the dev server: Vite doesn't notice new files in `data/`.
+The threshold is `bottom_up.threshold` in the config (1.75); `report --threshold N` shows turns near another value. A turn of 8 or more words copied from another conversation (all of conversation 1 reappears in 2, and much of 15 in 26) is kept only in the larger conversation, and every stage skips the copies. Every stage resumes where it stopped. To change the threshold, re-run `code` with `--threshold N` or edit the config (only newly passing turns cost anything), then `themes --force` and `build`. Every turn id and example label the model returns is checked against what it was sent. After `build`, restart the dev server: Vite doesn't notice new files in `data/`.
 
 ### Differences from the plan's data model
 
