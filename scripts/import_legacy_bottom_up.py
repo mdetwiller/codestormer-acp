@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_SOURCE = ROOT.parent.parent / "sensemaking-codebook-prototype" / "data" / "final_codebook_for_audit.json"
 DEFAULT_SNAPSHOT = ROOT.parent / "acp_pipeline_snapshot.db"
 TRANSCRIPTS = ROOT / "data" / "transcripts"
-OUT = ROOT / "data" / "derived" / "bottom_up_codebook.json"
+OUT = ROOT / "data" / "derived" / "bottom_up_legacy_codebook.json"
 
 # Parents dropped at the researcher's request: two with no children and a stray "takeaways".
 SLIVER_WORDS = 2

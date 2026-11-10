@@ -14,7 +14,9 @@ const transcriptLoaders = import.meta.glob<SpeakerTurn[]>('../../../data/transcr
   import: 'default',
 })
 
-export function loadCodebook(name: 'bottom_up_codebook' | 'top_down_codebook'): Codebook | null {
+export function loadCodebook(
+  name: 'bottom_up_codebook' | 'bottom_up_legacy_codebook' | 'top_down_codebook',
+): Codebook | null {
   return derived[`../../../data/derived/${name}.json`] ?? null
 }
 

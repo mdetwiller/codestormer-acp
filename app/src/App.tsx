@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer, useState } from 'react'
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import './App.css'
 import { CodeTree, type DragPayload } from './components/CodeTree'
 import { HighlightsPanel } from './components/HighlightsPanel'
@@ -10,14 +10,20 @@ import {
   findCode,
   loadSaved,
   originIds,
+  parseReconciledFile,
   reducer,
   save,
   toCorticoExport,
   toReconciledFile,
 } from './lib/reconciled'
-import type { Entry, PanelId } from './lib/types'
+import type { Code, Entry, PanelId } from './lib/types'
 
-const bottomUp = loadCodebook('bottom_up_codebook')
+// The Jev-scored pipeline's codebook, and the imported sensemaking-prototype one kept for comparison.
+const bottomUpVersions = {
+  new: loadCodebook('bottom_up_codebook'),
+  legacy: loadCodebook('bottom_up_legacy_codebook'),
+}
+type BottomUpVersion = keyof typeof bottomUpVersions
 const topDown = loadCodebook('top_down_codebook')
 
 function download(name: string, data: unknown) {
@@ -35,6 +41,11 @@ export default function App() {
   const [pinTargetId, setPinTargetId] = useState<string | null>(null)
   const [checked, setChecked] = useState<Map<string, Entry>>(new Map())
   const [confirmClear, setConfirmClear] = useState(false)
+  const [buVersion, setBuVersion] = useState<BottomUpVersion>(bottomUpVersions.new ? 'new' : 'legacy')
+  const bottomUp = bottomUpVersions[buVersion]
+  const fileInput = useRef<HTMLInputElement>(null)
+  const [pendingImport, setPendingImport] = useState<{ fileName: string; codes: Code[] } | null>(null)
+  const [importError, setImportError] = useState<string | null>(null)
 
   useEffect(() => save(reconciled), [reconciled])
 
@@ -70,43 +81,106 @@ export default function App() {
     if (code) dispatch({ type: 'merge', code, targetId })
   }
 
+  const applyImport = (codes: Code[]) => {
+    dispatch({ type: 'replace', codes })
+    stopPin()
+    setSelected(null)
+    setPendingImport(null)
+  }
+
+  const onImportFile = async (file: File) => {
+    setImportError(null)
+    setPendingImport(null)
+    try {
+      const codes = parseReconciledFile(await file.text())
+      if (reconciled.length === 0) applyImport(codes)
+      else setPendingImport({ fileName: file.name, codes })
+    } catch (e) {
+      setImportError(`Couldn't import ${file.name}: ${(e as Error).message}`)
+    }
+  }
+
   const emptyRqs = (topDown?.research_questions ?? []).filter((rq) => rq.family_ids.length === 0)
 
   return (
     <div className="app">
-      <header className="topbar">
-        <h1>Codestormer</h1>
-        <span className="muted">
-          {transcriptIndex
-            ? `${transcriptIndex.conversation_count} conversations · ${transcriptIndex.turn_count.toLocaleString()} turns`
-            : 'Transcripts not exported: run scripts/export_transcripts.py'}
-        </span>
-        <span className="spacer" />
-        <button onClick={() => download('reconciled_codebook.json', toReconciledFile(reconciled))}>
-          Export reconciled JSON
-        </button>
-        <button onClick={() => download('reconciled_codebook.cortico.json', toCorticoExport(reconciled))}>
-          Export Cortico format
-        </button>
-        <button
-          className={confirmClear ? 'danger' : ''}
-          disabled={reconciled.length === 0}
-          onBlur={() => setConfirmClear(false)}
-          onClick={() => {
-            if (!confirmClear) return setConfirmClear(true)
-            dispatch({ type: 'clear' })
-            stopPin()
-            setConfirmClear(false)
-          }}
-        >
-          {confirmClear ? 'Click again to clear' : 'Clear'}
-        </button>
-      </header>
+      <div>
+        <header className="topbar">
+          <h1>Codestormer</h1>
+          <span className="muted">
+            {transcriptIndex
+              ? `${transcriptIndex.conversation_count} conversations · ${transcriptIndex.turn_count.toLocaleString()} turns`
+              : 'Transcripts not exported: run scripts/export_transcripts.py'}
+          </span>
+          <span className="spacer" />
+          <input
+            ref={fileInput}
+            type="file"
+            accept=".json,application/json"
+            hidden
+            onChange={(e) => {
+              const file = e.target.files?.[0]
+              e.target.value = ''
+              if (file) void onImportFile(file)
+            }}
+          />
+          <button onClick={() => fileInput.current?.click()}>Import reconciled JSON</button>
+          <button onClick={() => download('reconciled_codebook.json', toReconciledFile(reconciled))}>
+            Export reconciled JSON
+          </button>
+          <button onClick={() => download('reconciled_codebook.cortico.json', toCorticoExport(reconciled))}>
+            Export Cortico format
+          </button>
+          <button
+            className={confirmClear ? 'danger' : ''}
+            disabled={reconciled.length === 0}
+            onBlur={() => setConfirmClear(false)}
+            onClick={() => {
+              if (!confirmClear) return setConfirmClear(true)
+              dispatch({ type: 'clear' })
+              stopPin()
+              setConfirmClear(false)
+            }}
+          >
+            {confirmClear ? 'Click again to clear' : 'Clear'}
+          </button>
+        </header>
+        {pendingImport && (
+          <div className="import-bar">
+            Replace the {reconciled.length} reconciled parent codes here with the {pendingImport.codes.length} in{' '}
+            {pendingImport.fileName}? Export first if you want to keep the current ones.
+            <button className="danger" onClick={() => applyImport(pendingImport.codes)}>
+              Replace
+            </button>
+            <button onClick={() => setPendingImport(null)}>Cancel</button>
+          </div>
+        )}
+        {importError && (
+          <div className="import-bar error">
+            {importError}
+            <button onClick={() => setImportError(null)}>Dismiss</button>
+          </div>
+        )}
+      </div>
 
       <main className="columns">
         <section className="panel bottom-up">
           <h2>
             Bottom-up <span className="muted">topic-driven</span>
+            {bottomUpVersions.new && bottomUpVersions.legacy && (
+              <select
+                className="bu-version"
+                value={buVersion}
+                title="Which bottom-up codebook to show"
+                onChange={(e) => {
+                  setBuVersion(e.target.value as BottomUpVersion)
+                  if (selected?.panel === 'bottom_up') setSelected(null)
+                }}
+              >
+                <option value="new">Jev-scored turns</option>
+                <option value="legacy">Old codebook (highlights)</option>
+              </select>
+            )}
           </h2>
           {bottomUp?.placeholder && (
             <p className="banner" title={bottomUp.placeholder_note}>
@@ -123,7 +197,7 @@ export default function App() {
               inReconciled={placed}
             />
           ) : (
-            <p className="empty">No bottom_up_codebook.json in data/derived yet.</p>
+            <p className="empty">No bottom-up codebook in data/derived yet.</p>
           )}
         </section>
 
@@ -186,7 +260,12 @@ export default function App() {
           checkedKeys={new Set(checked.keys())}
           onToggle={toggle}
           onConfirmPin={() => {
-            if (pinTargetId) dispatch({ type: 'pin', id: pinTargetId, entries: [...checked.values()] })
+            if (pinTargetId)
+              dispatch({
+                type: 'pin',
+                id: pinTargetId,
+                entries: [...checked.values()],
+              })
             stopPin()
           }}
           onCancelPin={stopPin}

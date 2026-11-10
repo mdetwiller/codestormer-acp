@@ -10,3 +10,7 @@ dist/
 __pycache__/
 .DS_Store
 .env
+
+# Bottom-up pipeline: label embeddings (rebuilt by the themes stage) and dry-run output
+data/derived/generated/bottom_up/label_vectors.npy
+data/derived/generated/bottom_up/dry_run/
