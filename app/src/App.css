@@ -132,3 +132,8 @@
 .rc-head .twisty { border: none; background: none; padding: 0; width: 16px; color: var(--muted); }
 
 .bu-version { margin-left: 8px; font-size: 12px; padding: 1px 4px; }
+.import-bar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 6px 14px; font-size: 13px; background: #fff7d6; border-bottom: 1px solid #f0dc8a;
+}
+.import-bar.error { background: #fde8e8; border-bottom-color: #f2b8b8; }

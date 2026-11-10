@@ -14,6 +14,7 @@ export type Action =
   | { type: 'pin'; id: string; entries: Entry[] }
   | { type: 'unpin'; id: string; index: number }
   | { type: 'clear' }
+  | { type: 'replace'; codes: Code[] }
 
 const STORAGE_KEY = 'codestormer.reconciled.v1'
 
@@ -198,6 +199,8 @@ export function reducer(codes: Code[], action: Action): Code[] {
       }))
     case 'clear':
       return []
+    case 'replace':
+      return action.codes
   }
 }
 
@@ -218,6 +221,50 @@ export function save(codes: Code[]): void {
   } catch {
     // Storage unavailable (private window); the export buttons still work.
   }
+}
+
+function badCode(c: unknown, path: string): string | null {
+  if (!c || typeof c !== 'object') return `${path} is not an object`
+  const code = c as Record<string, unknown>
+  if (typeof code.id !== 'string' || typeof code.name !== 'string') return `${path} has no id or name`
+  for (const key of ['highlights', 'exemplars'] as const) {
+    if (code[key] !== undefined && !Array.isArray(code[key])) return `${path}.${key} is not a list`
+  }
+  for (const key of ['children', 'merged_from'] as const) {
+    const list = code[key]
+    if (list === undefined) continue
+    if (!Array.isArray(list)) return `${path}.${key} is not a list`
+    for (const [i, child] of list.entries()) {
+      const problem = badCode(child, `${path}.${key}[${i}]`)
+      if (problem) return problem
+    }
+  }
+  return null
+}
+
+/** Parses a file written by "Export reconciled JSON"; throws a readable message for anything else. */
+export function parseReconciledFile(text: string): Code[] {
+  let data: unknown
+  try {
+    data = JSON.parse(text)
+  } catch {
+    throw new Error('The file is not valid JSON.')
+  }
+  const codes = (data as { codes?: unknown } | null)?.codes
+  if (!Array.isArray(codes)) throw new Error('The file has no "codes" list, so it is not a reconciled codebook export.')
+  if (codes.some((c) => c && typeof c === 'object' && 'parent_id' in c)) {
+    throw new Error('This looks like the Cortico-format export. Import the "Export reconciled JSON" file instead.')
+  }
+  for (const [i, c] of codes.entries()) {
+    const problem = badCode(c, `codes[${i}]`)
+    if (problem) throw new Error(`The file is not a reconciled codebook: ${problem}.`)
+  }
+  return (codes as Code[]).map((c) => ({
+    ...c,
+    definition: c.definition ?? '',
+    highlights: c.highlights ?? [],
+    exemplars: c.exemplars ?? [],
+  }))
 }
 
 export function toReconciledFile(codes: Code[]): ReconciledCodebook {

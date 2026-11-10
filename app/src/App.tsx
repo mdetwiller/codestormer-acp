@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer, useState } from 'react'
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import './App.css'
 import { CodeTree, type DragPayload } from './components/CodeTree'
 import { HighlightsPanel } from './components/HighlightsPanel'
@@ -10,12 +10,13 @@ import {
   findCode,
   loadSaved,
   originIds,
+  parseReconciledFile,
   reducer,
   save,
   toCorticoExport,
   toReconciledFile,
 } from './lib/reconciled'
-import type { Entry, PanelId } from './lib/types'
+import type { Code, Entry, PanelId } from './lib/types'
 
 // The Jev-scored pipeline's codebook, and the imported sensemaking-prototype one kept for comparison.
 const bottomUpVersions = {
@@ -42,6 +43,9 @@ export default function App() {
   const [confirmClear, setConfirmClear] = useState(false)
   const [buVersion, setBuVersion] = useState<BottomUpVersion>(bottomUpVersions.new ? 'new' : 'legacy')
   const bottomUp = bottomUpVersions[buVersion]
+  const fileInput = useRef<HTMLInputElement>(null)
+  const [pendingImport, setPendingImport] = useState<{ fileName: string; codes: Code[] } | null>(null)
+  const [importError, setImportError] = useState<string | null>(null)
 
   useEffect(() => save(reconciled), [reconciled])
 
@@ -77,38 +81,87 @@ export default function App() {
     if (code) dispatch({ type: 'merge', code, targetId })
   }
 
+  const applyImport = (codes: Code[]) => {
+    dispatch({ type: 'replace', codes })
+    stopPin()
+    setSelected(null)
+    setPendingImport(null)
+  }
+
+  const onImportFile = async (file: File) => {
+    setImportError(null)
+    setPendingImport(null)
+    try {
+      const codes = parseReconciledFile(await file.text())
+      if (reconciled.length === 0) applyImport(codes)
+      else setPendingImport({ fileName: file.name, codes })
+    } catch (e) {
+      setImportError(`Couldn't import ${file.name}: ${(e as Error).message}`)
+    }
+  }
+
   const emptyRqs = (topDown?.research_questions ?? []).filter((rq) => rq.family_ids.length === 0)
 
   return (
     <div className="app">
-      <header className="topbar">
-        <h1>Codestormer</h1>
-        <span className="muted">
-          {transcriptIndex
-            ? `${transcriptIndex.conversation_count} conversations · ${transcriptIndex.turn_count.toLocaleString()} turns`
-            : 'Transcripts not exported: run scripts/export_transcripts.py'}
-        </span>
-        <span className="spacer" />
-        <button onClick={() => download('reconciled_codebook.json', toReconciledFile(reconciled))}>
-          Export reconciled JSON
-        </button>
-        <button onClick={() => download('reconciled_codebook.cortico.json', toCorticoExport(reconciled))}>
-          Export Cortico format
-        </button>
-        <button
-          className={confirmClear ? 'danger' : ''}
-          disabled={reconciled.length === 0}
-          onBlur={() => setConfirmClear(false)}
-          onClick={() => {
-            if (!confirmClear) return setConfirmClear(true)
-            dispatch({ type: 'clear' })
-            stopPin()
-            setConfirmClear(false)
-          }}
-        >
-          {confirmClear ? 'Click again to clear' : 'Clear'}
-        </button>
-      </header>
+      <div>
+        <header className="topbar">
+          <h1>Codestormer</h1>
+          <span className="muted">
+            {transcriptIndex
+              ? `${transcriptIndex.conversation_count} conversations · ${transcriptIndex.turn_count.toLocaleString()} turns`
+              : 'Transcripts not exported: run scripts/export_transcripts.py'}
+          </span>
+          <span className="spacer" />
+          <input
+            ref={fileInput}
+            type="file"
+            accept=".json,application/json"
+            hidden
+            onChange={(e) => {
+              const file = e.target.files?.[0]
+              e.target.value = ''
+              if (file) void onImportFile(file)
+            }}
+          />
+          <button onClick={() => fileInput.current?.click()}>Import reconciled JSON</button>
+          <button onClick={() => download('reconciled_codebook.json', toReconciledFile(reconciled))}>
+            Export reconciled JSON
+          </button>
+          <button onClick={() => download('reconciled_codebook.cortico.json', toCorticoExport(reconciled))}>
+            Export Cortico format
+          </button>
+          <button
+            className={confirmClear ? 'danger' : ''}
+            disabled={reconciled.length === 0}
+            onBlur={() => setConfirmClear(false)}
+            onClick={() => {
+              if (!confirmClear) return setConfirmClear(true)
+              dispatch({ type: 'clear' })
+              stopPin()
+              setConfirmClear(false)
+            }}
+          >
+            {confirmClear ? 'Click again to clear' : 'Clear'}
+          </button>
+        </header>
+        {pendingImport && (
+          <div className="import-bar">
+            Replace the {reconciled.length} reconciled parent codes here with the {pendingImport.codes.length} in{' '}
+            {pendingImport.fileName}? Export first if you want to keep the current ones.
+            <button className="danger" onClick={() => applyImport(pendingImport.codes)}>
+              Replace
+            </button>
+            <button onClick={() => setPendingImport(null)}>Cancel</button>
+          </div>
+        )}
+        {importError && (
+          <div className="import-bar error">
+            {importError}
+            <button onClick={() => setImportError(null)}>Dismiss</button>
+          </div>
+        )}
+      </div>
 
       <main className="columns">
         <section className="panel bottom-up">
@@ -207,7 +260,12 @@ export default function App() {
           checkedKeys={new Set(checked.keys())}
           onToggle={toggle}
           onConfirmPin={() => {
-            if (pinTargetId) dispatch({ type: 'pin', id: pinTargetId, entries: [...checked.values()] })
+            if (pinTargetId)
+              dispatch({
+                type: 'pin',
+                id: pinTargetId,
+                entries: [...checked.values()],
+              })
             stopPin()
           }}
           onCancelPin={stopPin}
