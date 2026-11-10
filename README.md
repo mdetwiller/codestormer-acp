@@ -16,7 +16,7 @@ For search by meaning, also start the similarity search server in a second termi
 
 It loads the turn embeddings (`data/embeddings/`, about 260 MB in memory) and embeds each new query with `text-embedding-3-small`, which is a paid call of a few tokens; repeated queries are cached. Without it, the search panel says so and offers keyword search.
 
-The app reads `../data` directly; export the transcripts first or search will be empty. The reconciled codebook is kept in browser storage, so export it to keep a copy. "Import reconciled JSON" loads a file saved by "Export reconciled JSON" (not the Cortico-format file) and asks before replacing codes already there.
+The app reads `../data` directly; export the transcripts first or search will be empty. The reconciled codebook is kept in the browser (IndexedDB; it runs to tens of MB, past what localStorage holds), so export it to keep a copy. A browser with nothing saved starts from `data/reconciled/reconciled_codebook.json`, the copy saved in the repo; to update that copy, export and replace the file. "Import reconciled JSON" loads a file saved by "Export reconciled JSON" (not the Cortico-format file) and asks before replacing codes already there.
 
 ## Data
 

@@ -204,23 +204,54 @@ export function reducer(codes: Code[], action: Action): Code[] {
   }
 }
 
-export function loadSaved(): Code[] {
+// Saved in IndexedDB: a reconciled codebook with merged codes runs to tens of MB, past
+// localStorage's ~5 MB quota. Older builds used localStorage under the same key; it is read
+// once as a fallback so that work carries over.
+const DB_NAME = 'codestormer'
+const DB_STORE = 'kv'
+
+function openDb(): Promise<IDBDatabase> {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, 1)
+    req.onupgradeneeded = () => req.result.createObjectStore(DB_STORE)
+    req.onsuccess = () => resolve(req.result)
+    req.onerror = () => reject(req.error)
+  })
+}
+
+async function dbRequest<T>(mode: IDBTransactionMode, run: (store: IDBObjectStore) => IDBRequest<T>): Promise<T> {
+  const db = await openDb()
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return []
-    const parsed = JSON.parse(raw) as ReconciledCodebook
-    return Array.isArray(parsed.codes) ? parsed.codes : []
-  } catch {
-    return []
+    return await new Promise<T>((resolve, reject) => {
+      const req = run(db.transaction(DB_STORE, mode).objectStore(DB_STORE))
+      req.onsuccess = () => resolve(req.result)
+      req.onerror = () => reject(req.error)
+    })
+  } finally {
+    db.close()
   }
 }
 
-export function save(codes: Code[]): void {
+/** The codes this browser has saved, or null if it has never saved any (not even an empty list). */
+export async function loadStored(): Promise<Code[] | null> {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(toReconciledFile(codes)))
+    const file = await dbRequest<ReconciledCodebook | undefined>('readonly', (s) => s.get(STORAGE_KEY))
+    if (file) return Array.isArray(file.codes) ? file.codes : []
   } catch {
-    // Storage unavailable (private window); the export buttons still work.
+    // IndexedDB unavailable; fall through to the legacy copy.
   }
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw === null) return null
+    const parsed = JSON.parse(raw) as ReconciledCodebook
+    return Array.isArray(parsed.codes) ? parsed.codes : []
+  } catch {
+    return null
+  }
+}
+
+export async function save(codes: Code[]): Promise<void> {
+  await dbRequest('readwrite', (s) => s.put(toReconciledFile(codes), STORAGE_KEY))
 }
 
 function badCode(c: unknown, path: string): string | null {

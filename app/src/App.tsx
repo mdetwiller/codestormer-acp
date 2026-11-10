@@ -4,11 +4,11 @@ import { CodeTree, type DragPayload } from './components/CodeTree'
 import { HighlightsPanel } from './components/HighlightsPanel'
 import { ReconciledPanel } from './components/ReconciledPanel'
 import { SearchPanel } from './components/SearchPanel'
-import { loadCodebook, transcriptIndex } from './lib/data'
+import { loadCodebook, loadRepoReconciled, transcriptIndex } from './lib/data'
 import {
   entryKey,
   findCode,
-  loadSaved,
+  loadStored,
   originIds,
   parseReconciledFile,
   reducer,
@@ -36,7 +36,9 @@ function download(name: string, data: unknown) {
 }
 
 export default function App() {
-  const [reconciled, dispatch] = useReducer(reducer, undefined, loadSaved)
+  const [reconciled, dispatch] = useReducer(reducer, [])
+  const [loaded, setLoaded] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
   const [selected, setSelected] = useState<{ panel: PanelId; id: string } | null>(null)
   const [pinTargetId, setPinTargetId] = useState<string | null>(null)
   const [checked, setChecked] = useState<Map<string, Entry>>(new Map())
@@ -47,7 +49,28 @@ export default function App() {
   const [pendingImport, setPendingImport] = useState<{ fileName: string; codes: Code[] } | null>(null)
   const [importError, setImportError] = useState<string | null>(null)
 
-  useEffect(() => save(reconciled), [reconciled])
+  // A browser with nothing saved starts from the copy saved in the repo, if there is one.
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      const stored = await loadStored()
+      const codes = stored ?? (await loadRepoReconciled())?.codes ?? []
+      if (cancelled) return
+      dispatch({ type: 'replace', codes })
+      setLoaded(true)
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!loaded) return
+    save(reconciled).then(
+      () => setSaveError(null),
+      (e) => setSaveError(`Couldn't save the reconciled codebook in this browser (${(e as Error).message}). Export it to keep your changes.`),
+    )
+  }, [reconciled, loaded])
 
   const codesFor = (panel: PanelId) =>
     panel === 'bottom_up' ? (bottomUp?.codes ?? []) : panel === 'top_down' ? (topDown?.codes ?? []) : reconciled
@@ -155,6 +178,7 @@ export default function App() {
             <button onClick={() => setPendingImport(null)}>Cancel</button>
           </div>
         )}
+        {saveError && <div className="import-bar error">{saveError}</div>}
         {importError && (
           <div className="import-bar error">
             {importError}

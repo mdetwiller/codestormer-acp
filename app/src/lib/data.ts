@@ -1,4 +1,4 @@
-import type { Codebook, ConversationMeta, SpeakerTurn, TranscriptIndex } from './types'
+import type { Codebook, ConversationMeta, ReconciledCodebook, SpeakerTurn, TranscriptIndex } from './types'
 
 // Globs rather than static imports, so a missing file (bottom-up not generated yet,
 // transcripts not exported) renders an empty state instead of failing the build.
@@ -13,6 +13,17 @@ const indexFiles = import.meta.glob<TranscriptIndex>('../../../data/transcripts/
 const transcriptLoaders = import.meta.glob<SpeakerTurn[]>('../../../data/transcripts/conv-*.json', {
   import: 'default',
 })
+
+// Lazy, so the large saved reconciled codebook is only fetched when browser storage is empty.
+const savedReconciled = import.meta.glob<ReconciledCodebook>('../../../data/reconciled/reconciled_codebook.json', {
+  import: 'default',
+})
+
+/** The reconciled codebook saved in the repo, or null if there is none. */
+export function loadRepoReconciled(): Promise<ReconciledCodebook | null> {
+  const load = savedReconciled['../../../data/reconciled/reconciled_codebook.json']
+  return load ? load() : Promise.resolve(null)
+}
 
 export function loadCodebook(
   name: 'bottom_up_codebook' | 'bottom_up_legacy_codebook' | 'top_down_codebook',
