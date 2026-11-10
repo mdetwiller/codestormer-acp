@@ -50,7 +50,7 @@ The key comes from `OPENAI_API_KEY` / `OPENAI_BASE_URL`, or from the env file na
 
 ## Bottom-up pipeline (paid: TypeSafe and OpenAI)
 
-Adapted from the AI Sensemaking `highlights-codebook.ipynb` notebook, but starting from speaker turns instead of Cortico highlights. Jev (TypeSafe's scoring model, see `plan/jev-explainer.md`) scores every turn on the rubric in `scripts/pipeline_config.json` (`bottom_up.rubric`, levels 0-4), and only turns at or above the threshold you choose are coded. The Jev key goes in `Codestormer/.env` as `TYPESAFE_API_KEY=...` (gitignored); OpenAI calls use the same key as the top-down pipeline.
+Adapted from the AI Sensemaking `highlights-codebook.ipynb` notebook, but starting from speaker turns instead of Cortico highlights. Jev (TypeSafe's scoring model, see `plan/jev-explainer.md`) scores every turn on the rubric in `scripts/pipeline_config.json` (`bottom_up.rubric`, levels 0-4), and only turns at or above the threshold you choose are coded. The Jev key goes in `Codestormer/.env` as `TYPESAFE_API_KEY=...` (gitignored; start from `cp .env.example .env`); OpenAI calls use the same key as the top-down pipeline.
 
 ```
 .venv/bin/python scripts/bottom_up_pipeline.py score --dry-run                  # free: request count, token estimate, example request
