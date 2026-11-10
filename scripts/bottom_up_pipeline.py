@@ -339,14 +339,14 @@ OPEN_CODING_PROMPT = """You are provided speaker turns from a project aiming to 
 The speakers are {participants}.
 Each turn begins with its id in brackets. For context, the turn that came just before it is shown first; do not label the context.
 
-Your task is to create labels for any significant aspect of each turn that is relevant to the project's aims.
-These aspects could include topics, concepts, sentiments, underlying meanings, and so forth.
+Your task is to create open codes (short labels) for any significant aspect of each turn that is relevant to the project's aims.
+These aspects could include concepts, sentiments, underlying meanings, and so forth.
 
 Guidelines:
-- Each label should encapsulate a complete aspect from the turn.
-- Labels should be in a similar tone and style as the turn.
-- Labels should include enough context to not need reference to the original turn, or depend on the other labels.
-- Do not repeat ideas across labels.
+- Each label is 2-3 words and names a single concept. Never use "and", "or", "&" or "/".
+- Name the pattern or meaning, not just the topic: "Distrust of officials", "Pride in heritage", "Feeling unheard", not "Local government" or "History".
+- Use plain, general wording so the same idea gets the same label in different turns.
+- Do not repeat ideas across labels for the same turn.
 - Return every id below, each with its labels.
 
 {turns}
@@ -391,20 +391,31 @@ def coding_batches(ids: list[int], turns_by_id: dict[int, dict], max_turns: int,
     return batches
 
 
-def clean_open_codes(raw: dict, batch: list[int]) -> tuple[dict[str, list[str]], list[int], list[int]]:
-    """Keep labels only for ids that were in the batch. Returns (labels by id, invented ids, ids missing)."""
+def clean_open_codes(raw: dict, batch: list[int]) -> tuple[dict[str, list[str]], list[int], list[int], list[dict]]:
+    """Keep labels only for ids that were in the batch, and only labels within the naming rules
+    (2-3 words, no conjunctions). Returns (labels by id, invented ids, ids left with no labels,
+    rejected labels). A turn whose labels were all rejected counts as missing, so the next run
+    codes it again."""
     allowed = set(batch)
     out: dict[str, list[str]] = {}
-    invented = []
+    invented: list[int] = []
+    rejected: list[dict] = []
     for item in raw.get("turns", []):
         sid = item["snippet_id"]
         if sid not in allowed:
             invented.append(sid)
             continue
-        labels = [l.strip() for l in item["labels"] if l and l.strip()]
-        out[str(sid)] = list(dict.fromkeys(out.get(str(sid), []) + labels))
+        labels = []
+        for label in (l.strip() for l in item["labels"] if l and l.strip()):
+            problems = name_warnings(label)
+            if problems:
+                rejected.append({"snippet_id": sid, "label": label, "problems": problems})
+            else:
+                labels.append(label)
+        if labels:
+            out[str(sid)] = list(dict.fromkeys(out.get(str(sid), []) + labels))
     missing = [sid for sid in batch if str(sid) not in out]
-    return out, invented, missing
+    return out, invented, missing, rejected
 
 
 def stage_code(cfg: dict[str, Any], threshold: float, dry_run: bool) -> None:
@@ -461,9 +472,10 @@ def stage_code(cfg: dict[str, Any], threshold: float, dry_run: bool) -> None:
             except Exception as exc:
                 print(f"  a batch failed, will retry on the next run ({exc})")
                 continue
-            labels, invented, missing = clean_open_codes(raw, batch)
+            labels, invented, missing, rejected = clean_open_codes(raw, batch)
             coded["labels"].update(labels)
             coded["log"].append({"snippet_ids": batch, "invented_ids_removed": invented, "missing": missing,
+                                 "rejected_labels": rejected,
                                  "prompt_sha1": hashlib.sha1(prompt.encode()).hexdigest(), "raw_response": raw,
                                  "generated_at": now()})
             if n % 10 == 0:
@@ -471,7 +483,11 @@ def stage_code(cfg: dict[str, Any], threshold: float, dry_run: bool) -> None:
                 print(f"  {n}/{len(batches)} calls")
     write_json(OPEN_CODES, coded)
     n_labels = sum(len(v) for v in coded["labels"].values())
-    print(f"{len(coded['labels']):,} turns coded, {n_labels:,} labels. Saved {OPEN_CODES.relative_to(ROOT)}")
+    n_rejected = sum(len(entry.get("rejected_labels", [])) for entry in coded["log"])
+    n_missing = len([sid for sid in ids if str(sid) not in coded["labels"]])
+    print(f"{len(coded['labels']):,} turns coded, {n_labels:,} labels; {n_rejected:,} labels rejected for breaking "
+          f"the 2-3 word rule; {n_missing:,} passing turns still uncoded (run again to retry them). "
+          f"Saved {OPEN_CODES.relative_to(ROOT)}")
 
 
 # ---------- themes ----------

@@ -75,9 +75,21 @@ def test_parse_jev_answers_reports_missing():
 
 def test_clean_open_codes_drops_invented_ids():
     raw = {"turns": [{"snippet_id": 5, "labels": [" Trust in neighbors ", ""]}, {"snippet_id": 99, "labels": ["x"]}]}
-    labels, invented, missing = clean_open_codes(raw, [5, 6])
+    labels, invented, missing, rejected = clean_open_codes(raw, [5, 6])
     assert labels == {"5": ["Trust in neighbors"]}
-    assert invented == [99] and missing == [6]
+    assert invented == [99] and missing == [6] and rejected == []
+
+
+def test_clean_open_codes_rejects_long_or_conjoined_labels():
+    raw = {"turns": [
+        {"snippet_id": 5, "labels": ["Feeling unheard", "Pride and belonging", "Students divided by school protests"]},
+        {"snippet_id": 6, "labels": ["A label that is far too long"]},
+    ]}
+    labels, invented, missing, rejected = clean_open_codes(raw, [5, 6])
+    assert labels == {"5": ["Feeling unheard"]}
+    assert missing == [6]
+    assert [r["label"] for r in rejected] == ["Pride and belonging", "Students divided by school protests",
+                                             "A label that is far too long"]
 
 
 def test_coded_at_threshold_ignores_turns_from_a_lower_earlier_run():
