@@ -58,6 +58,7 @@
     "coding_concurrency": 4,
     "label_merge_similarity": 0.9,
     "max_labels_in_prompt": 8000,
+    "themes_model": "gpt-5.6-terra",
     "specificity": "the most common",
     "audience": "of diverse backgrounds",
     "max_parents": 12,

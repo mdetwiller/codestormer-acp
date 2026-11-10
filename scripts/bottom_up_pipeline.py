@@ -498,20 +498,21 @@ def coded_at_threshold(coded: dict, scores: dict[str, dict]) -> dict[str, list[s
     th = coded["threshold"]
     return {sid: labels for sid, labels in coded["labels"].items() if scores.get(sid, {}).get("score", -1) >= th}
 
-THEMES_PROMPT = """Your objective is to identify themes and sub-themes found in labels summarizing conversations with {participants}.
+THEMES_PROMPT = """Your objective is to identify {specificity} themes and sub-themes found in labels summarizing conversations with {participants}.
 These conversations were part of a project aiming to '{objective}'.
 
 Labels (each begins with its id; the number in parentheses is how many speaker turns carry that label or a near-identical one):
 {labels}
 
-Identify {specificity} themes and sub-themes, written for an audience {audience}.
-
-Rules:
-- Up to {max_parents} themes (parent codes), each with up to {max_children} sub-themes (child codes).
-- Names: 2-3 words, one concept, no "and", "&" or slash. Name a pattern (what people do, feel or experience), not a topic.
-- Definitions: 1-2 sentences that stand alone, specific enough that a second coder could apply the code.
+Instructions:
+- Analyze the labels to identify {specificity} themes and sub-themes relevant to the project aims.
+- Themes represent broad concepts discussed; sub-themes are more detailed insights based on the frequency of patterns found within the labels.
+- Up to {max_parents} themes, each with up to {max_children} sub-themes. Themes should be distinct from each other, and sub-themes should not overlap.
+- Theme and sub-theme names should be self-explanatory, intuitive, and tailored to an audience {audience}.
+- Names are 2-3 words, one concept, with no "and", "&" or slash. Name a pattern (what people do, feel or experience), not a topic.
+- Themes should not be overly complex. Sub-themes should be meaningful, distinct, and clearly connected to their theme.
+- Give each theme a 1-2 sentence definition. Give each sub-theme a 1-2 sentence definition, as it relates to its theme, that will be used for tagging: specific enough that a second coder could apply it.
 - Each sub-theme lists {min_examples}-{max_examples} example_label_ids from the list above that best exemplify it. Use only ids that appear above.
-- Sub-themes should not overlap each other.
 """
 
 THEMES_SCHEMA = {
@@ -611,6 +612,15 @@ def clean_themes(raw: dict, allowed_label_ids: set[str], min_examples: int, max_
     return themes, dropped
 
 
+def themes_prompt(b: dict[str, Any], rows: list[tuple[str, str, int]]) -> str:
+    return THEMES_PROMPT.format(
+        participants=b["project_participants"], objective=b["project_objective"],
+        labels="\n".join(f"[{lid}] {label} ({count})" for lid, label, count in rows),
+        specificity=b["specificity"], audience=b["audience"], max_parents=b["max_parents"],
+        max_children=b["max_children"], min_examples=b["min_examples"], max_examples=b["max_examples"],
+    )
+
+
 def stage_themes(cfg: dict[str, Any], dry_run: bool, force: bool) -> None:
     b = cfg["bottom_up"]
     coded = read_json(OPEN_CODES, None)
@@ -623,7 +633,12 @@ def stage_themes(cfg: dict[str, Any], dry_run: bool, force: bool) -> None:
     print(f"threshold {coded['threshold']}: {len(in_scope):,} coded turns carry {len(labels):,} distinct labels")
     print(f"embedding the labels: {-(-len(labels) // 500)} calls, approx {sum(approx_tokens(l) for l in labels):,} tokens")
     if dry_run:
-        print("then one theme call (prompt size depends on how many labels merge)")
+        order = sorted(range(len(labels)), key=lambda i: -len(turns_of[labels[i]]))[: b["max_labels_in_prompt"]]
+        prompt = themes_prompt(b, [(f"L{n + 1}", labels[i], len(turns_of[labels[i]])) for n, i in enumerate(order)])
+        DRY_DIR.mkdir(parents=True, exist_ok=True)
+        (DRY_DIR / "themes_prompt_example.txt").write_text(prompt)
+        print(f"then one call to {b['themes_model']}: ~{approx_tokens(prompt):,} tokens before near-duplicate labels "
+              f"merge. Prompt (unmerged) written to {(DRY_DIR / 'themes_prompt_example.txt').relative_to(ROOT)}")
         return
 
     import numpy as np
@@ -638,15 +653,10 @@ def stage_themes(cfg: dict[str, Any], dry_run: bool, force: bool) -> None:
     counts = {r: len({t for i in groups[r] for t in turns_of[labels[i]]}) for r in reps}
     shown = reps[: b["max_labels_in_prompt"]]
     label_id = {r: f"L{n + 1}" for n, r in enumerate(shown)}
-    prompt = THEMES_PROMPT.format(
-        participants=b["project_participants"], objective=b["project_objective"],
-        labels="\n".join(f"[{label_id[r]}] {labels[r]} ({counts[r]})" for r in shown),
-        specificity=b["specificity"], audience=b["audience"], max_parents=b["max_parents"],
-        max_children=b["max_children"], min_examples=b["min_examples"], max_examples=b["max_examples"],
-    )
+    prompt = themes_prompt(b, [(label_id[r], labels[r], counts[r]) for r in shown])
     print(f"{len(reps):,} label groups after merging at similarity >= {b['label_merge_similarity']}; "
           f"{len(shown):,} shown to the model (~{approx_tokens(prompt):,} tokens)")
-    raw = call_model(client, cfg["generation_model"], prompt, THEMES_SCHEMA, "themes")
+    raw = call_model(client, b["themes_model"], prompt, THEMES_SCHEMA, "themes")
     themes, dropped = clean_themes(raw, set(label_id.values()), b["min_examples"], b["max_examples"],
                                    b["max_parents"], b["max_children"])
     np.save(LABEL_VECS, vecs)
@@ -657,7 +667,7 @@ def stage_themes(cfg: dict[str, Any], dry_run: bool, force: bool) -> None:
         "label_ids": {lid: r for r, lid in label_id.items()},
         "themes": themes,
         "dropped_sub_themes": dropped,
-        "ai_metadata": {"model": cfg["generation_model"], "embedding_model": cfg["embedding_model"],
+        "ai_metadata": {"model": b["themes_model"], "embedding_model": cfg["embedding_model"],
                         "prompt": prompt, "prompt_sha1": hashlib.sha1(prompt.encode()).hexdigest(),
                         "raw_response": raw, "generated_at": now()},
     })
@@ -761,8 +771,8 @@ def stage_build(cfg: dict[str, Any]) -> None:
         "coverage_note": (f"Generated from speaker turns in conversations {convs} that Jev scored at or above "
                           f"{th:g} for codeable, substantive content ({n_turns:,} turns)."),
         "pipeline": {"jev_model": b["jev_model"], "rubric": b["rubric"], "threshold": th,
-                     "generation_model": cfg["generation_model"], "embedding_model": cfg["embedding_model"],
-                     "assign_min_similarity": b["assign_min_similarity"], "labels_unassigned": unassigned},
+                     "generation_model": cfg["generation_model"], "themes_model": b["themes_model"],
+                     "embedding_model": cfg["embedding_model"], "assign_min_similarity": b["assign_min_similarity"], "labels_unassigned": unassigned},
         "codes": codes,
     })
     total = sum(len(k["highlights"]) for c in codes for k in c["children"])
