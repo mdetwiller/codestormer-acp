@@ -12,6 +12,7 @@ from bottom_up_pipeline import (  # noqa: E402
     clean_open_codes,
     clean_themes,
     coded_at_threshold,
+    duplicate_ids,
     group_near_duplicates,
     jev_request,
     label_occurrences,
@@ -74,9 +75,21 @@ def test_parse_jev_answers_reports_missing():
 
 def test_clean_open_codes_drops_invented_ids():
     raw = {"turns": [{"snippet_id": 5, "labels": [" Trust in neighbors ", ""]}, {"snippet_id": 99, "labels": ["x"]}]}
-    labels, invented, missing = clean_open_codes(raw, [5, 6])
+    labels, invented, missing, rejected = clean_open_codes(raw, [5, 6])
     assert labels == {"5": ["Trust in neighbors"]}
-    assert invented == [99] and missing == [6]
+    assert invented == [99] and missing == [6] and rejected == []
+
+
+def test_clean_open_codes_rejects_long_or_conjoined_labels():
+    raw = {"turns": [
+        {"snippet_id": 5, "labels": ["Feeling unheard", "Pride and belonging", "Students divided by school protests"]},
+        {"snippet_id": 6, "labels": ["A label that is far too long"]},
+    ]}
+    labels, invented, missing, rejected = clean_open_codes(raw, [5, 6])
+    assert labels == {"5": ["Feeling unheard"]}
+    assert missing == [6]
+    assert [r["label"] for r in rejected] == ["Pride and belonging", "Students divided by school protests",
+                                             "A label that is far too long"]
 
 
 def test_coded_at_threshold_ignores_turns_from_a_lower_earlier_run():
@@ -116,3 +129,15 @@ def test_assign_labels_respects_minimum():
     children = np.array([[1, 0]], dtype=np.float32)
     out = assign_labels(labels, children, 0.5)
     assert out[0] == (0, 1.0) and out[1] is None and out[2][0] == 0
+
+
+def test_duplicate_ids_keeps_the_copy_in_the_larger_conversation():
+    long = "we never hear back from the council about anything"
+    turns = [
+        turn(1, 1, 0, long), turn(2, 1, 1, "Yes."),
+        turn(3, 2, 0, "Hello there."), turn(4, 2, 1, long.upper() + "  "), turn(5, 2, 2, "Yes."),
+        turn(6, 3, 0, long), turn(7, 3, 1, long),
+    ]
+    # conversations 2 and 3 tie on size, so the lower id (2) keeps it; short repeats and repeats
+    # inside one conversation's kept copy are left alone
+    assert duplicate_ids(turns, min_words=8) == {1, 6, 7}

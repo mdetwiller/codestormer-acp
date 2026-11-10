@@ -6,9 +6,9 @@ Stages (run in order; each resumes and skips work already saved):
   score    Jev (TypeSafe's System One model) scores each turn in the chosen conversations on the
            rubric in pipeline_config.json. Consecutive turns are sent together so each is judged
            in context, one Score question per turn. Paid: TypeSafe input tokens.
-  report   Free. Shows how many turns pass at each threshold, plus turns near a threshold.
+  report   Free. Shows how many turns pass at each threshold, plus turns near the threshold.
   code     Open coding (the notebook's prompt): several stand-alone labels for each turn scoring
-           at or above --threshold. Paid: OpenAI.
+           at or above the threshold (bottom_up.threshold, or --threshold). Paid: OpenAI.
   themes   Merges near-identical labels by embedding, then asks the model for themes (parent codes)
            and sub-themes (child codes) with definitions and example labels (the notebook's codebook
            prompt plus the plan's naming rules). Paid: OpenAI.
@@ -22,12 +22,17 @@ Usage:
   .venv/bin/python scripts/bottom_up_pipeline.py score --dry-run
   .venv/bin/python scripts/bottom_up_pipeline.py score
   .venv/bin/python scripts/bottom_up_pipeline.py report [--threshold 2.5]
-  .venv/bin/python scripts/bottom_up_pipeline.py code --threshold 2.5 [--dry-run]
+  .venv/bin/python scripts/bottom_up_pipeline.py code [--threshold 2.5] [--dry-run]
   .venv/bin/python scripts/bottom_up_pipeline.py themes [--dry-run] [--force]
   .venv/bin/python scripts/bottom_up_pipeline.py build
 
 Changing the threshold: re-run `code` with the new value (only newly passing turns are paid for),
 then `themes --force` and `build`.
+
+Duplicate turns: some conversations contain copies of another's turns (all of conversation 1
+reappears in 2, and 60 turns of 15 in 26). A turn of at least bottom_up.duplicate_min_words words
+whose text also appears in another conversation is kept only in the conversation with more turns,
+and its copies are skipped by every stage.
 """
 from __future__ import annotations
 
@@ -103,6 +108,35 @@ def selected_turns(cfg: dict[str, Any], spec: str | None) -> tuple[str, list[dic
     turns = [t for t in load_turns() if t["conversation_id"] in convs]
     turns.sort(key=lambda t: (t["conversation_id"], t["index_in_conversation"]))
     return spec, turns
+
+
+def normalized_text(text: str) -> str:
+    return " ".join(text.lower().split())
+
+
+def duplicate_ids(turns: list[dict], min_words: int) -> set[int]:
+    """Snippet ids of turns whose text is copied from a turn in another conversation. The copy in
+    the conversation with more turns (then the lower conversation id) is kept, so a conversation
+    that contains a whole shorter one keeps its context. Repeats within one conversation are kept."""
+    size: dict[int, int] = {}
+    for t in turns:
+        size[t["conversation_id"]] = size.get(t["conversation_id"], 0) + 1
+    by_text: dict[str, list[dict]] = {}
+    for t in turns:
+        if word_count(t["text"]) >= min_words:
+            by_text.setdefault(normalized_text(t["text"]), []).append(t)
+    dupes: set[int] = set()
+    for copies in by_text.values():
+        convs = {t["conversation_id"] for t in copies}
+        if len(convs) < 2:
+            continue
+        keep = min(convs, key=lambda c: (-size[c], c))
+        dupes.update(t["snippet_id"] for t in copies if t["conversation_id"] != keep)
+    return dupes
+
+
+def without_duplicates(scores: dict[str, dict], dupes: set[int]) -> dict[str, dict]:
+    return {sid: s for sid, s in scores.items() if int(sid) not in dupes}
 
 
 # ---------- score (Jev) ----------
@@ -212,14 +246,18 @@ def call_jev(client, url: str, key: str, body: dict, retries: int = 5) -> dict:
 def stage_score(cfg: dict[str, Any], spec: str | None, dry_run: bool) -> None:
     b = cfg["bottom_up"]
     spec, turns = selected_turns(cfg, spec)
+    dupes = duplicate_ids(load_turns(), b["duplicate_min_words"])
+    skipped = sum(1 for t in turns if t["snippet_id"] in dupes)
+    turns = [t for t in turns if t["snippet_id"] not in dupes]
     chunks = chunk_turns(turns, b["jev_chunk_turns"], b["jev_chunk_max_words"])
     saved = read_json(SCORES, {"chunks_done": [], "scores": {}, "missing": []})
     done = set(saved["chunks_done"])
-    todo = [c for c in chunks if c["key"] not in done]
+    todo = [c for c in chunks
+            if c["key"] not in done and any(str(t["snippet_id"]) not in saved["scores"] for t in c["turns"])]
     bodies = [jev_request(c, cfg) for c in todo]
     tokens = sum(approx_tokens(json.dumps(body)) for body in bodies)
-    print(f"conversations {spec}: {len(turns):,} turns in {len(chunks)} requests; "
-          f"already scored: {len(chunks) - len(todo)}; to call: {len(todo)}")
+    print(f"conversations {spec}: {len(turns):,} turns in {len(chunks)} requests "
+          f"({skipped:,} duplicate turns skipped); already scored: {len(chunks) - len(todo)}; to call: {len(todo)}")
     print(f"model: {b['jev_model']}  approx input tokens: {tokens:,} (TypeSafe bills input tokens only)")
     if dry_run:
         DRY_DIR.mkdir(parents=True, exist_ok=True)
@@ -265,26 +303,27 @@ def passing_ids(scores: dict[str, dict], threshold: float) -> list[int]:
     return sorted(int(sid) for sid, s in scores.items() if s["score"] >= threshold)
 
 
-def stage_report(cfg: dict[str, Any], threshold: float | None) -> None:
+def stage_report(cfg: dict[str, Any], threshold: float) -> None:
     saved = read_json(SCORES, None)
     if not saved:
         sys.exit("run the score stage first")
-    scores = saved["scores"]
-    turns_by_id = {t["snippet_id"]: t for t in load_turns()}
-    low_conf = cfg["bottom_up"]["low_confidence_below"]
-    levels = len(cfg["bottom_up"]["rubric"])
-    print(f"{len(scores):,} turns scored (conversations {saved['meta']['conversations']}); "
-          f"no answer for {len(saved['missing'])}")
+    b = cfg["bottom_up"]
+    all_turns = load_turns()
+    dupes = duplicate_ids(all_turns, b["duplicate_min_words"])
+    scores = without_duplicates(saved["scores"], dupes)
+    turns_by_id = {t["snippet_id"]: t for t in all_turns}
+    low_conf = b["low_confidence_below"]
+    levels = len(b["rubric"])
+    print(f"{len(scores):,} turns scored (conversations {saved['meta']['conversations']}; "
+          f"{len(saved['scores']) - len(scores):,} duplicate turns left out); no answer for {len(saved['missing'])}")
     print("\nthreshold  turns at or above  of which participant  low confidence (<%s)" % low_conf)
-    for step in range(1, (levels - 1) * 2 + 1):
-        th = step / 2
+    steps = sorted({step / 2 for step in range(1, (levels - 1) * 2 + 1)} | {threshold})
+    for th in steps:
         ids = passing_ids(scores, th)
         part = sum(1 for i in ids if not turns_by_id[i]["is_facilitator"])
         lc = sum(1 for i in ids if scores[str(i)]["confidence"] < low_conf)
-        print(f"  >= {th:<5}  {len(ids):>8,}           {part:>8,}           {lc:>6,}")
-    if threshold is None:
-        print("\nPass --threshold N to see turns just above and below N.")
-        return
+        mark = "  <- threshold" if th == threshold else ""
+        print(f"  >= {th:<5}  {len(ids):>8,}           {part:>8,}           {lc:>6,}{mark}")
     near = sorted(scores.items(), key=lambda kv: abs(kv[1]["score"] - threshold))[:12]
     print(f"\nTurns closest to {threshold}:")
     for sid, s in sorted(near, key=lambda kv: -kv[1]["score"]):
@@ -300,14 +339,14 @@ OPEN_CODING_PROMPT = """You are provided speaker turns from a project aiming to 
 The speakers are {participants}.
 Each turn begins with its id in brackets. For context, the turn that came just before it is shown first; do not label the context.
 
-Your task is to create labels for any significant aspect of each turn that is relevant to the project's aims.
-These aspects could include topics, concepts, sentiments, underlying meanings, and so forth.
+Your task is to create open codes (short labels) for any significant aspect of each turn that is relevant to the project's aims.
+These aspects could include concepts, sentiments, underlying meanings, and so forth.
 
 Guidelines:
-- Each label should encapsulate a complete aspect from the turn.
-- Labels should be in a similar tone and style as the turn.
-- Labels should include enough context to not need reference to the original turn, or depend on the other labels.
-- Do not repeat ideas across labels.
+- Each label is 2-3 words and names a single concept. Never use "and", "or", "&" or "/".
+- Name the pattern or meaning, not just the topic: "Distrust of officials", "Pride in heritage", "Feeling unheard", not "Local government" or "History".
+- Use plain, general wording so the same idea gets the same label in different turns.
+- Do not repeat ideas across labels for the same turn.
 - Return every id below, each with its labels.
 
 {turns}
@@ -352,20 +391,31 @@ def coding_batches(ids: list[int], turns_by_id: dict[int, dict], max_turns: int,
     return batches
 
 
-def clean_open_codes(raw: dict, batch: list[int]) -> tuple[dict[str, list[str]], list[int], list[int]]:
-    """Keep labels only for ids that were in the batch. Returns (labels by id, invented ids, ids missing)."""
+def clean_open_codes(raw: dict, batch: list[int]) -> tuple[dict[str, list[str]], list[int], list[int], list[dict]]:
+    """Keep labels only for ids that were in the batch, and only labels within the naming rules
+    (2-3 words, no conjunctions). Returns (labels by id, invented ids, ids left with no labels,
+    rejected labels). A turn whose labels were all rejected counts as missing, so the next run
+    codes it again."""
     allowed = set(batch)
     out: dict[str, list[str]] = {}
-    invented = []
+    invented: list[int] = []
+    rejected: list[dict] = []
     for item in raw.get("turns", []):
         sid = item["snippet_id"]
         if sid not in allowed:
             invented.append(sid)
             continue
-        labels = [l.strip() for l in item["labels"] if l and l.strip()]
-        out[str(sid)] = list(dict.fromkeys(out.get(str(sid), []) + labels))
+        labels = []
+        for label in (l.strip() for l in item["labels"] if l and l.strip()):
+            problems = name_warnings(label)
+            if problems:
+                rejected.append({"snippet_id": sid, "label": label, "problems": problems})
+            else:
+                labels.append(label)
+        if labels:
+            out[str(sid)] = list(dict.fromkeys(out.get(str(sid), []) + labels))
     missing = [sid for sid in batch if str(sid) not in out]
-    return out, invented, missing
+    return out, invented, missing, rejected
 
 
 def stage_code(cfg: dict[str, Any], threshold: float, dry_run: bool) -> None:
@@ -384,7 +434,8 @@ def stage_code(cfg: dict[str, Any], threshold: float, dry_run: bool) -> None:
         for a, c in zip(conv, conv[1:]):
             prev_of[c["snippet_id"]] = a
 
-    ids = passing_ids(saved["scores"], threshold)
+    dupes = duplicate_ids(all_turns, b["duplicate_min_words"])
+    ids = passing_ids(without_duplicates(saved["scores"], dupes), threshold)
     coded = read_json(OPEN_CODES, {"labels": {}, "log": []})
     todo = [sid for sid in ids if str(sid) not in coded["labels"]]
     batches = coding_batches(todo, turns_by_id, b["coding_batch_turns"], b["coding_batch_max_words"])
@@ -421,9 +472,10 @@ def stage_code(cfg: dict[str, Any], threshold: float, dry_run: bool) -> None:
             except Exception as exc:
                 print(f"  a batch failed, will retry on the next run ({exc})")
                 continue
-            labels, invented, missing = clean_open_codes(raw, batch)
+            labels, invented, missing, rejected = clean_open_codes(raw, batch)
             coded["labels"].update(labels)
             coded["log"].append({"snippet_ids": batch, "invented_ids_removed": invented, "missing": missing,
+                                 "rejected_labels": rejected,
                                  "prompt_sha1": hashlib.sha1(prompt.encode()).hexdigest(), "raw_response": raw,
                                  "generated_at": now()})
             if n % 10 == 0:
@@ -431,7 +483,11 @@ def stage_code(cfg: dict[str, Any], threshold: float, dry_run: bool) -> None:
                 print(f"  {n}/{len(batches)} calls")
     write_json(OPEN_CODES, coded)
     n_labels = sum(len(v) for v in coded["labels"].values())
-    print(f"{len(coded['labels']):,} turns coded, {n_labels:,} labels. Saved {OPEN_CODES.relative_to(ROOT)}")
+    n_rejected = sum(len(entry.get("rejected_labels", [])) for entry in coded["log"])
+    n_missing = len([sid for sid in ids if str(sid) not in coded["labels"]])
+    print(f"{len(coded['labels']):,} turns coded, {n_labels:,} labels; {n_rejected:,} labels rejected for breaking "
+          f"the 2-3 word rule; {n_missing:,} passing turns still uncoded (run again to retry them). "
+          f"Saved {OPEN_CODES.relative_to(ROOT)}")
 
 
 # ---------- themes ----------
@@ -442,20 +498,21 @@ def coded_at_threshold(coded: dict, scores: dict[str, dict]) -> dict[str, list[s
     th = coded["threshold"]
     return {sid: labels for sid, labels in coded["labels"].items() if scores.get(sid, {}).get("score", -1) >= th}
 
-THEMES_PROMPT = """Your objective is to identify themes and sub-themes found in labels summarizing conversations with {participants}.
+THEMES_PROMPT = """Your objective is to identify {specificity} themes and sub-themes found in labels summarizing conversations with {participants}.
 These conversations were part of a project aiming to '{objective}'.
 
 Labels (each begins with its id; the number in parentheses is how many speaker turns carry that label or a near-identical one):
 {labels}
 
-Identify {specificity} themes and sub-themes, written for an audience {audience}.
-
-Rules:
-- Up to {max_parents} themes (parent codes), each with up to {max_children} sub-themes (child codes).
-- Names: 2-3 words, one concept, no "and", "&" or slash. Name a pattern (what people do, feel or experience), not a topic.
-- Definitions: 1-2 sentences that stand alone, specific enough that a second coder could apply the code.
+Instructions:
+- Analyze the labels to identify {specificity} themes and sub-themes relevant to the project aims.
+- Themes represent broad concepts discussed; sub-themes are more detailed insights based on the frequency of patterns found within the labels.
+- Up to {max_parents} themes, each with up to {max_children} sub-themes. Themes should be distinct from each other, and sub-themes should not overlap.
+- Theme and sub-theme names should be self-explanatory, intuitive, and tailored to an audience {audience}.
+- Names are 2-3 words, one concept, with no "and", "&" or slash. Name a pattern (what people do, feel or experience), not a topic.
+- Themes should not be overly complex. Sub-themes should be meaningful, distinct, and clearly connected to their theme.
+- Give each theme a 1-2 sentence definition. Give each sub-theme a 1-2 sentence definition, as it relates to its theme, that will be used for tagging: specific enough that a second coder could apply it.
 - Each sub-theme lists {min_examples}-{max_examples} example_label_ids from the list above that best exemplify it. Use only ids that appear above.
-- Sub-themes should not overlap each other.
 """
 
 THEMES_SCHEMA = {
@@ -555,6 +612,15 @@ def clean_themes(raw: dict, allowed_label_ids: set[str], min_examples: int, max_
     return themes, dropped
 
 
+def themes_prompt(b: dict[str, Any], rows: list[tuple[str, str, int]]) -> str:
+    return THEMES_PROMPT.format(
+        participants=b["project_participants"], objective=b["project_objective"],
+        labels="\n".join(f"[{lid}] {label} ({count})" for lid, label, count in rows),
+        specificity=b["specificity"], audience=b["audience"], max_parents=b["max_parents"],
+        max_children=b["max_children"], min_examples=b["min_examples"], max_examples=b["max_examples"],
+    )
+
+
 def stage_themes(cfg: dict[str, Any], dry_run: bool, force: bool) -> None:
     b = cfg["bottom_up"]
     coded = read_json(OPEN_CODES, None)
@@ -567,7 +633,12 @@ def stage_themes(cfg: dict[str, Any], dry_run: bool, force: bool) -> None:
     print(f"threshold {coded['threshold']}: {len(in_scope):,} coded turns carry {len(labels):,} distinct labels")
     print(f"embedding the labels: {-(-len(labels) // 500)} calls, approx {sum(approx_tokens(l) for l in labels):,} tokens")
     if dry_run:
-        print("then one theme call (prompt size depends on how many labels merge)")
+        order = sorted(range(len(labels)), key=lambda i: -len(turns_of[labels[i]]))[: b["max_labels_in_prompt"]]
+        prompt = themes_prompt(b, [(f"L{n + 1}", labels[i], len(turns_of[labels[i]])) for n, i in enumerate(order)])
+        DRY_DIR.mkdir(parents=True, exist_ok=True)
+        (DRY_DIR / "themes_prompt_example.txt").write_text(prompt)
+        print(f"then one call to {b['themes_model']}: ~{approx_tokens(prompt):,} tokens before near-duplicate labels "
+              f"merge. Prompt (unmerged) written to {(DRY_DIR / 'themes_prompt_example.txt').relative_to(ROOT)}")
         return
 
     import numpy as np
@@ -582,15 +653,10 @@ def stage_themes(cfg: dict[str, Any], dry_run: bool, force: bool) -> None:
     counts = {r: len({t for i in groups[r] for t in turns_of[labels[i]]}) for r in reps}
     shown = reps[: b["max_labels_in_prompt"]]
     label_id = {r: f"L{n + 1}" for n, r in enumerate(shown)}
-    prompt = THEMES_PROMPT.format(
-        participants=b["project_participants"], objective=b["project_objective"],
-        labels="\n".join(f"[{label_id[r]}] {labels[r]} ({counts[r]})" for r in shown),
-        specificity=b["specificity"], audience=b["audience"], max_parents=b["max_parents"],
-        max_children=b["max_children"], min_examples=b["min_examples"], max_examples=b["max_examples"],
-    )
+    prompt = themes_prompt(b, [(label_id[r], labels[r], counts[r]) for r in shown])
     print(f"{len(reps):,} label groups after merging at similarity >= {b['label_merge_similarity']}; "
           f"{len(shown):,} shown to the model (~{approx_tokens(prompt):,} tokens)")
-    raw = call_model(client, cfg["generation_model"], prompt, THEMES_SCHEMA, "themes")
+    raw = call_model(client, b["themes_model"], prompt, THEMES_SCHEMA, "themes")
     themes, dropped = clean_themes(raw, set(label_id.values()), b["min_examples"], b["max_examples"],
                                    b["max_parents"], b["max_children"])
     np.save(LABEL_VECS, vecs)
@@ -601,7 +667,7 @@ def stage_themes(cfg: dict[str, Any], dry_run: bool, force: bool) -> None:
         "label_ids": {lid: r for r, lid in label_id.items()},
         "themes": themes,
         "dropped_sub_themes": dropped,
-        "ai_metadata": {"model": cfg["generation_model"], "embedding_model": cfg["embedding_model"],
+        "ai_metadata": {"model": b["themes_model"], "embedding_model": cfg["embedding_model"],
                         "prompt": prompt, "prompt_sha1": hashlib.sha1(prompt.encode()).hexdigest(),
                         "raw_response": raw, "generated_at": now()},
     })
@@ -705,8 +771,8 @@ def stage_build(cfg: dict[str, Any]) -> None:
         "coverage_note": (f"Generated from speaker turns in conversations {convs} that Jev scored at or above "
                           f"{th:g} for codeable, substantive content ({n_turns:,} turns)."),
         "pipeline": {"jev_model": b["jev_model"], "rubric": b["rubric"], "threshold": th,
-                     "generation_model": cfg["generation_model"], "embedding_model": cfg["embedding_model"],
-                     "assign_min_similarity": b["assign_min_similarity"], "labels_unassigned": unassigned},
+                     "generation_model": cfg["generation_model"], "themes_model": b["themes_model"],
+                     "embedding_model": cfg["embedding_model"], "assign_min_similarity": b["assign_min_similarity"], "labels_unassigned": unassigned},
         "codes": codes,
     })
     total = sum(len(k["highlights"]) for c in codes for k in c["children"])
@@ -718,19 +784,19 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("stage", choices=["score", "report", "code", "themes", "build"])
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--threshold", type=float, help="minimum Jev score for a turn to be coded")
+    parser.add_argument("--threshold", type=float,
+                        help="minimum Jev score for a turn to be coded (default: bottom_up.threshold in the config)")
     parser.add_argument("--conversations", help="e.g. 1-50 (default from pipeline_config.json)")
     parser.add_argument("--force", action="store_true", help="themes: rebuild even if themes.json exists")
     args = parser.parse_args()
     cfg = load_config()
+    threshold = args.threshold if args.threshold is not None else cfg["bottom_up"]["threshold"]
     if args.stage == "score":
         stage_score(cfg, args.conversations, args.dry_run)
     elif args.stage == "report":
-        stage_report(cfg, args.threshold)
+        stage_report(cfg, threshold)
     elif args.stage == "code":
-        if args.threshold is None:
-            sys.exit("code needs --threshold (see the report stage)")
-        stage_code(cfg, args.threshold, args.dry_run)
+        stage_code(cfg, threshold, args.dry_run)
     elif args.stage == "themes":
         stage_themes(cfg, args.dry_run, args.force)
     else:
